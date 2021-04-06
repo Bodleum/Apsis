@@ -1,8 +1,9 @@
 #pragma once
 
 // ---   Core   ---
-#include "Apsis/App.h"
+#include "Apsis/Core/App.h"
 
 
 // ---   Entry Point   ---
-#include "Apsis/Main.h"
+// MUST BE LAST
+#include "Apsis/Core/Main.h"
