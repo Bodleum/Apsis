@@ -4,6 +4,7 @@ int/
 
 # Files
 **.log
+**.json
 
 # Visual Studio
 .vs/
