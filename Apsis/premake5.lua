@@ -28,6 +28,7 @@ project "Apsis"
     filter { "configurations:Release" }
         defines "AP_RELEASE"
         runtime "Release"
+        symbols "On"
         optimize "Full"
 
     filter { "configurations:Final" }
