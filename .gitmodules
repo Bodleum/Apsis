@@ -1,0 +1,3 @@
+[submodule "Apsis/dependancies/spdlog"]
+	path = Apsis/dependancies/spdlog
+	url = https://github.com/gabime/spdlog.git
