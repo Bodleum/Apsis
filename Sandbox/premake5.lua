@@ -13,7 +13,8 @@ project "Sandbox"
 
     includedirs
     {
-        "%{wks.location}/Apsis/src"
+        "%{wks.location}/Apsis/src",
+        "%{wks.location}/Apsis/dependancies/spdlog/include",
     }
 
     links

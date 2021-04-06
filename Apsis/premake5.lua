@@ -7,13 +7,14 @@ project "Apsis"
 
     files
     {
-        "**.h",
-        "**.cpp"
+        "src/**.h",
+        "src/**.cpp"
     }
 
     includedirs
     {
-        "src"
+        "src",
+        "dependancies/spdlog/include"
     }
 
     pchheader "apch.h"

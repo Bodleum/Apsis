@@ -2,6 +2,9 @@
 bin/
 int/
 
+# Files
+**.log
+
 # Visual Studio
 .vs/
 **.sln

@@ -12,3 +12,5 @@
 		#include <Windows.h>
 	#endif
 #pragma warning(pop)
+
+#include "Apsis/Core/Logger.h"

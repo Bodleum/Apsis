@@ -7,8 +7,8 @@ namespace A {
 	class App
 	{
 	public:
-		App() {};
-		virtual ~App() {};
+		App();
+		virtual ~App() = default;
 
 	private:
 		void Run();

@@ -4,8 +4,9 @@
 
 Sandbox::Sandbox()
 {
-	std::cout << "Hello world!\n";
+	AP_TRACE("Hello world but logged!!");
 	if (A::Platform::Windows)
-		std::cout << "Platform: Windows\n";
+		AP_INFO("Platform: Windows");
+
 
 }
