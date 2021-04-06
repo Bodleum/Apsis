@@ -1,1 +1,0 @@
-{"otherData": {},"traceEvents":[{},{"cat":"function","dur":510,"name":"void A::App::LogInfo(void)","ph":"X","pid":0,"tid":21644,"ts":737076374591.900},{"cat":"function","dur":6133,"name":"A::App::App(void)","ph":"X","pid":0,"tid":21644,"ts":737076369553.900}]}
