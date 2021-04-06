@@ -4,11 +4,11 @@
 #include "Apsis/Core/App.h"
 
 
-extern A::Application* A::CreateApplication();
+extern A::App* A::CreateApp();
 
 int main(int argc, char** argv)
 {
-	auto app = A::CreateApplication();
+	auto app = A::CreateApp();
 
 	app->Run();
 

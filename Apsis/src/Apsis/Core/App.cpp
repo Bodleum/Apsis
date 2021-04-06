@@ -3,7 +3,7 @@
 
 namespace A {
 
-	void Application::Run()
+	void App::Run()
 	{
 		while (true);
 	}

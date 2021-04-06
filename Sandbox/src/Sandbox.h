@@ -1,7 +1,7 @@
 #pragma once
 #include "Apsis.h"
 
-class Sandbox : public A::Application
+class Sandbox : public A::App
 {
 public:
 	Sandbox();
@@ -11,4 +11,4 @@ private:
 
 };
 
-A::Application* A::CreateApplication() { return new Sandbox; }
+A::App* A::CreateApp() { return new Sandbox; }

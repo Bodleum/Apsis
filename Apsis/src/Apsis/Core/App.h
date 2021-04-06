@@ -4,11 +4,11 @@ int main(int argc, char** argv);
 
 namespace A {
 
-	class Application
+	class App
 	{
 	public:
-		Application() {};
-		virtual ~Application() {};
+		App() {};
+		virtual ~App() {};
 
 	private:
 		void Run();
@@ -17,6 +17,6 @@ namespace A {
 	};
 
 	// Defined in client code
-	Application* CreateApplication();
+	App* CreateApp();
 
 }
