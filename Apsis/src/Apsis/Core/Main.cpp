@@ -9,12 +9,18 @@ extern A::App* A::CreateApp();
 
 int main(int argc, char** argv)
 {
-	A::Logger::Init();
+	AP_PROFILE_BEGIN_SESSION("Startup", "Apsis - Startup.json");
+		A::Logger::Init();
+		auto app = A::CreateApp();
+	AP_PROFILE_END_SESSION();
 
-	auto app = A::CreateApp();
+	AP_PROFILE_BEGIN_SESSION("Runtime", "Apsis - Runtime.json");
+		app->Run();
+	AP_PROFILE_END_SESSION();
 
-	app->Run();
+	AP_PROFILE_BEGIN_SESSION("Shutdown", "Apsis - Shutdown.json");
+		delete app;
+	AP_PROFILE_END_SESSION();
 
-	delete app;
 	return 0;
 }

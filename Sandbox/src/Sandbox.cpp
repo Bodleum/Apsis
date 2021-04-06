@@ -8,5 +8,5 @@ Sandbox::Sandbox()
 	if (A::Platform::Windows)
 		AP_INFO("Platform: Windows");
 
-
+	system("pause");
 }

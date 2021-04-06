@@ -14,3 +14,4 @@
 #pragma warning(pop)
 
 #include "Apsis/Core/Logger.h"
+#include "Apsis/Utility/Instrumentor.h"
