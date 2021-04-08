@@ -23,14 +23,18 @@ project "Sandbox"
     }
 
     filter { "configurations:Debug" }
+        defines "AP_DEBUG"
         runtime "Debug"
         symbols "On"
 
     filter { "configurations:Release" }
+        defines "AP_RELEASE"
         runtime "Release"
+        symbols "On"
         optimize "Full"
 
     filter { "configurations:Final" }
+        defines "AP_FINAL"
         runtime "Release"
         optimize "Full"
 

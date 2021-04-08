@@ -10,6 +10,8 @@ namespace A {
 
 	std::shared_ptr<spdlog::logger> Logger::s_CoreLogger;
 	std::shared_ptr<spdlog::logger> Logger::s_ClientLogger;
+	std::shared_ptr<spdlog::logger> Logger::s_CoreAssertLogger;
+	std::shared_ptr<spdlog::logger> Logger::s_ClientAssertLogger;
 
 	void A::Logger::Init()
 	{
@@ -29,6 +31,17 @@ namespace A {
 		spdlog::register_logger(s_ClientLogger);
 		s_ClientLogger->set_level(spdlog::level::trace);
 		s_ClientLogger->flush_on(spdlog::level::trace);
+
+		// ---   Asserts   ---
+		s_CoreAssertLogger = std::make_shared<spdlog::logger>("Apsis Assert", begin(logSinks), end(logSinks));
+		spdlog::register_logger(s_CoreAssertLogger);
+		s_CoreAssertLogger->set_level(spdlog::level::trace);
+		s_CoreAssertLogger->flush_on(spdlog::level::trace);
+
+		s_ClientAssertLogger = std::make_shared<spdlog::logger>("Client Assert", begin(logSinks), end(logSinks));
+		spdlog::register_logger(s_ClientAssertLogger);
+		s_ClientAssertLogger->set_level(spdlog::level::trace);
+		s_ClientAssertLogger->flush_on(spdlog::level::trace);
 	}
 
 }
