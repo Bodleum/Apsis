@@ -6,7 +6,7 @@
 #include <mutex>
 
 /*
-* Instrumentor form Hazel
+* Instrumentor from Hazel
 * https://github.com/TheCherno/Hazel
 */
 
