@@ -34,50 +34,82 @@
 
 namespace A {
 
-	typedef struct PlatformType
-	{
+	namespace SystemInfo {
+
+		typedef struct PlatformType
+		{
+			#ifdef AP_PLATFORM_WIN
+				static const bool Windows = true;
+			#else
+				static const bool Windows = false;
+			#endif // AP_PLATFORM_WIN
+
+			#ifdef AP_PLATFORM_SIMULATOR
+				static const bool Simulator = true;
+			#else
+				static const bool Simulator = false;
+			#endif // AP_PLATFORM_SIMULATOR
+
+			#ifdef AP_PLATFORM_IPHONE
+				static const bool iPhone = true;
+			#else
+				static const bool iPhone = false;
+			#endif // AP_PLATFORM_IPHONE
+
+			#ifdef AP_PLATFORM_OSX
+				static const bool OSX = true;
+			#else
+				static const bool OSX = false;
+			#endif // AP_PLATFORM_OSX
+
+			#ifdef AP_PLATFORM_LINUX
+				static const bool Linux = true;
+			#else
+				static const bool Linux = false;
+			#endif // AP_PLATFORM_LINUX
+
+			#ifdef AP_PLATFORM_UNIX
+				static const bool Unix = true;
+			#else
+				static const bool Unix = false;
+			#endif // AP_PLATFORM_UNIX
+
+			#ifdef AP_PLATFORM_POSIX
+				static const bool POSIX = true;
+			#else
+				static const bool POSIX = false;
+			#endif // AP_PLATFORM_POSIX
+		} PlatformType;
+
 		#ifdef AP_PLATFORM_WIN
-			static const bool Windows = true;
-		#else
-			static const bool Windows = false;
+			const static std::string Platform = "Windows (x64)";
 		#endif // AP_PLATFORM_WIN
 
 		#ifdef AP_PLATFORM_SIMULATOR
-			static const bool Simulator = true;
-		#else
-			static const bool Simulator = false;
+			const static std::string Platform = "Simulator";
 		#endif // AP_PLATFORM_SIMULATOR
 
 		#ifdef AP_PLATFORM_IPHONE
-			static const bool iPhone = true;
-		#else
-			static const bool iPhone = false;
+			const static std::string Platform = "iPhone";
 		#endif // AP_PLATFORM_IPHONE
 
 		#ifdef AP_PLATFORM_OSX
-			static const bool OSX = true;
-		#else
-			static const bool OSX = false;
+			const static std::string Platform = "OSX";
 		#endif // AP_PLATFORM_OSX
 
 		#ifdef AP_PLATFORM_LINUX
-			static const bool Linux = true;
-		#else
-			static const bool Linux = false;
+			const static std::string Platform = "Linux";
 		#endif // AP_PLATFORM_LINUX
 
 		#ifdef AP_PLATFORM_UNIX
-			static const bool Unix = true;
-		#else
-			static const bool Unix = false;
+			const static std::string Platform = "Unix";
 		#endif // AP_PLATFORM_UNIX
 
 		#ifdef AP_PLATFORM_POSIX
-			static const bool POSIX = true;
-		#else
-			static const bool POSIX = false;
+			const static std::string Platform = "POSIX ";
 		#endif // AP_PLATFORM_POSIX
-	} Platform;
+
+	}
 
 
 	/*

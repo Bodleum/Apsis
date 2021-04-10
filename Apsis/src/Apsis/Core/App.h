@@ -12,7 +12,7 @@ namespace A {
 
 	private:
 		void Run();
-		void LogInfo();
+		static void LogInfo();
 
 		friend int ::main(int argc, char** argv);
 	};
