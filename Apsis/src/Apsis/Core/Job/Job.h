@@ -4,11 +4,6 @@ namespace A {
 
 	using JobEntryPoint = void* (void* params);
 
-	enum class Priority
-	{
-		Low, Normal, High
-	};
-
 	/*
 	* TODO: Add counter
 	*/
@@ -17,7 +12,6 @@ namespace A {
 	{
 		JobEntryPoint* EntryPoint;
 		void* Params;
-		Priority Priority;
 		// Counter* Counter;
 	};
 }
