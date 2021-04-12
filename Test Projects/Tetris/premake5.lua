@@ -1,5 +1,5 @@
-project "Apsis"
-	kind "StaticLib"
+project "Tetirs"
+	kind "ConsoleApp"
 	language "C++"
 
 	targetdir ("%{wks.location}/bin/%{cfg.system}_%{cfg.buildcfg}/%{prj.name}")
@@ -7,24 +7,20 @@ project "Apsis"
 
 	files
 	{
-		"src/**.h",
-		"src/**.cpp"
-	}
-
-	removefiles
-	{
-		"src/Apsis/Core/Job/*.h",
-		"src/Apsis/Core/Job/*.cpp"
+		"**.h",
+		"**.cpp"
 	}
 
 	includedirs
 	{
-		"src",
-		"dependancies/spdlog/include"
+		"%{wks.location}/Apsis/src",
+		"%{wks.location}/Apsis/dependancies/spdlog/include",
 	}
 
-	pchheader "apch.h"
-	pchsource "src/apch.cpp"
+	links
+	{
+		"Apsis"
+	}
 
 	filter { "configurations:Debug" }
 		defines "AP_DEBUG"

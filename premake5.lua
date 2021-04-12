@@ -1,21 +1,25 @@
 workspace "Apsis"
-    startproject "Sandbox"
+	startproject "Sandbox"
 
-    configurations
-    {
-        "Debug",
-        "Release",
-        "Final"
-    }
+	configurations
+	{
+		"Debug",
+		"Release",
+		"Final"
+	}
 
-    platforms
-    {
-        "Win64"
-    }
+	platforms
+	{
+		"Win64"
+	}
 
-    filter { "platforms:Win64" }
-        system "Windows"
-        architecture "x86_64"
+	filter { "platforms:Win64" }
+		system "Windows"
+		architecture "x86_64"
 
+group "TestProjects"
+	include "TestProjects/Tetris"
+
+group ""
 include "Apsis"
 include "Sandbox"
