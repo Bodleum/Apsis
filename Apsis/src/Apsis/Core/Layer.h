@@ -41,22 +41,23 @@ namespace A {
 		inline Layer* operator[](int index) { return m_LayerStack[index]; }
 		inline size_t Size() const { return m_LayerStack.size(); }
 
+
 		// ---   Iterators   ---
-		std::deque<Layer*>::iterator begin() noexcept { return m_LayerStack.begin(); }
-		std::deque<Layer*>::const_iterator begin() const noexcept { return m_LayerStack.begin(); }
-		std::deque<Layer*>::const_iterator cbegin() const noexcept { return m_LayerStack.cbegin(); }
+		inline std::deque<Layer*>::iterator begin() noexcept { return m_LayerStack.begin(); }
+		inline std::deque<Layer*>::const_iterator begin() const noexcept { return m_LayerStack.begin(); }
+		inline std::deque<Layer*>::const_iterator cbegin() const noexcept { return m_LayerStack.cbegin(); }
 
-		std::deque<Layer*>::iterator end() noexcept { return m_LayerStack.end(); }
-		std::deque<Layer*>::const_iterator end() const noexcept { return m_LayerStack.end(); }
-		std::deque<Layer*>::const_iterator cend() const noexcept { return m_LayerStack.cend(); }
+		inline std::deque<Layer*>::iterator end() noexcept { return m_LayerStack.end(); }
+		inline std::deque<Layer*>::const_iterator end() const noexcept { return m_LayerStack.end(); }
+		inline std::deque<Layer*>::const_iterator cend() const noexcept { return m_LayerStack.cend(); }
 
-		std::deque<Layer*>::reverse_iterator rbegin() noexcept { return m_LayerStack.rbegin(); }
-		std::deque<Layer*>::const_reverse_iterator rbegin() const noexcept { return m_LayerStack.rbegin(); }
-		std::deque<Layer*>::const_reverse_iterator crbegin() const noexcept { return m_LayerStack.crbegin(); }
+		inline std::deque<Layer*>::reverse_iterator rbegin() noexcept { return m_LayerStack.rbegin(); }
+		inline std::deque<Layer*>::const_reverse_iterator rbegin() const noexcept { return m_LayerStack.rbegin(); }
+		inline std::deque<Layer*>::const_reverse_iterator crbegin() const noexcept { return m_LayerStack.crbegin(); }
 
-		std::deque<Layer*>::reverse_iterator rend() noexcept { return m_LayerStack.rend(); }
-		std::deque<Layer*>::const_reverse_iterator rend() const noexcept { return m_LayerStack.rend(); }
-		std::deque<Layer*>::const_reverse_iterator crend() const noexcept { return m_LayerStack.crend(); }
+		inline std::deque<Layer*>::reverse_iterator rend() noexcept { return m_LayerStack.rend(); }
+		inline std::deque<Layer*>::const_reverse_iterator rend() const noexcept { return m_LayerStack.rend(); }
+		inline std::deque<Layer*>::const_reverse_iterator crend() const noexcept { return m_LayerStack.crend(); }
 
 	private:
 		std::deque<Layer*> m_LayerStack;
