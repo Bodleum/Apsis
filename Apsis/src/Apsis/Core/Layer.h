@@ -38,6 +38,7 @@ namespace A {
 		inline void Pop()							{ m_LayerStack.pop_front(); }
 
 		inline size_t Size() const { return m_LayerStack.size(); }
+		inline Layer operator[](int index) { return m_LayerStack[index]; }
 
 	private:
 		std::deque<Layer> m_LayerStack;
