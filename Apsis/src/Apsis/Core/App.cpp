@@ -19,12 +19,10 @@ namespace A {
 	{
 		AP_PROFILE_FN();
 
-		for (int i = 0; i < m_LayerStack.Size(); i++)
-		{
-			// Update each layer if enabled
-			if (m_LayerStack[i]->IsEnabled())
-				m_LayerStack[i]->OnUpdate();
-		}
+		// Update each layer if enabled
+		for (Layer* layer : m_LayerStack)
+			if (layer->IsEnabled())
+				layer->OnAdd();
 	}
 
 	void App::PushLayer(Layer* layer)
