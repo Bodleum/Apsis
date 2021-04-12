@@ -16,7 +16,7 @@ namespace A {
 
 		const bool IsEnabled() const { return m_Enabled; }
 
-	private:
+	protected:
 		bool m_Enabled;		// for turning on and off without removing layer from stack
 	};
 
