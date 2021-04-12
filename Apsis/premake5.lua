@@ -11,6 +11,12 @@ project "Apsis"
         "src/**.cpp"
     }
 
+    removefiles
+    {
+        "src/Apsis/Core/Job/*.h",
+        "src/Apsis/Core/Job/*.cpp"
+    }
+
     includedirs
     {
         "src",

@@ -1,17 +1,19 @@
 #pragma once
+#include <functional>
 
 namespace A {
 
-	using JobEntryPoint = void* (void* params);
+	template<typename ...Args>
+	using JobFunction = std::function<void(Args... args)>;
 
 	/*
 	* TODO: Add counter
 	*/
 
+	template<typename ...Args>
 	struct Job
 	{
-		JobEntryPoint* EntryPoint;
-		void* Params;
+		JobFunction<Args... args> JobFn;
 		// Counter* Counter;
 	};
 }

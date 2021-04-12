@@ -3,13 +3,14 @@
 
 namespace A {
 
-	//JobSystem::s_Instance = nullptr;
-
-	JobSystem* A::JobSystem::Get()
+	void SubmitJob(JobFunction job_fn)//, void* params)
 	{
-		if (!s_Instance)
-			s_Instance = new JobSystem;
-		return s_Instance;
+		SubmitJob({ job_fn, nullptr });
+	}
+
+	void SubmitJob(Job job)
+	{
+		job.JobFn(job.Params);
 	}
 
 }

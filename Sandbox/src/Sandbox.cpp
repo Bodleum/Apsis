@@ -12,5 +12,12 @@ Sandbox::Sandbox()
 	AP_ASSERT_C(x < 0, "x must be < 0!, x = {0}", x);
 	AP_ASSERT_NOMSG(x < 0);
 
+	A::SubmitJob([]() {AP_INFO("Fiber test");});
+
 	system("pause");
+}
+
+void Sandbox::testfn()
+{
+	AP_INFO("Test job");
 }

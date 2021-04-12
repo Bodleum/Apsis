@@ -4,19 +4,8 @@
 
 namespace A {
 
-	class JobSystem
-	{
-	public:
-		static JobSystem* Get();
-
-		Queue* HighPriorityQueue;
-		Queue* NormalPriorityQueue;
-		Queue* LowPriorityQueue;
-
-	private:
-		JobSystem();
-
-		static JobSystem* s_Instance;
-	};
+	//void SubmitJob(JobFunction job_fn, void* params);
+	void SubmitJob(JobFunction job_fn);
+	void SubmitJob(Job job);
 
 }
