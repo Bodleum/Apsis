@@ -1,5 +1,6 @@
 #pragma once
 #include "Apsis/Core/Platform.h"
+#include "Apsis/Core/Core.h"
 
 #pragma warning(push, 0)
 	#include <iostream>
