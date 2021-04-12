@@ -1,5 +1,5 @@
 #pragma once
-#include <stack>
+#include <deque>
 
 namespace A {
 
@@ -33,12 +33,14 @@ namespace A {
 		virtual ~LayerStack() = default;
 
 		// Push and pop layers from the stack
-		void Push(const Layer& layer)		{ m_LayerStack.push(layer); }
-		void Pop()							{ m_LayerStack.pop(); }
-		void Emplace(const Layer& layer)	{ m_LayerStack.emplace(layer); }
+		inline void Push(const Layer& layer)		{ m_LayerStack.push_front(layer); }
+		inline void Emplace(const Layer& layer)		{ m_LayerStack.emplace_front(layer); }
+		inline void Pop()							{ m_LayerStack.pop_front(); }
+
+		inline size_t Size() const { return m_LayerStack.size(); }
 
 	private:
-		std::stack<Layer> m_LayerStack;
+		std::deque<Layer> m_LayerStack;
 	};
 
 }
