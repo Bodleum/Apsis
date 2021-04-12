@@ -35,7 +35,7 @@ namespace A {
 	void App::PopLayer()
 	{
 		AP_PROFILE_FN();
-		m_LayerStack[0]->OnRemove();
+		m_LayerStack.Top()->OnRemove();
 		m_LayerStack.Pop();
 	}
 

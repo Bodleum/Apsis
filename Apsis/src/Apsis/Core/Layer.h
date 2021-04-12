@@ -37,8 +37,9 @@ namespace A {
 		inline void Emplace(Layer* layer)		{ m_LayerStack.emplace_front(layer); }
 		inline void Pop()							{ m_LayerStack.pop_front(); }
 
-		inline size_t Size() const { return m_LayerStack.size(); }
+		inline Layer* Top() { return m_LayerStack.front(); }
 		inline Layer* operator[](int index) { return m_LayerStack[index]; }
+		inline size_t Size() const { return m_LayerStack.size(); }
 
 		// ---   Iterators   ---
 		std::deque<Layer*>::iterator begin() noexcept { return m_LayerStack.begin(); }
