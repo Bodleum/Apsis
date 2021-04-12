@@ -22,22 +22,22 @@ namespace A {
 		for (int i = 0; i < m_LayerStack.Size(); i++)
 		{
 			// Update each layer if enabled
-			if (m_LayerStack[i].IsEnabled())
-				m_LayerStack[i].OnUpdate();
+			if (m_LayerStack[i]->IsEnabled())
+				m_LayerStack[i]->OnUpdate();
 		}
 	}
 
 	void App::PushLayer(Layer* layer)
 	{
 		AP_PROFILE_FN();
-		m_LayerStack.Push(*layer);
+		m_LayerStack.Push(layer);
 		layer->OnAdd();
 	}
 
 	void App::PopLayer()
 	{
 		AP_PROFILE_FN();
-		m_LayerStack[0].OnRemove();
+		m_LayerStack[0]->OnRemove();
 		m_LayerStack.Pop();
 	}
 
