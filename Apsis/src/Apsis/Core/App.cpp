@@ -3,8 +3,8 @@
 
 namespace A {
 
-	App::App(AppArgs* args)
-		: m_Args(args)
+	App::App(AppArgs args)
+		: m_Args(args), m_LayerStack()
 	{
 		AP_PROFILE_FN();
 

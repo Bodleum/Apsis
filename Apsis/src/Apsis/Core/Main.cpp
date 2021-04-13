@@ -4,7 +4,7 @@
 #include "Apsis/Core/App.h"
 //#include "Apsis/Core/Logger.h"	Included in pch
 
-extern A::App* A::CreateApp(AppArgs* args);
+extern A::App* A::CreateApp(AppArgs args);
 
 #ifdef AP_PLATFORM_WIN
 
@@ -45,11 +45,11 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 		A::App::LogInfo();
 		A::App* app;
 		{
-			A::WinAppArgs* args = new A::WinAppArgs;
-			args->WindowArgs.hInstance = hInstance;
-			args->WindowArgs.hPrevInstance = hPrevInstance;
-			args->WindowArgs.pCmdLine = pCmdLine;
-			args->WindowArgs.nShowCmd = nShowCmd;
+			A::WinAppArgs args;
+			args.WindowArgs.hInstance = hInstance;
+			args.WindowArgs.hPrevInstance = hPrevInstance;
+			args.WindowArgs.pCmdLine = pCmdLine;
+			args.WindowArgs.nShowCmd = nShowCmd;
 
 			app = A::CreateApp(args);
 		}
