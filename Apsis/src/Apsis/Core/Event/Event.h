@@ -21,9 +21,10 @@ namespace A {
 	struct Event
 	{
 		virtual EventType GetType() const = 0;
+		inline bool IsComplete() const { return m_Complete; }
 
 	protected:
-		bool Complete = false;
+		bool m_Complete = false;
 	};
 
 	//  --- Mouse   ---
@@ -38,7 +39,7 @@ namespace A {
 		inline float GetX() const { return m_MouseX; }
 		inline float GetY() const { return m_MouseY; }
 
-	private:
+	protected:
 		float m_MouseX;
 		float m_MouseY;
 	};
@@ -100,6 +101,64 @@ namespace A {
 
 	private:
 		int m_Delta;
+	};
+
+
+	// ---   Keyboard   ---
+	class KeyEvent : public Event
+	{
+	protected:
+		KeyEvent(int key_code)
+			: m_KeyCode(key_code)
+		{
+		}
+
+		int m_KeyCode;
+	};
+
+	class KeyDownEvent : public KeyEvent
+	{
+	public:
+		KeyDownEvent(int key_code, bool repeat)
+			: KeyEvent(key_code), m_Repeat(repeat)
+		{
+		}
+
+		inline int GetKeyCode() const { return m_KeyCode; }
+
+		virtual EventType GetType() const override { return EventType::KeyDown; }
+
+	private:
+		bool m_Repeat;
+	};
+
+	class KeyUpEvent : public KeyEvent
+	{
+	public:
+		KeyUpEvent(int key_code)
+			: KeyEvent(key_code)
+		{
+		}
+
+		inline int GetKeyCode() const { return m_KeyCode; }
+
+		virtual EventType GetType() const override { return EventType::KeyUp; }
+	};
+
+	class KeyCharEvent : public KeyEvent
+	{
+	public:
+		KeyCharEvent(int key_code, char character)
+			: KeyEvent(key_code), m_Char(character)
+		{
+		}
+
+		inline char GetKeyChar() const { return m_Char; }
+
+		virtual EventType GetType() const override { return EventType::KeyChar; }
+
+	private:
+		char m_Char;
 	};
 
 }
