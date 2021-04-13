@@ -13,27 +13,30 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 	// Fix io to console
 	if (A::CreateNewConsole(1024))
 	{
+		#define AP_CONSOLE_IO_TESTS 0
 		// Tests
-		/*
-		int i;
+		#if AP_CONSOLE_IO_TESTS
+			int i;
 
-		// test stdio
-		fprintf(stdout, "Test output to stdout\n");
-		fprintf(stderr, "Test output to stderr\n");
-		fprintf(stdout, "Enter an integer to test stdin: ");
-		scanf("%d", &i);
-		printf("You entered %d\n", i);
+			// test stdio
+			fprintf(stdout, "Test output to stdout\n");
+			fprintf(stderr, "Test output to stderr\n");
+			fprintf(stdout, "Enter an integer to test stdin: ");
+			if (scanf("%d", &i))
+				printf("You entered %d\n", i);
 
-		// test iostreams
-		std::cout << "Test output to std::cout" << std::endl;
-		std::cerr << "Test output to std::cerr" << std::endl;
-		std::clog << "Test output to std::clog" << std::endl;
-		std::cout << "Enter an integer to test std::cin: ";
-		std::cin >> i;
-		std::cout << "You entered " << i << std::endl;
+			// test iostreams
+			std::cout << "Test output to std::cout" << std::endl;
+			std::cerr << "Test output to std::cerr" << std::endl;
+			std::clog << "Test output to std::clog" << std::endl;
+			std::cout << "Enter an integer to test std::cin: ";
+			std::cin >> i;
+			std::cout << "You entered " << i << std::endl;
 
-		system("pause");
-		*/
+			std::cout << "------------------\n" << "End of testing" << std::endl;
+			system("pause");
+			system("cls");
+		#endif
 	}
 
 
