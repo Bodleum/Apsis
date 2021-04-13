@@ -1,5 +1,5 @@
 project "Sandbox"
-	kind "ConsoleApp"
+	kind "WindowedApp"
 	language "C++"
 
 	targetdir ("%{wks.location}/bin/%{cfg.system}_%{cfg.buildcfg}/%{prj.name}")
@@ -40,3 +40,4 @@ project "Sandbox"
 
 	filter { "system:Windows" }
 		systemversion "latest"
+		entrypoint "wWinMainCRTStartup"

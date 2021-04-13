@@ -3,6 +3,10 @@
 #include "Apsis/Core/Core.h"
 
 #pragma warning(push, 0)
+	#include <stdio.h>
+	#include <fcntl.h>
+	#include <io.h>
+	#include <fstream>
 	#include <iostream>
 	#include <string>
 	#include <sstream>
