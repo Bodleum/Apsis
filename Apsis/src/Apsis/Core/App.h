@@ -9,7 +9,7 @@ namespace A {
 	class App : public EventListener
 	{
 	public:
-		App();
+		App(AppArgs* args);
 		virtual ~App() = default;
 
 		void OnUpdate();
@@ -30,11 +30,12 @@ namespace A {
 			friend int ::main(int argc, char** argv);
 		#endif // AP_PLATFORM_WIN
 
+		AppArgs* m_Args;
 		LayerStack m_LayerStack;
 
 	};
 
 	// Defined in client code
-	App* CreateApp();
+	App* CreateApp(AppArgs* args);
 
 }

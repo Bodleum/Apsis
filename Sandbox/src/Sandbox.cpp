@@ -2,7 +2,8 @@
 
 #include <iostream>
 
-Sandbox::Sandbox()
+Sandbox::Sandbox(A::AppArgs* args)
+	: A::App(args)
 {
 	AP_TRACE("Hello world but logged!!");
 

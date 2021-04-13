@@ -4,8 +4,8 @@
 class Sandbox : public A::App
 {
 public:
-	Sandbox();
+	Sandbox(A::AppArgs* args);
 	virtual ~Sandbox() = default;
 };
 
-A::App* A::CreateApp() { return new Sandbox; }
+A::App* A::CreateApp(AppArgs* args) { return new Sandbox; }

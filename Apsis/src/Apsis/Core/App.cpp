@@ -3,7 +3,8 @@
 
 namespace A {
 
-	App::App()
+	App::App(AppArgs* args)
+		: m_Args(args)
 	{
 		AP_PROFILE_FN();
 
@@ -44,7 +45,6 @@ namespace A {
 		AP_PROFILE_FN();
 
 		AP_INFO_C("Platform: {0}", SystemInfo::Platform);
-
 	}
 
 	void App::OnEvent(Event& evt)
