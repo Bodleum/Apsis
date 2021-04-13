@@ -8,4 +8,4 @@ public:
 	virtual ~Sandbox() = default;
 };
 
-A::App* A::CreateApp(AppArgs args) { return new Sandbox; }
+A::App* A::CreateApp(AppArgs args) { return new Sandbox(args); }
