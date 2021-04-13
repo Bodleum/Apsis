@@ -47,4 +47,9 @@ namespace A {
 
 	}
 
+	void App::OnEvent(Event& evt)
+	{
+		AP_PROFILE_FN();
+	}
+
 }
