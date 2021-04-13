@@ -1,5 +1,5 @@
 #pragma once
-#include <memory>
+#include "Apsis/Core/Main.h"
 
 namespace A {
 
@@ -11,7 +11,7 @@ namespace A {
 		virtual unsigned int GetWidth() const = 0;
 		virtual unsigned int GetHeight() const = 0;
 
-		static std::shared_ptr<Window> Create();
+		static Unique<Window> Create(WindowArgs args);
 	};
 
 }

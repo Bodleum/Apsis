@@ -1,6 +1,7 @@
 #pragma once
 #include "Apsis/Core/Layer.h"
 #include "Apsis/Core/Main.h"
+#include "Apsis/Core/Window.h"
 //#include "Apsis/Event/Event.h"		Included in EventListener.h
 #include "Apsis/Event/EventListener.h"
 
@@ -32,6 +33,7 @@ namespace A {
 
 		AppArgs m_Args;
 		LayerStack m_LayerStack;
+		Unique<Window> m_Window;
 
 	};
 

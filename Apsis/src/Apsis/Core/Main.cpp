@@ -45,7 +45,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 		A::App::LogInfo();
 		A::App* app;
 		{
-			A::WinAppArgs args;
+			A::AppArgs args;
 			args.WindowArgs.hInstance = hInstance;
 			args.WindowArgs.hPrevInstance = hPrevInstance;
 			args.WindowArgs.pCmdLine = pCmdLine;

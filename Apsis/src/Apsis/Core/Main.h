@@ -2,16 +2,6 @@
 #include "apch.h"
 #include "Apsis/Core/Platform.h"
 
-namespace A {
-
-	struct WindowArgs {};
-	struct AppArgs
-	{
-		WindowArgs WindowArgs;
-	};
-
-}
-
 #ifdef AP_PLATFORM_WIN
 	int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPWSTR pCmdLine, _In_ int nShowCmd);
 
@@ -26,7 +16,7 @@ namespace A {
 		bool CreateNewConsole(int16_t minLength);
 		bool AttachParentConsole(int16_t minLength);
 
-		struct WinWindowArgs : public WindowArgs
+		struct WindowArgs
 		{
 			HINSTANCE hInstance;
 			HINSTANCE hPrevInstance;
@@ -34,11 +24,18 @@ namespace A {
 			int nShowCmd;
 		};
 
-		struct WinAppArgs : public AppArgs
+		struct AppArgs
 		{
-			WinWindowArgs WindowArgs;
+			WindowArgs WindowArgs;
 		};
 	}
 #else
 	int main(int argc, char** argv);
+
+	namespace A {
+
+		struct WindowArgs {};
+		struct AppArgs {};
+
+	}
 #endif // AP_PLATFORM_WIN
