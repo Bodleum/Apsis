@@ -15,7 +15,15 @@ namespace A {
 		// Keyboard
 		KeyDown,
 		KeyUp,
-		KeyChar
+		KeyChar,
+
+		// Window
+		WindowClose,
+		WindowDestroy,
+		WindowResize,
+
+		// App
+		AppQuit
 	};
 
 	struct Event
@@ -159,6 +167,54 @@ namespace A {
 
 	private:
 		char m_Char;
+	};
+
+
+	// ---   Window   ---
+	class WindowCloseEvent : public Event
+	{
+	public:
+		WindowCloseEvent()
+		{
+		}
+
+		virtual EventType GetType() const override { return EventType::WindowClose; }
+	};
+
+	class WindowDestroyEvent : public Event
+	{
+	public:
+		WindowDestroyEvent()
+		{
+		}
+
+		virtual EventType GetType() const override { return EventType::WindowDestroy; }
+	};
+
+	class WindowResizeEvent : public Event
+	{
+	public:
+		WindowResizeEvent(unsigned int width, unsigned int height)
+			: m_Width(width), m_Height(height)
+		{
+		}
+
+		virtual EventType GetType() const override { return EventType::WindowResize; }
+
+	private:
+		unsigned int m_Width, m_Height;
+	};
+
+
+	// ---   App   ---
+	class AppQuitEvent : public Event
+	{
+	public:
+		AppQuitEvent()
+		{
+		}
+
+		virtual EventType GetType() const override { return EventType::AppQuit; }
 	};
 
 }
