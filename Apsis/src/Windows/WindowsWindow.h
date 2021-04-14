@@ -12,13 +12,13 @@ namespace A {
 
 		// Inherited via Window
 		virtual bool PollEvents() const override;
-		virtual unsigned int GetWidth() const override { return 0; }
-		virtual unsigned int GetHeight() const override { return 0; }
 
 	private:
 		static LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 		WNDCLASS m_WindowClass;
 		HWND m_WindowHandle;
+
+		unsigned int m_Width, m_Height;
 	};
 	
 }

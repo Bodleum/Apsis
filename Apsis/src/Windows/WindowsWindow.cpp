@@ -4,6 +4,7 @@
 namespace A {
 
 	WindowsWindow::WindowsWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR pCmdLine, int nShowCmd, const std::string& name, unsigned int width, unsigned int height)
+		: m_Width(width), m_Height(height)
 	{
 		AP_PROFILE_FN();
 
