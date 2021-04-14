@@ -69,6 +69,8 @@ namespace A {
 
 	bool WindowsWindow::PollEvents() const
 	{
+		AP_PROFILE_FN();
+
 		bool eventsExist = false;
 
 		MSG msg;
