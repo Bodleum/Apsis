@@ -9,10 +9,10 @@ namespace A {
 		Layer();
 		virtual ~Layer() = default;
 
-		virtual void OnAdd();
-		virtual void OnRemove();
+		virtual void OnAdd() = 0;
+		virtual void OnRemove() = 0;
 
-		virtual void OnUpdate() {}
+		virtual void OnUpdate() = 0;
 
 		const bool IsEnabled() const { return m_Enabled; }
 
@@ -34,8 +34,8 @@ namespace A {
 
 		// Push and pop layers from the stack
 		inline void Push(Layer* layer)		{ m_LayerStack.push_front(layer); }
-		inline void Emplace(Layer* layer)		{ m_LayerStack.emplace_front(layer); }
-		inline void Pop()							{ m_LayerStack.pop_front(); }
+		inline void Emplace(Layer* layer)	{ m_LayerStack.emplace_front(layer); }
+		inline void Pop()					{ m_LayerStack.pop_front(); }
 
 		inline Layer* Top() { return m_LayerStack.front(); }
 		inline Layer* operator[](int index) { return m_LayerStack[index]; }

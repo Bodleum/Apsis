@@ -31,13 +31,20 @@ namespace A {
 		// Update each layer if enabled
 		for (Layer* layer : m_LayerStack)
 			if (layer->IsEnabled())
-				layer->OnAdd();
+				layer->OnUpdate();
 	}
 
 	void App::PushLayer(Layer* layer)
 	{
 		AP_PROFILE_FN();
 		m_LayerStack.Push(layer);
+		layer->OnAdd();
+	}
+
+	void App::EmlpaceLayer(Layer* layer)
+	{
+		AP_PROFILE_FN();
+		m_LayerStack.Emplace(layer);
 		layer->OnAdd();
 	}
 

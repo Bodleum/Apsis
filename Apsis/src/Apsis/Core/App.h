@@ -18,6 +18,7 @@ namespace A {
 		virtual void OnEvent(Event& evt) override;
 
 		void PushLayer(Layer* layer);
+		void EmlpaceLayer(Layer* layer);
 		void PopLayer();
 
 	private:
