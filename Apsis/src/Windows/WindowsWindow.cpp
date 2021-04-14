@@ -106,7 +106,8 @@ namespace A {
 		return 0;
 
 		}
-		return DefWindowProc(hwnd, uMsg, wParam, lParam);
+
+		return DefWindowProc(hwnd, uMsg, wParam, lParam);	// Unhandled message, DefWindowProc performs default action
 	}
 
 }

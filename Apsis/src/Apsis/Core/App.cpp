@@ -9,17 +9,24 @@ namespace A {
 		AP_PROFILE_FN();
 
 		AP_INFO_C("Created App");
-		Window::Create(args.MainFnArgs);
+		m_Window = Window::Create(args.MainFnArgs);
 	}
 
 	void App::Run()
 	{
 		AP_PROFILE_FN();
+
+		while (true)
+		{
+			OnUpdate();
+		}
 	}
 
 	void App::OnUpdate()
 	{
 		AP_PROFILE_FN();
+
+		m_Window->PollEvents();
 
 		// Update each layer if enabled
 		for (Layer* layer : m_LayerStack)
