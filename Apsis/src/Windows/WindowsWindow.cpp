@@ -7,6 +7,57 @@ namespace A {
 	{
 		AP_PROFILE_FN();
 
+		// Convert std::string& name into wchar_t*
+		wchar_t* className;
+		{
+			const char* orig = name.c_str();
+			// newsize describes the length of the
+			// wchar_t string called wcstring in terms of the number
+			// of wide characters, not the number of bytes.
+			size_t newsize = strlen(orig) + 1;
+
+			// The following creates a buffer large enough to contain
+			// the exact number of characters in the original string
+			// in the new format. If you want to add more characters
+			// to the end of the string, increase the value of newsize
+			// to increase the size of the buffer.
+			className = new wchar_t[newsize];
+
+			// Convert char* string to a wchar_t* string.
+			size_t convertedChars = 0;
+			mbstowcs_s(&convertedChars, className, newsize, orig, _TRUNCATE);
+		}
+
+		// Register window class
+		m_WindowClass = { 0 };
+		// Set parameters
+		m_WindowClass.lpfnWndProc = WindowProc;
+		m_WindowClass.hInstance = hInstance;
+		m_WindowClass.lpszClassName = className;
+		// Register
+		RegisterClass(&m_WindowClass);
+
+		// Create instance
+		m_WindowHandle = CreateWindowEx(
+			0,						// Optional window styles.
+			className,				// Window class
+			className,				// Window text (what appears in the title bar), set same as name.
+			WS_OVERLAPPEDWINDOW,	// Window style
+
+			// Size and position
+			CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
+
+			NULL,		// Parent window    
+			NULL,		// Menu
+			hInstance,	// Instance handle
+			NULL		// Additional application data
+		);
+		AP_ASSERT_C(m_WindowHandle, "Failed to create instance of window class.\n CreateWindowEx() returned NULL");
+
+		// Show window
+		if (m_WindowHandle)
+			ShowWindow(m_WindowHandle, nShowCmd);
+
 		AP_INFO_C("Created Windows window");
 	}
 

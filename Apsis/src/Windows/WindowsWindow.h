@@ -15,8 +15,9 @@ namespace A {
 		virtual unsigned int GetHeight() const override { return 0; }
 
 	private:
-		LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
-
+		static LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+		WNDCLASS m_WindowClass;
+		HWND m_WindowHandle;
 	};
 	
 }
