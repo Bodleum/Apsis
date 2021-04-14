@@ -46,10 +46,10 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 		A::App* app;
 		{
 			A::AppArgs args;
-			args.WindowArgs.hInstance = hInstance;
-			args.WindowArgs.hPrevInstance = hPrevInstance;
-			args.WindowArgs.pCmdLine = pCmdLine;
-			args.WindowArgs.nShowCmd = nShowCmd;
+			args.MainFnArgs.hInstance = hInstance;
+			args.MainFnArgs.hPrevInstance = hPrevInstance;
+			args.MainFnArgs.pCmdLine = pCmdLine;
+			args.MainFnArgs.nShowCmd = nShowCmd;
 
 			app = A::CreateApp(args);
 		}

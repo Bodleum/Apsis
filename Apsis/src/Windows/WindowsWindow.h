@@ -7,7 +7,7 @@ namespace A {
 	class WindowsWindow : public Window
 	{
 	public:
-		WindowsWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR pCmdLine, int nShowCmd);
+		WindowsWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR pCmdLine, int nShowCmd, const std::string& name, unsigned int width, unsigned int height);
 		virtual ~WindowsWindow();
 
 		// Inherited via Window

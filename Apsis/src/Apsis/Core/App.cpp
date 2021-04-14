@@ -9,7 +9,7 @@ namespace A {
 		AP_PROFILE_FN();
 
 		AP_INFO_C("Created App");
-		Window::Create(args.WindowArgs);
+		Window::Create(args.MainFnArgs);
 	}
 
 	void App::Run()

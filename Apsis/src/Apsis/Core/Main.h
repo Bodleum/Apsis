@@ -16,7 +16,7 @@
 		bool CreateNewConsole(int16_t minLength);
 		bool AttachParentConsole(int16_t minLength);
 
-		struct WindowArgs
+		struct MainFnArgs
 		{
 			HINSTANCE hInstance;
 			HINSTANCE hPrevInstance;
@@ -26,7 +26,7 @@
 
 		struct AppArgs
 		{
-			WindowArgs WindowArgs;
+			MainFnArgs MainFnArgs;
 		};
 	}
 #else

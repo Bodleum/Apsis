@@ -11,7 +11,7 @@ namespace A {
 		virtual unsigned int GetWidth() const = 0;
 		virtual unsigned int GetHeight() const = 0;
 
-		static Unique<Window> Create(WindowArgs args);
+		static Unique<Window> Create(MainFnArgs args, const std::string& name = "Window", unsigned int width = 1280, unsigned int height = 720);
 	};
 
 }
