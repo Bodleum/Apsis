@@ -11,6 +11,7 @@ namespace A {
 		virtual ~WindowsWindow();
 
 		// Inherited via Window
+		virtual bool PollEvents() const override;
 		virtual unsigned int GetWidth() const override { return 0; }
 		virtual unsigned int GetHeight() const override { return 0; }
 

@@ -65,6 +65,21 @@ namespace A {
 	{
 		AP_PROFILE_FN();
 	}
+
+	bool WindowsWindow::PollEvents() const
+	{
+		bool eventsExist = false;
+
+		MSG msg;
+		while (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE) > 0)  // PeekMessage is non blocking so use over GetMessage which is blocking
+		{
+			eventsExist = true;
+			TranslateMessage(&msg);		// Turns keystrokes into chars
+			DispatchMessage(&msg);		// Dispatch to WindowProc for handling
+		}
+
+		return eventsExist;
+	}
 	
 	LRESULT WindowsWindow::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
