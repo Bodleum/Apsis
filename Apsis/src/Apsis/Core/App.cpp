@@ -62,9 +62,19 @@ namespace A {
 		AP_INFO_C("Platform: {0}", SystemInfo::Platform);
 	}
 
-	void App::OnEvent(Event& evt)
+	bool App::OnEvent(Event& evt)
 	{
 		AP_PROFILE_FN();
+
+		AP_INFO_C("AppOnEvent!");
+
+		switch (evt.GetType())
+		{
+		default:
+			break;
+		}
+
+		return false;
 	}
 
 }

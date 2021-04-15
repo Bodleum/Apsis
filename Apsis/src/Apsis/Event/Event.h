@@ -5,6 +5,7 @@ namespace A {
 	enum class EventType
 	{
 		Unknown = 0,
+		Test,
 
 		// Mouse
 		MouseButtonDown,
@@ -28,11 +29,26 @@ namespace A {
 
 	struct Event
 	{
-		virtual EventType GetType() const {};
+		virtual EventType GetType() const { return EventType::Unknown; };
 		inline bool IsComplete() const { return m_Complete; }
 
 	protected:
 		bool m_Complete = false;
+	};
+
+	class TestEvent : public Event
+	{
+	public:
+		TestEvent(const std::string& msg)
+			: m_Message(msg)
+		{
+		}
+
+		inline std::string GetMessage() { return m_Message; }
+		virtual EventType GetType() const override { return EventType::Test; }
+
+	private:
+		std::string m_Message;
 	};
 
 	//  --- Mouse   ---

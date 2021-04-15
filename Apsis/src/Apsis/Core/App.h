@@ -2,8 +2,8 @@
 #include "Apsis/Core/Layer.h"
 #include "Apsis/Core/Main.h"
 #include "Apsis/Core/Window.h"
-//#include "Apsis/Event/Event.h"		Included in EventListener.h
-#include "Apsis/Event/EventListener.h"
+//#include "Apsis/Event/Event.h"		Included in EventDispatcher.h
+#include "Apsis/Event/EventDispatcher.h"
 
 namespace A {
 
@@ -15,7 +15,7 @@ namespace A {
 
 		void OnUpdate();
 		// Inherited via EventListener
-		virtual void OnEvent(Event& evt) override;
+		virtual bool OnEvent(Event& evt) override;
 
 		void PushLayer(Layer* layer);
 		void EmlpaceLayer(Layer* layer);

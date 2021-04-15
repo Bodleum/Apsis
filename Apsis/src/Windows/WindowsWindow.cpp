@@ -1,6 +1,8 @@
 #include "apch.h"
 #include "WindowsWindow.h"
 
+#include "Apsis/Event/EventDispatcher.h"
+
 namespace A {
 
 	WindowsWindow::WindowsWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR pCmdLine, int nShowCmd, const std::string& name, unsigned int width, unsigned int height)
@@ -87,6 +89,8 @@ namespace A {
 	LRESULT WindowsWindow::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
 		AP_PROFILE_FN();
+
+		EventDispatcher::OnEvent(TestEvent("Test!"));
 
 		switch (uMsg)
 		{
