@@ -2,6 +2,7 @@
 #include "WindowsWindow.h"
 
 #include "Apsis/Event/EventDispatcher.h"
+//#include "Apsis/Core/InputCodes.h"		Included in EventDispatcher.h
 
 namespace A {
 
@@ -94,23 +95,178 @@ namespace A {
 
 		switch (uMsg)
 		{
-		case WM_DESTROY:
-			PostQuitMessage(0);
+			// ---   Mouse   ---
+			case WM_LBUTTONDOWN:
+			{
+				int x = LOWORD(lParam);
+				int y = HIWORD(lParam);
+				Event evt = MouseButtonDownEvent(x, y, Mouse::Left);
+				EventDispatcher::OnEvent(evt);
+				break;
+			}
+
+			case WM_LBUTTONUP:
+			{
+				int x = LOWORD(lParam);
+				int y = HIWORD(lParam);
+				Event evt = MouseButtonUpEvent(x, y, Mouse::Left);
+				EventDispatcher::OnEvent(evt);
+				break;
+			}
+
+			case WM_MBUTTONDOWN:
+			{
+				int x = LOWORD(lParam);
+				int y = HIWORD(lParam);
+				Event evt = MouseButtonDownEvent(x, y, Mouse::Middle);
+				EventDispatcher::OnEvent(evt);
+				break;
+			}
+
+			case WM_MBUTTONUP:
+			{
+				int x = LOWORD(lParam);
+				int y = HIWORD(lParam);
+				Event evt = MouseButtonUpEvent(x, y, Mouse::Middle);
+				EventDispatcher::OnEvent(evt);
+				break;
+			}
+
+			case WM_RBUTTONDOWN:
+			{
+				int x = LOWORD(lParam);
+				int y = HIWORD(lParam);
+				Event evt = MouseButtonDownEvent(x, y, Mouse::Right);
+				EventDispatcher::OnEvent(evt);
+				break;
+			}
+
+			case WM_RBUTTONUP:
+			{
+				int x = LOWORD(lParam);
+				int y = HIWORD(lParam);
+				Event evt = MouseButtonUpEvent(x, y, Mouse::Right);
+				EventDispatcher::OnEvent(evt);
+				break;
+			}
+
+			case WM_XBUTTONDOWN:
+			{
+				int x1or2 = HIWORD(wParam);
+				int x = LOWORD(lParam);
+				int y = HIWORD(lParam);
+				Event evt = MouseButtonDownEvent(x, y, x1or2 == 1 ? Mouse::X1 : Mouse::X2);
+				EventDispatcher::OnEvent(evt);
+				break;
+			}
+
+			case WM_XBUTTONUP:
+			{
+				int x1or2 = HIWORD(wParam);
+				int x = LOWORD(lParam);
+				int y = HIWORD(lParam);
+				Event evt = MouseButtonUpEvent(x, y, x1or2 == 1 ? Mouse::X1 : Mouse::X2);
+				EventDispatcher::OnEvent(evt);
+				break;
+			}
+
+			case WM_MOUSEMOVE:
+			{
+				int x = LOWORD(lParam);
+				int y = HIWORD(lParam);
+				Event evt = MouseMoveEvent(x, y);
+				EventDispatcher::OnEvent(evt);
+				break;
+			}
+
+			case WM_MOUSEWHEEL:
+			{
+				int delta = HIWORD(wParam);
+				int x = LOWORD(lParam);
+				int y = HIWORD(lParam);
+				Event evt = MouseWheelEvent(x, y, delta);
+				EventDispatcher::OnEvent(evt);
+				break;
+			}
+
+
+			// ---   Keyboard   ---
+			case WM_KEYDOWN:
+			{
+				int virtualKeyCode = wParam;
+				bool repeat = BIT_AT(30) & lParam;
+				Event evt = KeyDownEvent((KeyCode)virtualKeyCode, repeat);
+				EventDispatcher::OnEvent(evt);
+				break;
+			}
+
+			case WM_KEYUP:
+			{
+				int virtualKeyCode = wParam;
+				Event evt = KeyUpEvent((KeyCode)virtualKeyCode);
+				EventDispatcher::OnEvent(evt);
+				break;
+			}
+
+			case WM_CHAR:
+			{
+				char characterCode = wParam;
+				bool repeat = BIT_AT(30) & lParam;
+				Event evt = KeyCharEvent(Key::None, characterCode, repeat);
+				EventDispatcher::OnEvent(evt);
+				break;
+			}
+
+
+			// --- Window   ---
+			case WM_CLOSE:
+			{
+				Event evt = WindowCloseEvent();
+				EventDispatcher::OnEvent(evt);
+				break;
+			}
+
+			case WM_DESTROY:
+			{
+				Event evt = WindowDestroyEvent();
+				EventDispatcher::OnEvent(evt);
+				PostQuitMessage(0);
+				break;
+			}
+
+			case WM_SIZE:
+			{
+				UINT width = LOWORD(lParam);
+				UINT height = HIWORD(lParam);
+				Event evt = WindowResizeEvent(width, height);
+				EventDispatcher::OnEvent(evt);
+				break;
+			}
+
+
+			// --- App   ---
+			case WM_QUIT:
+			{
+				Event evt = AppQuitEvent();
+				EventDispatcher::OnEvent(evt);
+				break;
+			}
+
+
+			// ---   Other   ---
+			case WM_PAINT:
+			{
+				PAINTSTRUCT ps;
+				HDC hdc = BeginPaint(hwnd, &ps);
+
+
+
+				FillRect(hdc, &ps.rcPaint, (HBRUSH)(COLOR_WINDOW + 1));
+
+				EndPaint(hwnd, &ps);
+			}
+
 			return 0;
-
-		case WM_PAINT:
-		{
-			PAINTSTRUCT ps;
-			HDC hdc = BeginPaint(hwnd, &ps);
-
-
-
-			FillRect(hdc, &ps.rcPaint, (HBRUSH)(COLOR_WINDOW + 1));
-
-			EndPaint(hwnd, &ps);
-		}
-		return 0;
-
 		}
 
 		return DefWindowProc(hwnd, uMsg, wParam, lParam);	// Unhandled message, DefWindowProc performs default action

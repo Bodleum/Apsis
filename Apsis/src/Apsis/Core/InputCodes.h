@@ -15,9 +15,10 @@ namespace A {
 	typedef enum class KeyCode : unsigned short
 	{
 		Unknown = -1,
+		None = 0,
 
 		// Alphabet
-		A = 0,
+		A = 1,
 		B,
 		C,
 		D,

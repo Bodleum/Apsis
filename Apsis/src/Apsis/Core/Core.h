@@ -6,6 +6,9 @@
 	#define UNICODE
 #endif
 
+// Bits
+#define BIT_AT(x) (1 << x)
+
 // ---   Smart Pointers   ---
 namespace A {
 

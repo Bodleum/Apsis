@@ -173,8 +173,8 @@ namespace A {
 	class KeyCharEvent : public KeyEvent
 	{
 	public:
-		KeyCharEvent(KeyCode key_code, char character)
-			: KeyEvent(key_code), m_Char(character)
+		KeyCharEvent(KeyCode key_code, char character, bool repeat)
+			: KeyEvent(key_code), m_Char(character), m_Repeat(repeat)
 		{
 		}
 
@@ -184,6 +184,7 @@ namespace A {
 
 	private:
 		char m_Char;
+		bool m_Repeat;
 	};
 
 
