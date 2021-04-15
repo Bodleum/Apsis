@@ -28,7 +28,7 @@ namespace A {
 
 	struct Event
 	{
-		virtual EventType GetType() const = 0;
+		virtual EventType GetType() const {};
 		inline bool IsComplete() const { return m_Complete; }
 
 	protected:
