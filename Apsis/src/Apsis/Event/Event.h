@@ -31,6 +31,7 @@ namespace A {
 	struct Event
 	{
 		virtual EventType GetType() const { return EventType::Unknown; };
+		virtual std::string GetString() const { return ""; }
 		inline bool IsComplete() const { return m_Complete; }
 
 	protected:
@@ -47,6 +48,7 @@ namespace A {
 
 		inline std::string GetMessage() { return m_Message; }
 		virtual EventType GetType() const override { return EventType::Test; }
+		virtual std::string GetString() const override { return m_Message; }
 
 	private:
 		std::string m_Message;
@@ -80,6 +82,7 @@ namespace A {
 		inline MouseCode GetButton() const { return m_Button; }
 
 		virtual EventType GetType() const override { return EventType::MouseButtonDown; }
+		virtual std::string GetString() const override { return "MouseDown at " + std::to_string(m_MouseX) + ", " + std::to_string(m_MouseY); }
 
 	private:
 		MouseCode m_Button;
@@ -96,6 +99,7 @@ namespace A {
 		inline MouseCode GetButton() const { return m_Button; }
 
 		virtual EventType GetType() const override { return EventType::MouseButtonUp; }
+		virtual std::string GetString() const override { return "MouseUp at " + std::to_string(m_MouseX) + ", " + std::to_string(m_MouseY); }
 
 	private:
 		MouseCode m_Button;
@@ -110,6 +114,7 @@ namespace A {
 		}
 
 		virtual EventType GetType() const override { return EventType::MouseMove; }
+		virtual std::string GetString() const override { return "MouseMove at " + std::to_string(m_MouseX) + ", " + std::to_string(m_MouseY); }
 	};
 
 	class MouseWheelEvent : public MouseEvent
@@ -123,6 +128,7 @@ namespace A {
 		inline int GetDelta() const { return m_Delta; }
 
 		virtual EventType GetType() const override { return EventType::MouseWheel; }
+		virtual std::string GetString() const override { return "MouseWheel " + std::to_string(m_Delta) + " at " + std::to_string(m_MouseX) + ", " + std::to_string(m_MouseY); }
 
 	private:
 		int m_Delta;
@@ -152,6 +158,7 @@ namespace A {
 		inline KeyCode GetKeyCode() const { return m_KeyCode; }
 
 		virtual EventType GetType() const override { return EventType::KeyDown; }
+		virtual std::string GetString() const override { return "KeyDown " + std::to_string((unsigned short)m_KeyCode) + ", repeat " + std::to_string(m_Repeat); }
 
 	private:
 		bool m_Repeat;
@@ -168,6 +175,7 @@ namespace A {
 		inline KeyCode GetKeyCode() const { return m_KeyCode; }
 
 		virtual EventType GetType() const override { return EventType::KeyUp; }
+		virtual std::string GetString() const override { return "KeyUp " + std::to_string((unsigned short)m_KeyCode); }
 	};
 
 	class KeyCharEvent : public KeyEvent
@@ -181,6 +189,7 @@ namespace A {
 		inline char GetKeyChar() const { return m_Char; }
 
 		virtual EventType GetType() const override { return EventType::KeyChar; }
+		virtual std::string GetString() const override { return "KeyChar " + std::to_string(m_Char) + ", repeat " + std::to_string(m_Repeat); }
 
 	private:
 		char m_Char;
@@ -197,6 +206,7 @@ namespace A {
 		}
 
 		virtual EventType GetType() const override { return EventType::WindowClose; }
+		virtual std::string GetString() const override { return "WindowClose"; }
 	};
 
 	class WindowDestroyEvent : public Event
@@ -207,6 +217,7 @@ namespace A {
 		}
 
 		virtual EventType GetType() const override { return EventType::WindowDestroy; }
+		virtual std::string GetString() const override { return "WindowDestroy"; }
 	};
 
 	class WindowResizeEvent : public Event
@@ -218,6 +229,7 @@ namespace A {
 		}
 
 		virtual EventType GetType() const override { return EventType::WindowResize; }
+		virtual std::string GetString() const override { return "WindowReise: " + std::to_string(m_Width) + " x " + std::to_string(m_Height); }
 
 	private:
 		unsigned int m_Width, m_Height;
@@ -233,6 +245,13 @@ namespace A {
 		}
 
 		virtual EventType GetType() const override { return EventType::AppQuit; }
+		virtual std::string GetString() const override { return "AppQuit"; }
 	};
+
+	// Printing events
+	inline std::ostream& operator<<(std::ostream& os, const Event& evt)
+	{
+		return os << evt.GetString();
+	}
 
 }

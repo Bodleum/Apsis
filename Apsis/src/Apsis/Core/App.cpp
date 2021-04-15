@@ -66,7 +66,7 @@ namespace A {
 	{
 		AP_PROFILE_FN();
 
-		AP_INFO_C("AppOnEvent!");
+		AP_INFO_C(evt);
 
 		switch (evt.GetType())
 		{

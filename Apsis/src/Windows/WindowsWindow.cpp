@@ -91,8 +91,6 @@ namespace A {
 	{
 		AP_PROFILE_FN();
 
-		EventDispatcher::OnEvent(TestEvent("Test!"));
-
 		switch (uMsg)
 		{
 			// ---   Mouse   ---
@@ -100,8 +98,7 @@ namespace A {
 			{
 				int x = LOWORD(lParam);
 				int y = HIWORD(lParam);
-				Event evt = MouseButtonDownEvent(x, y, Mouse::Left);
-				EventDispatcher::OnEvent(evt);
+				EventDispatcher::OnEvent(MouseButtonDownEvent(x, y, Mouse::Left));
 				break;
 			}
 
@@ -109,8 +106,7 @@ namespace A {
 			{
 				int x = LOWORD(lParam);
 				int y = HIWORD(lParam);
-				Event evt = MouseButtonUpEvent(x, y, Mouse::Left);
-				EventDispatcher::OnEvent(evt);
+				EventDispatcher::OnEvent(MouseButtonUpEvent(x, y, Mouse::Left));
 				break;
 			}
 
@@ -118,8 +114,7 @@ namespace A {
 			{
 				int x = LOWORD(lParam);
 				int y = HIWORD(lParam);
-				Event evt = MouseButtonDownEvent(x, y, Mouse::Middle);
-				EventDispatcher::OnEvent(evt);
+				EventDispatcher::OnEvent(MouseButtonDownEvent(x, y, Mouse::Middle));
 				break;
 			}
 
@@ -127,8 +122,7 @@ namespace A {
 			{
 				int x = LOWORD(lParam);
 				int y = HIWORD(lParam);
-				Event evt = MouseButtonUpEvent(x, y, Mouse::Middle);
-				EventDispatcher::OnEvent(evt);
+				EventDispatcher::OnEvent(MouseButtonUpEvent(x, y, Mouse::Middle));
 				break;
 			}
 
@@ -136,8 +130,7 @@ namespace A {
 			{
 				int x = LOWORD(lParam);
 				int y = HIWORD(lParam);
-				Event evt = MouseButtonDownEvent(x, y, Mouse::Right);
-				EventDispatcher::OnEvent(evt);
+				EventDispatcher::OnEvent(MouseButtonDownEvent(x, y, Mouse::Right));
 				break;
 			}
 
@@ -145,8 +138,7 @@ namespace A {
 			{
 				int x = LOWORD(lParam);
 				int y = HIWORD(lParam);
-				Event evt = MouseButtonUpEvent(x, y, Mouse::Right);
-				EventDispatcher::OnEvent(evt);
+				EventDispatcher::OnEvent(MouseButtonUpEvent(x, y, Mouse::Right));
 				break;
 			}
 
@@ -155,8 +147,7 @@ namespace A {
 				int x1or2 = HIWORD(wParam);
 				int x = LOWORD(lParam);
 				int y = HIWORD(lParam);
-				Event evt = MouseButtonDownEvent(x, y, x1or2 == 1 ? Mouse::X1 : Mouse::X2);
-				EventDispatcher::OnEvent(evt);
+				EventDispatcher::OnEvent(MouseButtonDownEvent(x, y, x1or2 == 1 ? Mouse::X1 : Mouse::X2));
 				break;
 			}
 
@@ -165,8 +156,7 @@ namespace A {
 				int x1or2 = HIWORD(wParam);
 				int x = LOWORD(lParam);
 				int y = HIWORD(lParam);
-				Event evt = MouseButtonUpEvent(x, y, x1or2 == 1 ? Mouse::X1 : Mouse::X2);
-				EventDispatcher::OnEvent(evt);
+				EventDispatcher::OnEvent(MouseButtonUpEvent(x, y, x1or2 == 1 ? Mouse::X1 : Mouse::X2));
 				break;
 			}
 
@@ -174,8 +164,7 @@ namespace A {
 			{
 				int x = LOWORD(lParam);
 				int y = HIWORD(lParam);
-				Event evt = MouseMoveEvent(x, y);
-				EventDispatcher::OnEvent(evt);
+				EventDispatcher::OnEvent(MouseMoveEvent(x, y));
 				break;
 			}
 
@@ -184,8 +173,7 @@ namespace A {
 				int delta = HIWORD(wParam);
 				int x = LOWORD(lParam);
 				int y = HIWORD(lParam);
-				Event evt = MouseWheelEvent(x, y, delta);
-				EventDispatcher::OnEvent(evt);
+				EventDispatcher::OnEvent(MouseWheelEvent(x, y, delta));
 				break;
 			}
 
@@ -195,16 +183,14 @@ namespace A {
 			{
 				int virtualKeyCode = wParam;
 				bool repeat = BIT_AT(30) & lParam;
-				Event evt = KeyDownEvent((KeyCode)virtualKeyCode, repeat);
-				EventDispatcher::OnEvent(evt);
+				EventDispatcher::OnEvent(KeyDownEvent((KeyCode)virtualKeyCode, repeat));
 				break;
 			}
 
 			case WM_KEYUP:
 			{
 				int virtualKeyCode = wParam;
-				Event evt = KeyUpEvent((KeyCode)virtualKeyCode);
-				EventDispatcher::OnEvent(evt);
+				EventDispatcher::OnEvent(KeyUpEvent((KeyCode)virtualKeyCode));
 				break;
 			}
 
@@ -212,8 +198,7 @@ namespace A {
 			{
 				char characterCode = wParam;
 				bool repeat = BIT_AT(30) & lParam;
-				Event evt = KeyCharEvent(Key::None, characterCode, repeat);
-				EventDispatcher::OnEvent(evt);
+				EventDispatcher::OnEvent(KeyCharEvent(Key::None, characterCode, repeat));
 				break;
 			}
 
@@ -221,15 +206,13 @@ namespace A {
 			// --- Window   ---
 			case WM_CLOSE:
 			{
-				Event evt = WindowCloseEvent();
-				EventDispatcher::OnEvent(evt);
+				EventDispatcher::OnEvent(WindowCloseEvent());
 				break;
 			}
 
 			case WM_DESTROY:
 			{
-				Event evt = WindowDestroyEvent();
-				EventDispatcher::OnEvent(evt);
+				EventDispatcher::OnEvent(WindowDestroyEvent());
 				PostQuitMessage(0);
 				break;
 			}
@@ -238,8 +221,7 @@ namespace A {
 			{
 				UINT width = LOWORD(lParam);
 				UINT height = HIWORD(lParam);
-				Event evt = WindowResizeEvent(width, height);
-				EventDispatcher::OnEvent(evt);
+				EventDispatcher::OnEvent(WindowResizeEvent(width, height));
 				break;
 			}
 
@@ -247,8 +229,7 @@ namespace A {
 			// --- App   ---
 			case WM_QUIT:
 			{
-				Event evt = AppQuitEvent();
-				EventDispatcher::OnEvent(evt);
+				EventDispatcher::OnEvent(AppQuitEvent());
 				break;
 			}
 
