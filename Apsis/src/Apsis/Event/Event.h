@@ -1,4 +1,5 @@
 #pragma once
+#include "Apsis/Core/InputCodes.h"
 
 namespace A {
 
@@ -55,7 +56,7 @@ namespace A {
 	class MouseEvent : public Event
 	{
 	public:
-		MouseEvent(float x, float y)
+		MouseEvent(int x, int y)
 			: m_MouseX(x), m_MouseY(y)
 		{
 		}
@@ -71,39 +72,39 @@ namespace A {
 	class MouseButtonDownEvent : public MouseEvent
 	{
 	public:
-		MouseButtonDownEvent(float x, float y, int button)
+		MouseButtonDownEvent(int x, int y, MouseCode button)
 			: MouseEvent(x, y), m_Button(button)
 		{
 		}
 
-		inline int GetButton() const { return m_Button; }
+		inline MouseCode GetButton() const { return m_Button; }
 
 		virtual EventType GetType() const override { return EventType::MouseButtonDown; }
 
 	private:
-		int m_Button;
+		MouseCode m_Button;
 	};
 
 	class MouseButtonUpEvent : public MouseEvent
 	{
 	public:
-		MouseButtonUpEvent(float x, float y, int button)
+		MouseButtonUpEvent(int x, int y, MouseCode button)
 			: MouseEvent(x, y), m_Button(button)
 		{
 		}
 
-		inline int GetButton() const { return m_Button; }
+		inline MouseCode GetButton() const { return m_Button; }
 
 		virtual EventType GetType() const override { return EventType::MouseButtonUp; }
 
 	private:
-		int m_Button;
+		MouseCode m_Button;
 	};
 
 	class MouseMoveEvent : public MouseEvent
 	{
 	public:
-		MouseMoveEvent(float x, float y)
+		MouseMoveEvent(int x, int y)
 			: MouseEvent(x, y)
 		{
 		}
@@ -114,7 +115,7 @@ namespace A {
 	class MouseWheelEvent : public MouseEvent
 	{
 	public:
-		MouseWheelEvent(float x, float y, int delta)
+		MouseWheelEvent(int x, int y, int delta)
 			: MouseEvent(x, y), m_Delta(delta)
 		{
 		}
@@ -132,23 +133,23 @@ namespace A {
 	class KeyEvent : public Event
 	{
 	protected:
-		KeyEvent(int key_code)
+		KeyEvent(KeyCode key_code)
 			: m_KeyCode(key_code)
 		{
 		}
 
-		int m_KeyCode;
+		KeyCode m_KeyCode;
 	};
 
 	class KeyDownEvent : public KeyEvent
 	{
 	public:
-		KeyDownEvent(int key_code, bool repeat)
+		KeyDownEvent(KeyCode key_code, bool repeat)
 			: KeyEvent(key_code), m_Repeat(repeat)
 		{
 		}
 
-		inline int GetKeyCode() const { return m_KeyCode; }
+		inline KeyCode GetKeyCode() const { return m_KeyCode; }
 
 		virtual EventType GetType() const override { return EventType::KeyDown; }
 
@@ -159,12 +160,12 @@ namespace A {
 	class KeyUpEvent : public KeyEvent
 	{
 	public:
-		KeyUpEvent(int key_code)
+		KeyUpEvent(KeyCode key_code)
 			: KeyEvent(key_code)
 		{
 		}
 
-		inline int GetKeyCode() const { return m_KeyCode; }
+		inline KeyCode GetKeyCode() const { return m_KeyCode; }
 
 		virtual EventType GetType() const override { return EventType::KeyUp; }
 	};
@@ -172,7 +173,7 @@ namespace A {
 	class KeyCharEvent : public KeyEvent
 	{
 	public:
-		KeyCharEvent(int key_code, char character)
+		KeyCharEvent(KeyCode key_code, char character)
 			: KeyEvent(key_code), m_Char(character)
 		{
 		}
