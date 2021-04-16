@@ -12,6 +12,26 @@ namespace A {
 		X2
 	} Mouse;
 
+	inline std::string MouseCodeToString(MouseCode mouse_code)
+	{
+		switch (mouse_code)
+		{
+		case A::MouseCode::Unknown:	return "Unknown";
+		case A::MouseCode::Left:	return "Left";
+		case A::MouseCode::Right:	return "Right";
+		case A::MouseCode::Middle:	return "Middle";
+		case A::MouseCode::X1:		return "X1";
+		case A::MouseCode::X2:		return "X2";
+		default:					return "Unknown";
+		}
+	}
+
+	// Printing
+	inline std::ostream& operator<<(std::ostream& os, const MouseCode& mouse_code)
+	{
+		return os << (unsigned short)mouse_code;
+	}
+
 	typedef enum class KeyCode : unsigned short
 	{
 		Unknown = -1,

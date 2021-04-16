@@ -1,4 +1,5 @@
 #pragma once
+#include "apch.h"		// sstream
 #include "Apsis/Core/InputCodes.h"
 
 namespace A {
@@ -82,7 +83,12 @@ namespace A {
 		inline MouseCode GetButton() const { return m_Button; }
 
 		virtual EventType GetType() const override { return EventType::MouseButtonDown; }
-		virtual std::string GetString() const override { return "MouseDown at " + std::to_string(m_MouseX) + ", " + std::to_string(m_MouseY); }
+		virtual std::string GetString() const override
+		{
+			std::stringstream ss;
+			ss << "MouseButtonDown: " << MouseCodeToString(m_Button) << " at " << m_MouseX << ", " << m_MouseY;
+			return ss.str();
+		}
 
 	private:
 		MouseCode m_Button;
@@ -99,7 +105,12 @@ namespace A {
 		inline MouseCode GetButton() const { return m_Button; }
 
 		virtual EventType GetType() const override { return EventType::MouseButtonUp; }
-		virtual std::string GetString() const override { return "MouseUp at " + std::to_string(m_MouseX) + ", " + std::to_string(m_MouseY); }
+		virtual std::string GetString() const override
+		{
+			std::stringstream ss;
+			ss << "MouseButtonUp: " << MouseCodeToString(m_Button) << " at " << m_MouseX << ", " << m_MouseY;
+			return ss.str();
+		}
 
 	private:
 		MouseCode m_Button;
@@ -114,7 +125,12 @@ namespace A {
 		}
 
 		virtual EventType GetType() const override { return EventType::MouseMove; }
-		virtual std::string GetString() const override { return "MouseMove at " + std::to_string(m_MouseX) + ", " + std::to_string(m_MouseY); }
+		virtual std::string GetString() const override
+		{
+			std::stringstream ss;
+			ss << "MouseMove at " << m_MouseX << ", " << m_MouseY;
+			return ss.str();
+		}
 	};
 
 	class MouseWheelEvent : public MouseEvent
@@ -128,7 +144,12 @@ namespace A {
 		inline int GetDelta() const { return m_Delta; }
 
 		virtual EventType GetType() const override { return EventType::MouseWheel; }
-		virtual std::string GetString() const override { return "MouseWheel " + std::to_string(m_Delta) + " at " + std::to_string(m_MouseX) + ", " + std::to_string(m_MouseY); }
+		virtual std::string GetString() const override
+		{
+			std::stringstream ss;
+			ss << "MouseWheel, Delta: " << m_Delta << " at " << m_MouseX << ", " << m_MouseY;
+			return ss.str();
+		}
 
 	private:
 		int m_Delta;
