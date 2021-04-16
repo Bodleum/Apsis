@@ -71,7 +71,7 @@ namespace A {
 		Colon				= 58,
 		Semicolon			= 59,
 		LessThan			= 60,
-		Equals				= 61,
+		Equal				= 61,
 		GreaterThan			= 62,
 		QuestionMark		= 63,
 		At					= 64,
@@ -141,6 +141,7 @@ namespace A {
 		NumLock				= 282,
 		PrintScreen			= 283,
 		Pause				= 284,
+		Break				= 285,
 
 		F1					= 290,
 		F2					= 291,
@@ -183,7 +184,7 @@ namespace A {
 		NumpadDivide		= 331,
 		NumpadMultiply		= 332,
 		NumpadSubtract		= 333,
-		NumpadAdd			= 334,
+		NumpadPlus			= 334,
 		NumpadEnter			= 335,
 		NumpadEqual			= 336,
 
@@ -238,7 +239,7 @@ namespace A {
 			case KeyCode::Colon:				return "Colon";
 			case KeyCode::Semicolon:			return "Semicolon";
 			case KeyCode::LessThan:				return "LessThan";
-			case KeyCode::Equals:				return "Equals";
+			case KeyCode::Equal:				return "Equal";
 			case KeyCode::GreaterThan:			return "GreaterThan";
 			case KeyCode::QuestionMark:			return "QuestionMark";
 			case KeyCode::At:					return "At";
@@ -308,6 +309,7 @@ namespace A {
 			case KeyCode::NumLock:				return "NumLock";
 			case KeyCode::PrintScreen:			return "PrintScreen";
 			case KeyCode::Pause:				return "Pause";
+			case KeyCode::Break:				return "Break";
 
 			case KeyCode::F1:					return "F1";
 			case KeyCode::F2:					return "F2";
@@ -350,7 +352,7 @@ namespace A {
 			case KeyCode::NumpadDivide:			return "NumpadDivide";
 			case KeyCode::NumpadMultiply:		return "NumpadMultiply";
 			case KeyCode::NumpadSubtract:		return "NumpadSubtract";
-			case KeyCode::NumpadAdd:			return "NumpadAdd";
+			case KeyCode::NumpadPlus:			return "NumpadPlus";
 			case KeyCode::NumpadEnter:			return "NumpadEnter";
 			case KeyCode::NumpadEqual:			return "NumpadEqual";
 
