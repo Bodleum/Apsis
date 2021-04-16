@@ -63,12 +63,12 @@ namespace A {
 		{
 		}
 
-		inline float GetX() const { return m_MouseX; }
-		inline float GetY() const { return m_MouseY; }
+		inline int GetX() const { return m_MouseX; }
+		inline int GetY() const { return m_MouseY; }
 
 	protected:
-		float m_MouseX;
-		float m_MouseY;
+		int m_MouseX;
+		int m_MouseY;
 	};
 
 	class MouseButtonDownEvent : public MouseEvent
@@ -229,7 +229,7 @@ namespace A {
 		}
 
 		virtual EventType GetType() const override { return EventType::WindowResize; }
-		virtual std::string GetString() const override { return "WindowReise: " + std::to_string(m_Width) + " x " + std::to_string(m_Height); }
+		virtual std::string GetString() const override { return "WindowReise: " + std::to_string(m_Width) + "x" + std::to_string(m_Height); }
 
 	private:
 		unsigned int m_Width, m_Height;

@@ -1,6 +1,8 @@
 #include "apch.h"
 #include "WindowsWindow.h"
 
+#include <windowsx.h>
+
 #include "Apsis/Event/EventDispatcher.h"
 //#include "Apsis/Core/InputCodes.h"		Included in EventDispatcher.h
 
@@ -96,83 +98,83 @@ namespace A {
 			// ---   Mouse   ---
 			case WM_LBUTTONDOWN:
 			{
-				int x = LOWORD(lParam);
-				int y = HIWORD(lParam);
+				int x = GET_X_LPARAM(lParam);
+				int y = GET_Y_LPARAM(lParam);
 				EventDispatcher::OnEvent(MouseButtonDownEvent(x, y, Mouse::Left));
 				break;
 			}
 
 			case WM_LBUTTONUP:
 			{
-				int x = LOWORD(lParam);
-				int y = HIWORD(lParam);
+				int x = GET_X_LPARAM(lParam);
+				int y = GET_Y_LPARAM(lParam);
 				EventDispatcher::OnEvent(MouseButtonUpEvent(x, y, Mouse::Left));
 				break;
 			}
 
 			case WM_MBUTTONDOWN:
 			{
-				int x = LOWORD(lParam);
-				int y = HIWORD(lParam);
+				int x = GET_X_LPARAM(lParam);
+				int y = GET_Y_LPARAM(lParam);
 				EventDispatcher::OnEvent(MouseButtonDownEvent(x, y, Mouse::Middle));
 				break;
 			}
 
 			case WM_MBUTTONUP:
 			{
-				int x = LOWORD(lParam);
-				int y = HIWORD(lParam);
+				int x = GET_X_LPARAM(lParam);
+				int y = GET_Y_LPARAM(lParam);
 				EventDispatcher::OnEvent(MouseButtonUpEvent(x, y, Mouse::Middle));
 				break;
 			}
 
 			case WM_RBUTTONDOWN:
 			{
-				int x = LOWORD(lParam);
-				int y = HIWORD(lParam);
+				int x = GET_X_LPARAM(lParam);
+				int y = GET_Y_LPARAM(lParam);
 				EventDispatcher::OnEvent(MouseButtonDownEvent(x, y, Mouse::Right));
 				break;
 			}
 
 			case WM_RBUTTONUP:
 			{
-				int x = LOWORD(lParam);
-				int y = HIWORD(lParam);
+				int x = GET_X_LPARAM(lParam);
+				int y = GET_Y_LPARAM(lParam);
 				EventDispatcher::OnEvent(MouseButtonUpEvent(x, y, Mouse::Right));
 				break;
 			}
 
 			case WM_XBUTTONDOWN:
 			{
-				int x1or2 = HIWORD(wParam);
-				int x = LOWORD(lParam);
-				int y = HIWORD(lParam);
+				int x1or2 = GET_Y_LPARAM(wParam);
+				int x = GET_X_LPARAM(lParam);
+				int y = GET_Y_LPARAM(lParam);
 				EventDispatcher::OnEvent(MouseButtonDownEvent(x, y, x1or2 == 1 ? Mouse::X1 : Mouse::X2));
 				break;
 			}
 
 			case WM_XBUTTONUP:
 			{
-				int x1or2 = HIWORD(wParam);
-				int x = LOWORD(lParam);
-				int y = HIWORD(lParam);
+				int x1or2 = GET_Y_LPARAM(wParam);
+				int x = GET_X_LPARAM(lParam);
+				int y = GET_Y_LPARAM(lParam);
 				EventDispatcher::OnEvent(MouseButtonUpEvent(x, y, x1or2 == 1 ? Mouse::X1 : Mouse::X2));
 				break;
 			}
 
 			case WM_MOUSEMOVE:
 			{
-				int x = LOWORD(lParam);
-				int y = HIWORD(lParam);
+				int x = GET_X_LPARAM(lParam);
+				int y = GET_Y_LPARAM(lParam);
 				EventDispatcher::OnEvent(MouseMoveEvent(x, y));
 				break;
 			}
 
 			case WM_MOUSEWHEEL:
 			{
-				int delta = HIWORD(wParam);
-				int x = LOWORD(lParam);
-				int y = HIWORD(lParam);
+				int delta = GET_WHEEL_DELTA_WPARAM(wParam) / 120;
+				int x = GET_X_LPARAM(lParam);
+				int y = GET_Y_LPARAM(lParam);
 				EventDispatcher::OnEvent(MouseWheelEvent(x, y, delta));
 				break;
 			}
