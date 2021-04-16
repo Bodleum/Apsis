@@ -19,6 +19,9 @@ namespace A {
 		HWND m_WindowHandle;
 
 		unsigned int m_Width, m_Height;
+
+		// message type, tally
+		static std::map<unsigned int, int> m_MessageTally;
 	};
 	
 }

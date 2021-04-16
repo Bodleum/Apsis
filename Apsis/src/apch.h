@@ -12,6 +12,7 @@
 	#include <sstream>
 	#include <array>
 	#include <vector>
+	#include <map>
 
 	#ifdef AP_PLATFORM_WIN
 		#include <Windows.h>

@@ -8,6 +8,8 @@
 
 namespace A {
 
+	std::map<unsigned int, int> WindowsWindow::m_MessageTally = {};
+
 	WindowsWindow::WindowsWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR pCmdLine, int nShowCmd, const std::string& name, unsigned int width, unsigned int height)
 		: m_Width(width), m_Height(height)
 	{
@@ -92,6 +94,17 @@ namespace A {
 	LRESULT WindowsWindow::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
 		AP_PROFILE_FN();
+
+		// Trace windows messages
+		#define AP_TRACE_WINMSG 1
+		{
+			#if defined(AP_TRACE_WINMSG)
+			auto insertret = m_MessageTally.insert({ (unsigned int)uMsg, 1 });
+			if (!insertret.second)
+				insertret.first->second++;
+			#endif // defined(AP_TRACE_WINMSG)
+		}
+
 
 		switch (uMsg)
 		{
@@ -215,6 +228,10 @@ namespace A {
 			case WM_DESTROY:
 			{
 				EventDispatcher::OnEvent(WindowDestroyEvent());
+				#if AP_TRACE_WINMSG
+					for (auto& element : m_MessageTally)
+						AP_TRACE_C("Message: {0},\t{1} times", element.first, element.second);
+				#endif // AP_TRACE_WINMSG
 				PostQuitMessage(0);
 				break;
 			}
