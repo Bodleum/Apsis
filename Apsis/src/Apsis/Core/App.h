@@ -32,6 +32,7 @@ namespace A {
 			friend int ::main(int argc, char** argv);
 		#endif // AP_PLATFORM_WIN
 
+		bool m_Running = true;
 		AppArgs m_Args;
 		LayerStack m_LayerStack;
 		Unique<Window> m_Window;

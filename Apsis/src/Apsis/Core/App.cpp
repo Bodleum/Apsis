@@ -16,7 +16,7 @@ namespace A {
 	{
 		AP_PROFILE_FN();
 
-		while (true)
+		while (m_Running)
 		{
 			OnUpdate();
 		}
@@ -70,6 +70,12 @@ namespace A {
 
 		switch (evt.GetType())
 		{
+		case EventType::WindowDestroy:
+		{
+			m_Running = false;
+			break;
+		}
+
 		default:
 			break;
 		}
