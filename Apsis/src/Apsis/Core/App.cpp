@@ -8,9 +8,6 @@ namespace A {
 	{
 		AP_PROFILE_FN();
 
-		char testchar = 97;
-		AP_TRACE_C(testchar);
-
 		AP_INFO_C("Created App");
 		m_Window = Window::Create(args.MainFnArgs);
 	}
@@ -72,6 +69,12 @@ namespace A {
 		switch (evt.GetType())
 		{
 		case EventType::MouseButtonDown:
+		{
+			AP_TRACE_C(evt);
+			break;
+		}
+
+		case EventType::KeyDown:
 		{
 			AP_TRACE_C(evt);
 			break;

@@ -53,7 +53,7 @@ namespace A {
 			WS_OVERLAPPEDWINDOW,	// Window style
 
 			// Size and position
-			CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
+			CW_USEDEFAULT, CW_USEDEFAULT, width, height,
 
 			NULL,		// Parent window    
 			NULL,		// Menu
@@ -66,7 +66,7 @@ namespace A {
 		if (m_WindowHandle)
 			ShowWindow(m_WindowHandle, nShowCmd);
 
-		AP_INFO_C("Created Windows window");
+		AP_INFO_C("Created Windows window: {0}x{1}", width, height);
 	}
 
 	WindowsWindow::~WindowsWindow()
@@ -213,7 +213,7 @@ namespace A {
 			{
 				char characterCode = wParam;
 				bool repeat = BIT_AT(30) & lParam;
-				EventDispatcher::OnEvent(KeyCharEvent(Key::None, characterCode, repeat));
+				EventDispatcher::OnEvent(KeyCharEvent(Key::Null, characterCode, repeat));
 				break;
 			}
 
