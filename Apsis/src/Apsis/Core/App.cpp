@@ -5,13 +5,15 @@
 
 namespace A {
 
-	App::App(AppArgs args)
-		: m_Args(args), m_LayerStack()
+	AppArgs App::m_Args = AppArgs();
+
+	App::App()
+		: m_LayerStack()
 	{
 		AP_PROFILE_FN();
 
 		AP_INFO_C("Created App");
-		m_Window = Window::Create(args.MainFnArgs);
+		m_Window = Window::Create(m_Args.MainFnArgs);
 	}
 
 	void App::Run()

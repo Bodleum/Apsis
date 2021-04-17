@@ -10,7 +10,7 @@ namespace A {
 	class App : public EventListener
 	{
 	public:
-		App(AppArgs args);
+		App();
 		virtual ~App() = default;
 
 		void OnUpdate();
@@ -24,6 +24,7 @@ namespace A {
 	private:
 		void Run();
 
+		static inline void SetAppArgs(AppArgs args) { m_Args = args; }
 		static void LogInfo();
 
 		#ifdef AP_PLATFORM_WIN
@@ -33,13 +34,13 @@ namespace A {
 		#endif // AP_PLATFORM_WIN
 
 		bool m_Running = true;
-		AppArgs m_Args;
+		static AppArgs m_Args;
 		LayerStack m_LayerStack;
 		Unique<Window> m_Window;
 
 	};
 
 	// Defined in client code
-	App* CreateApp(AppArgs args);
+	App* CreateApp();
 
 }

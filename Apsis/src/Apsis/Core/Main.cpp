@@ -4,7 +4,7 @@
 #include "Apsis/Core/App.h"
 //#include "Apsis/Core/Logger.h"	Included in pch
 
-extern A::App* A::CreateApp(AppArgs args);
+extern A::App* A::CreateApp();
 
 #ifdef AP_PLATFORM_WIN
 
@@ -43,16 +43,15 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 	AP_PROFILE_BEGIN_SESSION("Startup", "Apsis - Startup.json");
 		A::Logger::Init();
 		A::App::LogInfo();
-		A::App* app;
 		{
 			A::AppArgs args;
 			args.MainFnArgs.hInstance = hInstance;
 			args.MainFnArgs.hPrevInstance = hPrevInstance;
 			args.MainFnArgs.pCmdLine = pCmdLine;
 			args.MainFnArgs.nShowCmd = nShowCmd;
-
-			app = A::CreateApp(args);
+			A::App::SetAppArgs(args);
 		}
+		A::App* app = A::CreateApp();
 	AP_PROFILE_END_SESSION();
 
 	AP_PROFILE_BEGIN_SESSION("Runtime", "Apsis - Runtime.json");

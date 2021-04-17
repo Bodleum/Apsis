@@ -1,6 +1,9 @@
 #pragma once
 #include <memory>
 
+// Creating App
+#define AP_CREATE_APP(appname) A::App* A::CreateApp() { return new appname(); }
+
 // Unicode
 #ifndef UNICODE
 	#define UNICODE

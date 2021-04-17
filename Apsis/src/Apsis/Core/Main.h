@@ -18,6 +18,11 @@
 
 		struct MainFnArgs
 		{
+			MainFnArgs()
+				: hInstance(nullptr), hPrevInstance(nullptr), pCmdLine(nullptr), nShowCmd(0)
+			{
+			}
+
 			HINSTANCE hInstance;
 			HINSTANCE hPrevInstance;
 			LPWSTR pCmdLine;
@@ -26,6 +31,11 @@
 
 		struct AppArgs
 		{
+			AppArgs()
+				: MainFnArgs()
+			{
+			}
+
 			MainFnArgs MainFnArgs;
 		};
 	}

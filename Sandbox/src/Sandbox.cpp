@@ -4,8 +4,7 @@
 
 #include "MainLayer.h"
 
-Sandbox::Sandbox(A::AppArgs args)
-	: A::App(args)
+Sandbox::Sandbox()
 {
 	EmlpaceLayer(new MainLayer());
 }
