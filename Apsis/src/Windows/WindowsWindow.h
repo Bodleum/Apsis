@@ -4,6 +4,8 @@
 
 namespace A {
 
+	typedef enum class KeyCode : unsigned short;
+
 	class WindowsWindow : public Window
 	{
 	public:
@@ -23,5 +25,11 @@ namespace A {
 		// message type, tally
 		static std::map<unsigned int, int> m_MessageTally;
 	};
+
+	namespace RawInput {
+
+		KeyCode ScanCodeToKeyCode(unsigned short scan_code, bool E0 = false, bool E1 = false);
+
+	}
 	
 }

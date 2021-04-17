@@ -68,23 +68,6 @@ namespace A {
 
 		switch (evt.GetType())
 		{
-		case EventType::MouseButtonDown:
-		{
-			AP_TRACE_C(evt);
-			break;
-		}
-
-		case EventType::KeyDown:
-		{
-			AP_TRACE_C(evt);
-			break;
-		}
-
-		case EventType::KeyChar:
-		{
-			AP_TRACE_C(evt);
-			break;
-		}
 
 		case EventType::WindowDestroy:
 		{

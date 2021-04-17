@@ -2,6 +2,7 @@
 #include "WindowsWindow.h"
 
 #include <windowsx.h>
+#include <strsafe.h>  //StringCchPrintf
 
 #include "Apsis/Event/EventDispatcher.h"
 //#include "Apsis/Core/InputCodes.h"		Included in EventDispatcher.h
@@ -88,10 +89,10 @@ namespace A {
 			DispatchMessage(&msg);		// Dispatch to WindowProc for handling
 		}
 
-		return eventsExist;
+		return eventsExist;	
 	}
 	
-	LRESULT WindowsWindow::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+	LRESULT WindowsWindow::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
 		AP_PROFILE_FN();
 
@@ -114,7 +115,7 @@ namespace A {
 				int x = GET_X_LPARAM(lParam);
 				int y = GET_Y_LPARAM(lParam);
 				EventDispatcher::OnEvent(MouseButtonDownEvent(x, y, Mouse::Left));
-				break;
+				return 0;
 			}
 
 			case WM_LBUTTONUP:
@@ -122,7 +123,7 @@ namespace A {
 				int x = GET_X_LPARAM(lParam);
 				int y = GET_Y_LPARAM(lParam);
 				EventDispatcher::OnEvent(MouseButtonUpEvent(x, y, Mouse::Left));
-				break;
+				return 0;
 			}
 
 			case WM_MBUTTONDOWN:
@@ -130,7 +131,7 @@ namespace A {
 				int x = GET_X_LPARAM(lParam);
 				int y = GET_Y_LPARAM(lParam);
 				EventDispatcher::OnEvent(MouseButtonDownEvent(x, y, Mouse::Middle));
-				break;
+				return 0;
 			}
 
 			case WM_MBUTTONUP:
@@ -138,7 +139,7 @@ namespace A {
 				int x = GET_X_LPARAM(lParam);
 				int y = GET_Y_LPARAM(lParam);
 				EventDispatcher::OnEvent(MouseButtonUpEvent(x, y, Mouse::Middle));
-				break;
+				return 0;
 			}
 
 			case WM_RBUTTONDOWN:
@@ -146,7 +147,7 @@ namespace A {
 				int x = GET_X_LPARAM(lParam);
 				int y = GET_Y_LPARAM(lParam);
 				EventDispatcher::OnEvent(MouseButtonDownEvent(x, y, Mouse::Right));
-				break;
+				return 0;
 			}
 
 			case WM_RBUTTONUP:
@@ -154,7 +155,7 @@ namespace A {
 				int x = GET_X_LPARAM(lParam);
 				int y = GET_Y_LPARAM(lParam);
 				EventDispatcher::OnEvent(MouseButtonUpEvent(x, y, Mouse::Right));
-				break;
+				return 0;
 			}
 
 			case WM_XBUTTONDOWN:
@@ -163,7 +164,7 @@ namespace A {
 				int x = GET_X_LPARAM(lParam);
 				int y = GET_Y_LPARAM(lParam);
 				EventDispatcher::OnEvent(MouseButtonDownEvent(x, y, x1or2 == 1 ? Mouse::X1 : Mouse::X2));
-				break;
+				return 0;
 			}
 
 			case WM_XBUTTONUP:
@@ -172,7 +173,7 @@ namespace A {
 				int x = GET_X_LPARAM(lParam);
 				int y = GET_Y_LPARAM(lParam);
 				EventDispatcher::OnEvent(MouseButtonUpEvent(x, y, x1or2 == 1 ? Mouse::X1 : Mouse::X2));
-				break;
+				return 0;
 			}
 
 			case WM_MOUSEMOVE:
@@ -180,7 +181,7 @@ namespace A {
 				int x = GET_X_LPARAM(lParam);
 				int y = GET_Y_LPARAM(lParam);
 				EventDispatcher::OnEvent(MouseMoveEvent(x, y));
-				break;
+				return 0;
 			}
 
 			case WM_MOUSEWHEEL:
@@ -189,40 +190,93 @@ namespace A {
 				int x = GET_X_LPARAM(lParam);
 				int y = GET_Y_LPARAM(lParam);
 				EventDispatcher::OnEvent(MouseWheelEvent(x, y, delta));
-				break;
+				return 0;
 			}
 
 
 			// ---   Keyboard   ---
-			case WM_KEYDOWN:
+			case WM_INPUT:
 			{
-				int virtualKeyCode = wParam;
-				bool repeat = BIT_AT(30) & lParam;
-				EventDispatcher::OnEvent(KeyDownEvent((KeyCode)virtualKeyCode, repeat));
-				break;
-			}
+				// 0 if app is in foreground --> continue with event
+				// 1 if app is in background --> yield to DefWindowProc
+				if (GET_RAWINPUT_CODE_WPARAM(wParam) == 1)
+					break;
 
-			case WM_KEYUP:
-			{
-				int virtualKeyCode = wParam;
-				EventDispatcher::OnEvent(KeyUpEvent((KeyCode)virtualKeyCode));
-				break;
-			}
+				// Find size of buffer needed to store input data, set in dwSize
+				UINT dwSize = 0;
+				GetRawInputData((HRAWINPUT)lParam, RID_INPUT, NULL, &dwSize, sizeof(RAWINPUTHEADER));
+				LPBYTE lpb = new BYTE[dwSize];	// Create the buffer
 
-			case WM_CHAR:
-			{
-				char characterCode = wParam;
-				bool repeat = BIT_AT(30) & lParam;
-				EventDispatcher::OnEvent(KeyCharEvent(Key::Null, characterCode, repeat));
-				break;
-			}
+				if (lpb == NULL) { return 0; } // buffer was Null
 
+				if (GetRawInputData((HRAWINPUT)lParam, RID_INPUT, lpb, &dwSize, sizeof(RAWINPUTHEADER)) != dwSize)
+					AP_CRIT_C("GetRawInputData does not return correct size !");
+
+				RAWINPUT* rawInput = (RAWINPUT*)lpb;
+
+				if (rawInput->header.dwType == RIM_TYPEKEYBOARD)	// If raw input comes from a keyboard
+				{
+					unsigned short scanCode = rawInput->data.keyboard.MakeCode;
+					unsigned short flags = rawInput->data.keyboard.Flags;
+					unsigned short virtualKeyCode = rawInput->data.keyboard.VKey;	// Legacy virtual keycode: https://docs.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes
+					unsigned int message = rawInput->data.keyboard.Message;		// WM_KEYDOWN, WM_SYSKEYDOWN, and so forth
+					unsigned long extraInfo = rawInput->data.keyboard.ExtraInformation;
+					// Proccess flags
+					bool down = (flags & 1) == 0;
+					bool up = (flags & BIT_AT(0));
+					bool E0 = (flags & BIT_AT(1));
+					bool E1 = (flags & BIT_AT(2));
+					bool repeat = (GetKeyState(virtualKeyCode) & 0x8000) * down;
+
+					KeyCode keyCode = RawInput::ScanCodeToKeyCode(scanCode, E0, E1);
+					// Get key char
+					UINT key = (scanCode << 16) | (E0 << 24);
+					char buffer[30] = {};
+					GetKeyNameTextA((LONG)key, buffer, sizeof(buffer));
+
+					//std::cout << KeyCodeToString(keyCode) << ' ' << up << ' ' << down << ' ' << repeat << '\n';
+					//std::cout << scanCode << E0 << E1 << '\n';
+
+					if (up)
+						EventDispatcher::OnEvent(KeyUpEvent(keyCode));
+					else if (down)
+					{
+						EventDispatcher::OnEvent(KeyDownEvent(keyCode, repeat));
+						if (strlen(buffer) == 1)
+						{
+							char* character = buffer;
+							EventDispatcher::OnEvent(KeyCharEvent(keyCode, character, repeat));
+						}
+					}
+				}
+
+				delete[] lpb;		// delete buffer to avoid mem leaks
+				break;	// must call DefWindowProc so the system can perform cleanup
+			}
 
 			// --- Window   ---
+			case WM_CREATE:
+			{
+				// Setup of raw input devices
+				// Keyboard
+				RAWINPUTDEVICE rawInputDevices[1];
+				rawInputDevices[0].dwFlags = RIDEV_INPUTSINK;	// adds keyboard and also ignores legacy keyboard messages
+				rawInputDevices[0].hwndTarget = hWnd;
+				rawInputDevices[0].usUsagePage = 0x01;				// HID_USAGE_PAGE_GENERIC
+				rawInputDevices[0].usUsage = 0x06;					// HID_USAGE_GENERIC_KEYBOARD
+
+				// Register
+				if (RegisterRawInputDevices(rawInputDevices, 1, sizeof(rawInputDevices[0])) == FALSE)
+					AP_ASSERT_C(false, "Failed to register raw input devices: {0}", GetLastError());
+
+				AP_TRACE_C("Registered raw input devices");
+				return 0;
+			}
+
 			case WM_CLOSE:
 			{
 				EventDispatcher::OnEvent(WindowCloseEvent());
-				break;
+				break;	// Continue with the closing of the window
 			}
 
 			case WM_DESTROY:
@@ -233,7 +287,7 @@ namespace A {
 						AP_TRACE_C("Message: {0},\t{1} times", element.first, element.second);
 				#endif // AP_TRACE_WINMSG
 				PostQuitMessage(0);
-				break;
+				return 0;
 			}
 
 			case WM_SIZE:
@@ -241,7 +295,7 @@ namespace A {
 				UINT width = LOWORD(lParam);
 				UINT height = HIWORD(lParam);
 				EventDispatcher::OnEvent(WindowResizeEvent(width, height));
-				break;
+				return 0;
 			}
 
 
@@ -249,7 +303,7 @@ namespace A {
 			case WM_QUIT:
 			{
 				EventDispatcher::OnEvent(AppQuitEvent());
-				break;
+				return 0;
 			}
 
 
@@ -257,19 +311,147 @@ namespace A {
 			case WM_PAINT:
 			{
 				PAINTSTRUCT ps;
-				HDC hdc = BeginPaint(hwnd, &ps);
+				HDC hdc = BeginPaint(hWnd, &ps);
 
 
 
 				FillRect(hdc, &ps.rcPaint, (HBRUSH)(COLOR_WINDOW + 1));
 
-				EndPaint(hwnd, &ps);
+				EndPaint(hWnd, &ps);
 			}
-
-			return 0;
 		}
 
-		return DefWindowProc(hwnd, uMsg, wParam, lParam);	// Unhandled message, DefWindowProc performs default action
+		return DefWindowProc(hWnd, uMsg, wParam, lParam);	// Unhandled message, DefWindowProc performs default action
 	}
 
+
+	namespace RawInput {
+
+		KeyCode ScanCodeToKeyCode(unsigned short scan_code, bool E0/* = false*/, bool E1/* = false*/)
+		{
+			switch (scan_code)
+			{
+				case 0x1E:			return Key::A;
+				case 0x30:			return Key::B;
+				case 0x2E:			return Key::C;
+				case 0x20:			return Key::D;
+				case 0x12:			return Key::E;
+				case 0x21:			return Key::F;
+				case 0x22:			return Key::G;
+				case 0x23:			return Key::H;
+				case 0x17:			return Key::I;
+				case 0x24:			return Key::J;
+				case 0x25:			return Key::K;
+				case 0x26:			return Key::L;
+				case 0x32:			return Key::M;
+				case 0x31:			return Key::N;
+				case 0x18:			return Key::O;
+				case 0x19:			return Key::P;
+				case 0x10:			return Key::Q;
+				case 0x13:			return Key::R;
+				case 0x1F:			return Key::S;
+				case 0x14:			return Key::T;
+				case 0x16:			return Key::U;
+				case 0x2F:			return Key::V;
+				case 0x11:			return Key::W;
+				case 0x2D:			return Key::X;
+				case 0x15:			return Key::Y;
+				case 0x2C:			return Key::Z;
+
+				case 0x02:			return Key::Num1;	// also ! (shift 1)
+				case 0x03:			return Key::Num2;	// etc
+				case 0x04:			return Key::Num3;	// .
+				case 0x05:			return Key::Num4;	// .
+				case 0x06:			return Key::Num5;	// .
+				case 0x07:			return Key::Num6;
+				case 0x08:			return Key::Num7;
+				case 0x09:			return Key::Num8;
+				case 0x0A:			return Key::Num9;
+				case 0x0B:			return Key::Num0;
+
+				case 0x1C:			if (E0) return Key::NumpadEnter;	else return Key::Enter;
+				case 0x01:			return Key::Escape;
+				case 0x0E:			return Key::Backspace;
+				case 0x0F:			return Key::Tab;
+				case 0x39:			return Key::Space;
+
+				case 0x0C:			return Key::Hyphen;
+				case 0x0D:			return Key::Equal;
+				case 0x1A:			return Key::OpenSquareBracket;
+				case 0x1B:			return Key::CloseSquareBracket;
+				//case 0x2B:			return Key::Backslash;
+				case 0x2B:			return Key::Europe1;	// #(~) on my keyboard
+				case 0x27:			return Key::Semicolon;
+				case 0x28:			return Key::SingleQuote;
+				case 0x29:			return Key::Grave;
+				case 0x33:			return Key::Comma;
+				case 0x34:			return Key::Dot;
+				case 0x35:			if (E0) return Key::NumpadDivide;	else return Key::Slash;
+
+				case 0x3A:			return Key::CapsLock;
+				case 0x3B:			return Key::F1;
+				case 0x3C:			return Key::F2;
+				case 0x3D:			return Key::F3;
+				case 0x3E:			return Key::F4;
+				case 0x3F:			return Key::F5;
+				case 0x40:			return Key::F6;
+				case 0x41:			return Key::F7;
+				case 0x42:			return Key::F8;
+				case 0x43:			return Key::F9;
+				case 0x44:			return Key::F10;
+				case 0x57:			return Key::F11;
+				case 0x58:			return Key::F12;
+
+				case 0x37:			if (E0) return Key::PrintScreen;	else			return Key::NumpadMultiply;
+				case 0x46:			if (E0) return Key::Break;			else			return Key::ScrollLock;
+				case 0xC6:			if (E0) return Key::Break;			else			return Key::Unknown;
+				case 0x1D:			if (E0) return Key::RightControl;	else if (E1)	return Key::Pause;				else return Key::LeftControl;
+				case 0x9D:			if (E1) return Key::Pause;			else			return Key::Unknown;
+				case 0xC5:					return Key::Pause;
+				case 0x52:			if (E0) return Key::Insert;			else return Key::Numpad0;
+				case 0x47:			if (E0) return Key::Home;			else return Key::Numpad7;
+				case 0x49:			if (E0) return Key::PageUp;			else return Key::Numpad9;
+				case 0x53:			if (E0) return Key::Delete;			else return Key::NumpadDecimal;
+				case 0x4F:			if (E0) return Key::End;			else return Key::Numpad1;
+				case 0x51:			if (E0) return Key::PageDown;		else return Key::Numpad3;
+
+				case 0x4D:			if (E0) return Key::Right;			else return Key::Numpad6;
+				case 0x4B:			if (E0) return Key::Left;			else return Key::Numpad4;
+				case 0x50:			if (E0) return Key::Down;			else return Key::Numpad2;
+				case 0x48:			if (E0) return Key::Up;				else return Key::Numpad8;
+
+				case 0x45:			return Key::NumLock;
+				case 0x4A:			return Key::NumpadSubtract;
+				case 0x4E:			return Key::NumpadPlus;
+				case 0x4C:			return Key::Numpad5;
+
+				case 0x56:			return Key::Europe2;	// \(|) on my keyboard
+				case 0x5D:			if (E0) return Key::Menu;			else return Key::Unknown;
+				//case 0x5E:			if (E0) return Key::KeyboardPower;	else return Key::Unknown;	// What is KeyboardPower?
+				case 0x59:			return Key::NumpadEqual;
+				case 0x64:			return Key::F13;
+				case 0x65:			return Key::F14;
+				case 0x66:			return Key::F15;
+				case 0x67:			return Key::F16;
+				case 0x68:			return Key::F17;
+				case 0x69:			return Key::F18;
+				case 0x6A:			return Key::F19;
+				case 0x6B:			return Key::F20;
+				case 0x6C:			return Key::F21;
+				case 0x6D:			return Key::F22;
+				case 0x6E:			return Key::F23;
+				case 0x76:			return Key::F24;
+
+				case 0x2A:					return Key::LeftShift;
+				case 0x38:			if (E0) return Key::RightAlt;		else return Key::LeftAlt;
+				case 0x5B:			if (E0) return Key::LeftSuper;		else return Key::Unknown;
+				case 0x36:					return Key::RightShift;
+				case 0x5C:			if (E0) return Key::RightSuper;		else return Key::Unknown;
+
+
+				default:			return Key::Unknown;
+			}
+		}
+
+	}
 }

@@ -212,12 +212,12 @@ namespace A {
 	class KeyCharEvent : public KeyEvent
 	{
 	public:
-		KeyCharEvent(KeyCode key_code, char character, bool repeat)
+		KeyCharEvent(KeyCode key_code, char* character, bool repeat)
 			: KeyEvent(key_code), m_Char(character), m_Repeat(repeat)
 		{
 		}
 
-		inline char GetKeyChar() const { return m_Char; }
+		inline char* GetKeyChar() const { return m_Char; }
 
 		virtual EventType GetType() const override { return EventType::KeyChar; }
 		virtual std::string GetString() const override
@@ -228,7 +228,7 @@ namespace A {
 		}
 
 	private:
-		char m_Char;
+		char* m_Char;
 		bool m_Repeat;
 	};
 
