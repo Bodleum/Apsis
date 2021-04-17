@@ -182,7 +182,9 @@ namespace A {
 		virtual std::string GetString() const override
 		{
 			std::stringstream ss;
-			ss << "KeyDown: " << KeyCodeToString(m_KeyCode);
+			ss << KeyCodeToString(m_KeyCode) << " Down";
+			if (m_Repeat)
+				ss << "\tRepeat";
 			return ss.str();
 		}
 
@@ -204,7 +206,7 @@ namespace A {
 		virtual std::string GetString() const override
 		{
 			std::stringstream ss;
-			ss << "KeyUp: " << KeyCodeToString(m_KeyCode);
+			ss << KeyCodeToString(m_KeyCode) << " Up";
 			return ss.str();
 		}
 	};
@@ -223,7 +225,9 @@ namespace A {
 		virtual std::string GetString() const override
 		{
 			std::stringstream ss;
-			ss << "KeyChar: " << m_Char;
+			ss << m_Char << " Char";
+			if (m_Repeat)
+				ss << "\tRepeat";
 			return ss.str();
 		}
 
