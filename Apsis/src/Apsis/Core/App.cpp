@@ -34,8 +34,6 @@ namespace A {
 		for (Layer* layer : m_LayerStack)
 			if (layer->IsEnabled())
 				layer->OnUpdate();
-
-		if (Input::IsMouseButtonDown(Mouse::Left))
 	}
 
 	void App::PushLayer(Layer* layer)

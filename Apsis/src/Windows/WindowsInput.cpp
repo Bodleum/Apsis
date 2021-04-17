@@ -25,7 +25,7 @@ namespace A {
 
 	std::array<int, 2> WindowsInput::GetMousePosImpl()
 	{
-		POINT point = {};
+		POINT point;
 		GetCursorPos(&point);
 		return std::array<int, 2>({ (int)point.x, (int)point.y });
 	}

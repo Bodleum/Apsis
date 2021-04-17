@@ -7,21 +7,21 @@ namespace A {
 	class Input
 	{
 	public:
-		static Shared<Input> Create();
+		static Unique<Input> Create();
 
-		static bool IsKeyDown(KeyCode key_code) { s_Instance->IsKeyDownImpl(key_code); }
-		static bool WasKeyDown(KeyCode key_code) { s_Instance->WasKeyDownImpl(key_code); }
-		static bool IsMouseButtonDown(MouseCode mouse_code) { s_Instance->IsMouseButtonDownImpl(mouse_code); }
-		static bool WasMouseButtonDown(MouseCode mouse_code) { s_Instance->WasMouseButtonDownImpl(mouse_code); }
-		static std::array<int, 2> GetMousePos() { s_Instance->GetMousePosImpl(); }
-		static int GetMouseX() { s_Instance->GetMouseXImpl(); }
-		static int GetMouseY() { s_Instance->GetMouseYImpl(); }
+		static inline bool IsKeyDown(KeyCode key_code) { return s_Instance->IsKeyDownImpl(key_code); }
+		static inline bool WasKeyDown(KeyCode key_code) { return s_Instance->WasKeyDownImpl(key_code); }
+		static inline bool IsMouseButtonDown(MouseCode mouse_code) { return s_Instance->IsMouseButtonDownImpl(mouse_code); }
+		static inline bool WasMouseButtonDown(MouseCode mouse_code) { return s_Instance->WasMouseButtonDownImpl(mouse_code); }
+		static inline std::array<int, 2> GetMousePos() { return s_Instance->GetMousePosImpl(); }
+		static inline int GetMouseX() { return s_Instance->GetMouseXImpl(); }
+		static inline int GetMouseY() { return s_Instance->GetMouseYImpl(); }
 
 		Input(Input const&) = delete;
 		Input& operator=(Input const&) = delete;
 
 	protected:
-		Input() {};
+		Input() = default;
 
 		virtual bool IsKeyDownImpl(KeyCode key_code) = 0;
 		virtual bool WasKeyDownImpl(KeyCode key_code) = 0;
@@ -32,7 +32,7 @@ namespace A {
 		virtual int GetMouseYImpl() = 0;
 
 	private:
-		static Shared<Input> s_Instance;
+		static Unique<Input> s_Instance;
 	};
 
 }

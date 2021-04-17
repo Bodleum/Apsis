@@ -6,8 +6,6 @@ namespace A {
 	class WindowsInput : public Input
 	{
 	public:
-		WindowsInput() {};
-
 		// Inherited via Input
 		virtual bool IsKeyDownImpl(KeyCode key_code) override;
 		virtual bool WasKeyDownImpl(KeyCode key_code) override;
