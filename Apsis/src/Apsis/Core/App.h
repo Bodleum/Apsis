@@ -1,9 +1,9 @@
 #pragma once
 #include "Apsis/Core/Layer.h"
-#include "Apsis/Core/Main.h"
+//#include "Apsis/Core/Main.h"				Included in Window.h
 #include "Apsis/Core/Window.h"
-//#include "Apsis/Event/Event.h"		Included in EventDispatcher.h
-#include "Apsis/Event/EventDispatcher.h"
+//#include "Apsis/Event/Event.h"			Included in EventDispatcher.h
+//#include "Apsis/Event/EventDispatcher.h"	Included in Layer.h
 
 namespace A {
 

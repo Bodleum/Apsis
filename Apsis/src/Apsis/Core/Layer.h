@@ -1,9 +1,10 @@
 #pragma once
 #include <deque>
+#include "Apsis/Event/EventDispatcher.h"
 
 namespace A {
 
-	class Layer
+	class Layer : public EventListener
 	{
 	public:
 		Layer();
