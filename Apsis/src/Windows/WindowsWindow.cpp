@@ -2,7 +2,6 @@
 #include "WindowsWindow.h"
 
 #include <windowsx.h>
-#include <strsafe.h>  //StringCchPrintf
 
 #include "Apsis/Event/EventDispatcher.h"
 //#include "Apsis/Core/InputCodes.h"		Included in EventDispatcher.h
@@ -236,6 +235,7 @@ namespace A {
 
 					//std::cout << KeyCodeToString(keyCode) << ' ' << up << ' ' << down << ' ' << repeat << '\n';
 					//std::cout << scanCode << E0 << E1 << '\n';
+					//std::cout << virtualKeyCode << '\n';
 
 					if (up)
 						EventDispatcher::OnEvent(KeyUpEvent(keyCode));
@@ -454,4 +454,5 @@ namespace A {
 		}
 
 	}
+
 }
