@@ -1,6 +1,8 @@
 #include "apch.h"
 #include "App.h"
 
+#include "Input.h"
+
 namespace A {
 
 	App::App(AppArgs args)
@@ -32,6 +34,8 @@ namespace A {
 		for (Layer* layer : m_LayerStack)
 			if (layer->IsEnabled())
 				layer->OnUpdate();
+
+		if (Input::IsMouseButtonDown(Mouse::Left))
 	}
 
 	void App::PushLayer(Layer* layer)

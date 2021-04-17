@@ -3,39 +3,39 @@
 
 namespace A {
 
-	bool WindowsInput::IsKeyDown(KeyCode key_code)
+	bool WindowsInput::IsKeyDownImpl(KeyCode key_code)
 	{
 		return 0x80000000 & GetAsyncKeyState(KeyCodeToVirtualKeyCode(key_code));
 	}
 
-	bool WindowsInput::WasKeyDown(KeyCode key_code)
+	bool WindowsInput::WasKeyDownImpl(KeyCode key_code)
 	{
 		return 0x00000001 & GetAsyncKeyState(KeyCodeToVirtualKeyCode(key_code));
 	}
 
-	bool WindowsInput::IsMouseButtonDown(MouseCode mouse_code)
+	bool WindowsInput::IsMouseButtonDownImpl(MouseCode mouse_code)
 	{
 		return 0x80000000 & GetAsyncKeyState(MouseCodeToVirtualKeyCode(mouse_code));
 	}
 
-	bool WindowsInput::WasMouseButtonDown(MouseCode mouse_code)
+	bool WindowsInput::WasMouseButtonDownImpl(MouseCode mouse_code)
 	{
 		return 0x00000001 & GetAsyncKeyState(MouseCodeToVirtualKeyCode(mouse_code));
 	}
 
-	std::array<int, 2> WindowsInput::GetMousePos()
+	std::array<int, 2> WindowsInput::GetMousePosImpl()
 	{
 		POINT point = {};
 		GetCursorPos(&point);
 		return std::array<int, 2>({ (int)point.x, (int)point.y });
 	}
 
-	int WindowsInput::GetMouseX()
+	int WindowsInput::GetMouseXImpl()
 	{
 		return GetMousePos()[0];
 	}
 
-	int WindowsInput::GetMouseY()
+	int WindowsInput::GetMouseYImpl()
 	{
 		return GetMousePos()[1];
 	}

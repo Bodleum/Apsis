@@ -9,13 +9,13 @@ namespace A {
 		WindowsInput() {};
 
 		// Inherited via Input
-		virtual bool IsKeyDown(KeyCode key_code) override;
-		virtual bool WasKeyDown(KeyCode key_code) override;
-		virtual bool IsMouseButtonDown(MouseCode mouse_code) override;
-		virtual bool WasMouseButtonDown(MouseCode mouse_code) override;
-		virtual std::array<int, 2> GetMousePos() override;
-		virtual int GetMouseX() override;
-		virtual int GetMouseY() override;
+		virtual bool IsKeyDownImpl(KeyCode key_code) override;
+		virtual bool WasKeyDownImpl(KeyCode key_code) override;
+		virtual bool IsMouseButtonDownImpl(MouseCode mouse_code) override;
+		virtual bool WasMouseButtonDownImpl(MouseCode mouse_code) override;
+		virtual std::array<int, 2> GetMousePosImpl() override;
+		virtual int GetMouseXImpl() override;
+		virtual int GetMouseYImpl() override;
 
 	private:
 		int KeyCodeToVirtualKeyCode(KeyCode key_code);
