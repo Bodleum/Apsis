@@ -12,7 +12,7 @@ namespace A {
 		static Shared<EventDispatcher> Get();
 
 		static inline void AddListener(EventListener* inst) { s_ListenerList.push_back(inst); }
-		static bool OnEvent(Event& evt);
+		static bool DispatchEvent(Event& evt);
 
 		EventDispatcher(EventDispatcher const&) = delete;
 		EventDispatcher& operator=(EventDispatcher const&) = delete;

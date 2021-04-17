@@ -35,3 +35,8 @@ void MainLayer::OnRemove()
 void MainLayer::OnUpdate()
 {
 }
+
+bool MainLayer::OnEvent(A::Event& evt)
+{
+	return false;
+}

@@ -113,7 +113,7 @@ namespace A {
 			{
 				int x = GET_X_LPARAM(lParam);
 				int y = GET_Y_LPARAM(lParam);
-				EventDispatcher::OnEvent(MouseButtonDownEvent(x, y, Mouse::Left));
+				EventDispatcher::DispatchEvent(MouseButtonDownEvent(x, y, Mouse::Left));
 				return 0;
 			}
 
@@ -121,7 +121,7 @@ namespace A {
 			{
 				int x = GET_X_LPARAM(lParam);
 				int y = GET_Y_LPARAM(lParam);
-				EventDispatcher::OnEvent(MouseButtonUpEvent(x, y, Mouse::Left));
+				EventDispatcher::DispatchEvent(MouseButtonUpEvent(x, y, Mouse::Left));
 				return 0;
 			}
 
@@ -129,7 +129,7 @@ namespace A {
 			{
 				int x = GET_X_LPARAM(lParam);
 				int y = GET_Y_LPARAM(lParam);
-				EventDispatcher::OnEvent(MouseButtonDownEvent(x, y, Mouse::Middle));
+				EventDispatcher::DispatchEvent(MouseButtonDownEvent(x, y, Mouse::Middle));
 				return 0;
 			}
 
@@ -137,7 +137,7 @@ namespace A {
 			{
 				int x = GET_X_LPARAM(lParam);
 				int y = GET_Y_LPARAM(lParam);
-				EventDispatcher::OnEvent(MouseButtonUpEvent(x, y, Mouse::Middle));
+				EventDispatcher::DispatchEvent(MouseButtonUpEvent(x, y, Mouse::Middle));
 				return 0;
 			}
 
@@ -145,7 +145,7 @@ namespace A {
 			{
 				int x = GET_X_LPARAM(lParam);
 				int y = GET_Y_LPARAM(lParam);
-				EventDispatcher::OnEvent(MouseButtonDownEvent(x, y, Mouse::Right));
+				EventDispatcher::DispatchEvent(MouseButtonDownEvent(x, y, Mouse::Right));
 				return 0;
 			}
 
@@ -153,7 +153,7 @@ namespace A {
 			{
 				int x = GET_X_LPARAM(lParam);
 				int y = GET_Y_LPARAM(lParam);
-				EventDispatcher::OnEvent(MouseButtonUpEvent(x, y, Mouse::Right));
+				EventDispatcher::DispatchEvent(MouseButtonUpEvent(x, y, Mouse::Right));
 				return 0;
 			}
 
@@ -162,7 +162,7 @@ namespace A {
 				int x1or2 = GET_Y_LPARAM(wParam);
 				int x = GET_X_LPARAM(lParam);
 				int y = GET_Y_LPARAM(lParam);
-				EventDispatcher::OnEvent(MouseButtonDownEvent(x, y, x1or2 == 1 ? Mouse::X1 : Mouse::X2));
+				EventDispatcher::DispatchEvent(MouseButtonDownEvent(x, y, x1or2 == 1 ? Mouse::X1 : Mouse::X2));
 				return 0;
 			}
 
@@ -171,7 +171,7 @@ namespace A {
 				int x1or2 = GET_Y_LPARAM(wParam);
 				int x = GET_X_LPARAM(lParam);
 				int y = GET_Y_LPARAM(lParam);
-				EventDispatcher::OnEvent(MouseButtonUpEvent(x, y, x1or2 == 1 ? Mouse::X1 : Mouse::X2));
+				EventDispatcher::DispatchEvent(MouseButtonUpEvent(x, y, x1or2 == 1 ? Mouse::X1 : Mouse::X2));
 				return 0;
 			}
 
@@ -179,7 +179,7 @@ namespace A {
 			{
 				int x = GET_X_LPARAM(lParam);
 				int y = GET_Y_LPARAM(lParam);
-				EventDispatcher::OnEvent(MouseMoveEvent(x, y));
+				EventDispatcher::DispatchEvent(MouseMoveEvent(x, y));
 				return 0;
 			}
 
@@ -188,7 +188,7 @@ namespace A {
 				int delta = GET_WHEEL_DELTA_WPARAM(wParam) / 120;
 				int x = GET_X_LPARAM(lParam);
 				int y = GET_Y_LPARAM(lParam);
-				EventDispatcher::OnEvent(MouseWheelEvent(x, y, delta));
+				EventDispatcher::DispatchEvent(MouseWheelEvent(x, y, delta));
 				return 0;
 			}
 
@@ -238,14 +238,14 @@ namespace A {
 					//std::cout << virtualKeyCode << '\n';
 
 					if (up)
-						EventDispatcher::OnEvent(KeyUpEvent(keyCode));
+						EventDispatcher::DispatchEvent(KeyUpEvent(keyCode));
 					else if (down)
 					{
-						EventDispatcher::OnEvent(KeyDownEvent(keyCode, repeat));
+						EventDispatcher::DispatchEvent(KeyDownEvent(keyCode, repeat));
 						if (strlen(buffer) == 1)
 						{
 							char* character = buffer;
-							EventDispatcher::OnEvent(KeyCharEvent(keyCode, character, repeat));
+							EventDispatcher::DispatchEvent(KeyCharEvent(keyCode, character, repeat));
 						}
 					}
 				}
@@ -275,13 +275,13 @@ namespace A {
 
 			case WM_CLOSE:
 			{
-				EventDispatcher::OnEvent(WindowCloseEvent());
+				EventDispatcher::DispatchEvent(WindowCloseEvent());
 				break;	// Continue with the closing of the window
 			}
 
 			case WM_DESTROY:
 			{
-				EventDispatcher::OnEvent(WindowDestroyEvent());
+				EventDispatcher::DispatchEvent(WindowDestroyEvent());
 				#if AP_TRACE_WINMSG
 					for (auto& element : m_MessageTally)
 						AP_TRACE_C("Message: {0},\t{1} times", element.first, element.second);
@@ -294,7 +294,7 @@ namespace A {
 			{
 				UINT width = LOWORD(lParam);
 				UINT height = HIWORD(lParam);
-				EventDispatcher::OnEvent(WindowResizeEvent(width, height));
+				EventDispatcher::DispatchEvent(WindowResizeEvent(width, height));
 				return 0;
 			}
 
@@ -302,7 +302,7 @@ namespace A {
 			// --- App   ---
 			case WM_QUIT:
 			{
-				EventDispatcher::OnEvent(AppQuitEvent());
+				EventDispatcher::DispatchEvent(AppQuitEvent());
 				return 0;
 			}
 

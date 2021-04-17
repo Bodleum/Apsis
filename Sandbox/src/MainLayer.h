@@ -11,4 +11,5 @@ public:
 	virtual void OnAdd() override;
 	virtual void OnRemove() override;
 	virtual void OnUpdate() override;
+	virtual bool OnEvent(A::Event& evt) override;
 };

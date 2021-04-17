@@ -12,7 +12,7 @@ namespace A {
 		return instance;
 	}
 
-	bool EventDispatcher::OnEvent(Event& evt)
+	bool EventDispatcher::DispatchEvent(Event& evt)
 	{
 		AP_PROFILE_FN();
 
