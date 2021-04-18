@@ -38,5 +38,14 @@ void MainLayer::OnUpdate(A::MicroSeconds time_step)
 
 bool MainLayer::OnEvent(A::Event& evt)
 {
+	A::LocalDispatcher ld(evt);
+	ld.Dispatch<A::MouseButtonDownEvent>(BIND_EVT_FN(MainLayer::testfn));
+
+	return false;
+}
+
+bool MainLayer::testfn(A::MouseButtonDownEvent& evt)
+{
+	AP_INFO("Test! {0}", evt);
 	return false;
 }
