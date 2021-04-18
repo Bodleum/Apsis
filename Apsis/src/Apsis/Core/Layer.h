@@ -1,8 +1,11 @@
 #pragma once
 #include <deque>
+#include <chrono>
 #include "Apsis/Event/EventDispatcher.h"
 
 namespace A {
+
+	using MicroSeconds = std::chrono::microseconds;
 
 	class Layer : public EventListener
 	{
@@ -13,7 +16,7 @@ namespace A {
 		virtual void OnAdd() = 0;
 		virtual void OnRemove() = 0;
 
-		virtual void OnUpdate() = 0;
+		virtual void OnUpdate(MicroSeconds time_step) = 0;
 
 		const bool IsEnabled() const { return m_Enabled; }
 

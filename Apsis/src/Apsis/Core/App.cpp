@@ -8,7 +8,7 @@ namespace A {
 	AppArgs App::m_Args = AppArgs();
 
 	App::App()
-		: m_LayerStack()
+		: m_LayerStack(), m_CurrentTime(std::chrono::time_point_cast<MicroSeconds>(std::chrono::steady_clock::now()))
 	{
 		AP_PROFILE_FN();
 
@@ -22,11 +22,32 @@ namespace A {
 
 		while (m_Running)
 		{
-			OnUpdate();
+			m_NewTime = std::chrono::time_point_cast<MicroSeconds>(std::chrono::steady_clock::now());	// Get new time
+			m_FrameTime = (m_NewTime - m_CurrentTime);	// Calcultate frame time
+			if (m_FrameTime > 25 * m_TimeStep)	// Clipping
+				m_FrameTime = 25 * m_TimeStep;
+			m_CurrentTime = m_NewTime;	// Set current time to start timing the frame we're about to process
+			m_TimeAccumulator += m_FrameTime;	// Add frame time to the accumulator
+
+			// Do updates
+			while (m_TimeAccumulator >= m_TimeStep)
+			{
+				OnUpdate(m_TimeStep);
+				m_TimeAccumulator -= m_TimeStep;
+			}
+
+			/* Interpolate rendering
+			const auto alpha = m_TimeAccumulator / m_TimeStep;
+			* 
+			* Some other stuff
+			* See: https://gafferongames.com/post/fix_your_timestep/
+			*/
+
+			// OnRender();
 		}
 	}
 
-	void App::OnUpdate()
+	void App::OnUpdate(MicroSeconds time_step)
 	{
 		AP_PROFILE_FN();
 
@@ -35,7 +56,7 @@ namespace A {
 		// Update each layer if enabled
 		for (Layer* layer : m_LayerStack)
 			if (layer->IsEnabled())
-				layer->OnUpdate();
+				layer->OnUpdate(time_step);
 	}
 
 	void App::PushLayer(Layer* layer)

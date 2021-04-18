@@ -32,7 +32,7 @@ void MainLayer::OnRemove()
 	m_Enabled = false;
 }
 
-void MainLayer::OnUpdate()
+void MainLayer::OnUpdate(A::MicroSeconds time_step)
 {
 }
 

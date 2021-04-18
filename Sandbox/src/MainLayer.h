@@ -10,6 +10,6 @@ public:
 	// Inherited via Layer
 	virtual void OnAdd() override;
 	virtual void OnRemove() override;
-	virtual void OnUpdate() override;
+	virtual void OnUpdate(A::MicroSeconds time_step) override;
 	virtual bool OnEvent(A::Event& evt) override;
 };
