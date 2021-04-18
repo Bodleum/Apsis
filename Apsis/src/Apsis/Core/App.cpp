@@ -104,6 +104,12 @@ namespace A {
 			break;
 		}
 
+		for (Layer* layer : m_LayerStack)
+		{
+			if (layer->OnEvent(evt))
+				return true;
+		}
+
 		return false;
 	}
 
