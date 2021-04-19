@@ -22,7 +22,7 @@ project "Apsis"
 	{
 		"src",
 		"dependancies/spdlog/include",
-		"dependancies/DirectXMath/Inc"
+		"dependancies/eigen-3.3.9"
 	}
 
 	pchheader "apch.h"
