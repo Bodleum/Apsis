@@ -25,7 +25,7 @@ namespace A {
 	private:
 		EventDispatcher() {}
 
-		static std::vector<EventListener*> EventDispatcher::s_ListenerList;
+		static std::vector<EventListener*> s_ListenerList;
 	};
 
 	class EventListener
