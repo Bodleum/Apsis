@@ -1,7 +1,8 @@
 #include "apch.h"
 #include "App.h"
 
-#include "Input.h"
+#include "Apsis/Core/Input.h"
+#include "Apsis/Renderer/Renderer.h"
 
 namespace A {
 
@@ -14,6 +15,8 @@ namespace A {
 
 		AP_INFO_C("Created App");
 		m_Window = Window::Create(m_Args.MainFnArgs);
+		m_Renderer = Renderer::Create();
+		m_Renderer->Init(m_Window->GetHandle());
 	}
 
 	void App::Run()

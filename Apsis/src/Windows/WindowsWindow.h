@@ -15,6 +15,8 @@ namespace A {
 		// Inherited via Window
 		virtual bool PollEvents() const override;
 
+		virtual inline void* GetHandle() const override { return m_WindowHandle; }
+
 	private:
 		static LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 		WNDCLASSEX m_WindowClass;
