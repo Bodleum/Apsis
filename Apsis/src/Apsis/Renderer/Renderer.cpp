@@ -5,6 +5,8 @@
 
 namespace A {
 
+	Shared<Renderer> Renderer::s_Instance = Renderer::Create();
+
 	Shared<Renderer> Renderer::Create()
 	{
 		return MakeShared<Direct2DRenderer>();

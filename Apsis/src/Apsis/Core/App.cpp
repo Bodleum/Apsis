@@ -15,8 +15,12 @@ namespace A {
 
 		AP_INFO_C("Created App");
 		m_Window = Window::Create(m_Args.MainFnArgs);
-		m_Renderer = Renderer::Create();
-		m_Renderer->Init(m_Window->GetHandle());
+		{// Init renderer
+			AP_PROFILE_SCOPE("Init renderer");
+			bool res = Renderer::Init(m_Window->GetHandle());
+			AP_ASSERT_C(res, "Failed to initialise renderer!");
+			return;
+		}
 	}
 
 	void App::Run()

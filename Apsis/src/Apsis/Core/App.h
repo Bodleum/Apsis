@@ -47,7 +47,6 @@ namespace A {
 		static AppArgs m_Args;
 		LayerStack m_LayerStack;
 		Unique<Window> m_Window;
-		Shared<Renderer> m_Renderer;
 		//Timing
 		MicroSeconds m_TimeStep{ 16667 };	// 60ups by default
 		MicroSeconds m_TimeAccumulator{ 0 };

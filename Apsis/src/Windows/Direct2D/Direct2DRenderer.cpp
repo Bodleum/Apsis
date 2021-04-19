@@ -23,7 +23,7 @@ namespace A {
 			m_SolidColorBrush->Release();
 	}
 
-	bool Direct2DRenderer::Init(void* window_handle)
+	bool Direct2DRenderer::InitImpl(void* window_handle)
 	{
 		AP_PROFILE_FN();
 
@@ -61,7 +61,7 @@ namespace A {
 		return true;
 	}
 
-	void Direct2DRenderer::DrawCircle(Eigen::Vector2i& position, float radius, Eigen::Vector4f& col)
+	void Direct2DRenderer::DrawCircleImpl(Eigen::Vector2i& position, float radius, Eigen::Vector4f& col)
 	{
 		m_SolidColorBrush->SetColor(D2D1::ColorF((FLOAT)m_ClearColor.x(), (FLOAT)m_ClearColor.y(), (FLOAT)m_ClearColor.z()));
 		m_RenderTarget->DrawEllipse(D2D1::Ellipse(D2D1::Point2F(position.x(), position.y()), radius, radius), m_SolidColorBrush, 3.0f);

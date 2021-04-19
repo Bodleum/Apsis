@@ -12,13 +12,13 @@ namespace A {
 		virtual ~Direct2DRenderer();
 
 		// Inherited via Renderer
-		virtual bool Init(void* window_handle) override;
-		virtual inline void Clear() override { m_RenderTarget->Clear(D2D1::ColorF((FLOAT)m_ClearColor.x(), (FLOAT)m_ClearColor.y(), (FLOAT)m_ClearColor.z())); }
-		virtual inline void SetClearColor(Eigen::Vector4f& col) override { m_ClearColor = col; }
-		virtual void DrawCircle(Eigen::Vector2i& position, float radius, Eigen::Vector4f& col) override;
+		virtual bool InitImpl(void* window_handle) override;
+		virtual inline void ClearImpl() override { m_RenderTarget->Clear(D2D1::ColorF((FLOAT)m_ClearColor.x(), (FLOAT)m_ClearColor.y(), (FLOAT)m_ClearColor.z())); }
+		virtual inline void SetClearColorImpl(Eigen::Vector4f& col) override { m_ClearColor = col; }
+		virtual void DrawCircleImpl(Eigen::Vector2i& position, float radius, Eigen::Vector4f& col) override;
 
-		inline void BeginDraw() { m_RenderTarget->BeginDraw(); }
-		inline void EndDraw() { m_RenderTarget->EndDraw(); }
+		inline void BeginDrawImpl() override { m_RenderTarget->BeginDraw(); }
+		inline void EndDrawImpl() override { m_RenderTarget->EndDraw(); }
 
 	private:
 		ID2D1Factory* m_Factory;
