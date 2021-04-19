@@ -52,8 +52,5 @@ bool MainLayer::testfn(A::MouseButtonDownEvent& evt)
 
 void MainLayer::OnRender()
 {
-	A::Renderer::BeginDraw();
-	A::Renderer::Clear();
 	A::Renderer::DrawCircle(Eigen::Vector2i(100, 100), 100, Eigen::Vector4f(1.0f, 1.0f, 0.5f, 1.0f));
-	A::Renderer::EndDraw();
 }

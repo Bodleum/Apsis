@@ -73,10 +73,13 @@ namespace A {
 	void App::OnRender()
 	{
 		AP_PROFILE_FN();
+		A::Renderer::BeginDraw();
+		A::Renderer::Clear();
 		// Render each layer from the bottom up
 		for (auto it = m_LayerStack.rbegin(); it != m_LayerStack.rend(); ++it)
 			if ((*it)->IsEnabled())
 				(*it)->OnRender();
+		A::Renderer::EndDraw();
 	}
 
 	void App::PushLayer(Layer* layer)
