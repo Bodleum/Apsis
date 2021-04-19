@@ -6,6 +6,7 @@ namespace A {
 
 	#define BIND_EVT_FN(x) std::bind(&x, this, std::placeholders::_1)
 
+	class Window;
 	class EventListener;
 
 	class EventDispatcher
@@ -15,6 +16,8 @@ namespace A {
 
 		static inline void AddListener(EventListener* inst) { s_ListenerList.push_back(inst); }
 		static bool DispatchEvent(Event& evt);
+
+		static bool PollWindowEvents(Unique<Window>& window);
 
 		EventDispatcher(EventDispatcher const&) = delete;
 		EventDispatcher& operator=(EventDispatcher const&) = delete;

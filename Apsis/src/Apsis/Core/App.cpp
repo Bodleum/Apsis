@@ -51,7 +51,7 @@ namespace A {
 	{
 		AP_PROFILE_FN();
 
-		m_Window->PollEvents();
+		EventDispatcher::PollWindowEvents(m_Window);
 
 		// Update each layer if enabled
 		for (Layer* layer : m_LayerStack)

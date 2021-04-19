@@ -1,6 +1,8 @@
 #include "apch.h"
 #include "EventDispatcher.h"
 
+#include "Apsis/Core/Window.h"
+
 namespace A {
 
 	std::vector<EventListener*> EventDispatcher::s_ListenerList = {};
@@ -25,6 +27,11 @@ namespace A {
 			}
 
 		return eventComleted;
+	}
+
+	bool EventDispatcher::PollWindowEvents(Unique<Window>& window)
+	{
+		return window->PollEvents();
 	}
 
 }
