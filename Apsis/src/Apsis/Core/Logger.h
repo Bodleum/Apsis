@@ -45,16 +45,8 @@ namespace A {
 #define AP_CRIT(...)	::A::Logger::GetClientLogger()->critical(__VA_ARGS__)
 
 // ---   Asserts   ---
-#if defined(AP_DEBUG) || defined(AP_RELEASE)
-	#define AP_ASSERT_C(expr, msg, ...) if (!(expr)) { ::A::Logger::GetCoreAssertLogger()->critical(msg, __VA_ARGS__); }
-	#define AP_ASSERT_NOMSG_C(expr) if (!(expr)) { ::A::Logger::GetCoreAssertLogger()->critical("Assertion fail: {0}", #expr); }
+#define AP_ASSERT_C(expr, msg, ...) if (!(expr)) { ::A::Logger::GetCoreAssertLogger()->critical(msg, __VA_ARGS__); }
+#define AP_ASSERT_NOMSG_C(expr) if (!(expr)) { ::A::Logger::GetCoreAssertLogger()->critical("Assertion fail: {0}", #expr); }
 
-	#define AP_ASSERT(expr, msg, ...) if (!(expr)) { ::A::Logger::GetClientAssertLogger()->critical(msg, __VA_ARGS__); }
-	#define AP_ASSERT_NOMSG(expr) if (!(expr)) { ::A::Logger::GetClientAssertLogger()->critical("Assertion fail: {0}", #expr); }
-#else
-	#define AP_ASSERT_C(expr, msg, ...)
-	#define AP_ASSERT_NOMSG_C(expr)
-
-	#define AP_ASSERT(expr, msg, ...)
-	#define AP_ASSERT_NOMSG(expr)
-#endif // AP_DEBUG
+#define AP_ASSERT(expr, msg, ...) if (!(expr)) { ::A::Logger::GetClientAssertLogger()->critical(msg, __VA_ARGS__); }
+#define AP_ASSERT_NOMSG(expr) if (!(expr)) { ::A::Logger::GetClientAssertLogger()->critical("Assertion fail: {0}", #expr); }
