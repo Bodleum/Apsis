@@ -51,7 +51,7 @@ namespace A {
 			* See: https://gafferongames.com/post/fix_your_timestep/
 			*/
 
-			// OnRender();
+			 OnRender();
 		}
 	}
 

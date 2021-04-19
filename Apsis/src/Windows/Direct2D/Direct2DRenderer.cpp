@@ -35,6 +35,7 @@ namespace A {
 				AP_ASSERT_C(false, "Failed to create Direct2D factory! Error: {0}", GetLastError());
 				return false;
 			}
+			AP_TRACE_C("Created Direct2D factory");
 		}
 
 		{// Create render target
@@ -51,11 +52,13 @@ namespace A {
 				AP_ASSERT_C(false, "Failed to create render target! Error: {0}", GetLastError());
 				return false;
 			}
+			AP_TRACE_C("Created Direct2D render target");
 		}
 
 		{// Create solid color brush
 			AP_PROFILE_SCOPE("Create solid color brush");
 			HRESULT res = m_RenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.0f, 0.0f, 0.0f, 0.0f), &m_SolidColorBrush);
+			AP_TRACE_C("Created Direct2D solid color brush");
 		}
 
 		return true;
@@ -63,8 +66,8 @@ namespace A {
 
 	void Direct2DRenderer::DrawCircleImpl(Eigen::Vector2i& position, float radius, Eigen::Vector4f& col)
 	{
-		m_SolidColorBrush->SetColor(D2D1::ColorF((FLOAT)m_ClearColor.x(), (FLOAT)m_ClearColor.y(), (FLOAT)m_ClearColor.z()));
-		m_RenderTarget->DrawEllipse(D2D1::Ellipse(D2D1::Point2F(position.x(), position.y()), radius, radius), m_SolidColorBrush, 3.0f);
+		m_SolidColorBrush->SetColor(D2D1::ColorF(col.x(), col.y(), col.z()));
+		m_RenderTarget->DrawEllipse(D2D1::Ellipse(D2D1::Point2F(position.x(), position.y()), radius, radius), m_SolidColorBrush, 2.0f);
 	}
 
 }

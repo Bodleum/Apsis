@@ -13,12 +13,12 @@ namespace A {
 
 		// Inherited via Renderer
 		virtual bool InitImpl(void* window_handle) override;
-		virtual inline void ClearImpl() override { m_RenderTarget->Clear(D2D1::ColorF((FLOAT)m_ClearColor.x(), (FLOAT)m_ClearColor.y(), (FLOAT)m_ClearColor.z())); }
+		virtual inline void ClearImpl() override { m_RenderTarget->Clear(D2D1::ColorF(m_ClearColor.x(), m_ClearColor.y(), m_ClearColor.z())); }
 		virtual inline void SetClearColorImpl(Eigen::Vector4f& col) override { m_ClearColor = col; }
 		virtual void DrawCircleImpl(Eigen::Vector2i& position, float radius, Eigen::Vector4f& col) override;
 
-		inline void BeginDrawImpl() override { m_RenderTarget->BeginDraw(); }
-		inline void EndDrawImpl() override { m_RenderTarget->EndDraw(); }
+		virtual inline void BeginDrawImpl() override { m_RenderTarget->BeginDraw(); }
+		virtual inline void EndDrawImpl() override { m_RenderTarget->EndDraw(); }
 
 	private:
 		ID2D1Factory* m_Factory;

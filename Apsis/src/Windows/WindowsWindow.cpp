@@ -316,6 +316,7 @@ namespace A {
 
 
 			// ---   Other   ---
+			/*
 			case WM_PAINT:
 			{
 				PAINTSTRUCT ps;
@@ -327,6 +328,7 @@ namespace A {
 
 				EndPaint(hWnd, &ps);
 			}
+			*/
 		}
 
 		return DefWindowProc(hWnd, uMsg, wParam, lParam);	// Unhandled message, DefWindowProc performs default action
