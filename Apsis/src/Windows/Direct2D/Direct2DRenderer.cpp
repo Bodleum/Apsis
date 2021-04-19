@@ -4,7 +4,7 @@
 namespace A {
 
 	Direct2DRenderer::Direct2DRenderer()
-		: m_Factory(NULL), m_RenderTarget(NULL), m_SolidColorBrush(NULL)
+		: m_WindowHandle(NULL), m_Factory(NULL), m_RenderTarget(NULL), m_SolidColorBrush(NULL)
 	{
 		AP_PROFILE_FN();
 	}
@@ -12,20 +12,15 @@ namespace A {
 	Direct2DRenderer::~Direct2DRenderer()
 	{
 		AP_PROFILE_FN();
-
-		if (m_Factory)
-			m_Factory->Release();
-
-		if (m_RenderTarget)
-			m_RenderTarget->Release();
-
-		if (m_SolidColorBrush)
-			m_SolidColorBrush->Release();
+		ReleaseGraphicsResources();
+		SafeRelease(&m_Factory);
 	}
 
 	bool Direct2DRenderer::InitImpl(void* window_handle)
 	{
 		AP_PROFILE_FN();
+
+		m_WindowHandle = (HWND)window_handle;
 
 		{// Create Direct2D factory
 			AP_PROFILE_SCOPE("Create Direct2D factory");
@@ -38,13 +33,36 @@ namespace A {
 			AP_TRACE_C("Created Direct2D factory");
 		}
 
+		{// Create graphics resouces
+			AP_PROFILE_SCOPE("Create graphics resouces");
+			bool res = CreateGraphicsResources();
+			if (!res)
+			{
+				AP_ASSERT_C(false, "Could not create graphics resources");
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	void Direct2DRenderer::DrawCircleImpl(Eigen::Vector2i& position, float radius, Eigen::Vector4f& col)
+	{
+		m_SolidColorBrush->SetColor(D2D1::ColorF(col.x(), col.y(), col.z()));
+		m_RenderTarget->DrawEllipse(D2D1::Ellipse(D2D1::Point2F(position.x(), position.y()), radius, radius), m_SolidColorBrush, 2.0f);
+	}
+
+	bool Direct2DRenderer::CreateGraphicsResources()
+	{
+		AP_PROFILE_FN();
+
 		{// Create render target
 			RECT clientRect;
 			AP_PROFILE_SCOPE("Create render target");
-			GetClientRect((HWND)window_handle, &clientRect);
+			GetClientRect(m_WindowHandle, &clientRect);
 			HRESULT res = m_Factory->CreateHwndRenderTarget(
 				D2D1::RenderTargetProperties(),
-				D2D1::HwndRenderTargetProperties((HWND)window_handle, D2D1::SizeU(clientRect.right, clientRect.bottom)),
+				D2D1::HwndRenderTargetProperties(m_WindowHandle, D2D1::SizeU(clientRect.right, clientRect.bottom)),
 				&m_RenderTarget
 			);
 			if (res != S_OK)
@@ -64,10 +82,11 @@ namespace A {
 		return true;
 	}
 
-	void Direct2DRenderer::DrawCircleImpl(Eigen::Vector2i& position, float radius, Eigen::Vector4f& col)
+	void Direct2DRenderer::ReleaseGraphicsResources()
 	{
-		m_SolidColorBrush->SetColor(D2D1::ColorF(col.x(), col.y(), col.z()));
-		m_RenderTarget->DrawEllipse(D2D1::Ellipse(D2D1::Point2F(position.x(), position.y()), radius, radius), m_SolidColorBrush, 2.0f);
+		AP_PROFILE_FN();
+		SafeRelease(&m_RenderTarget);
+		SafeRelease(&m_SolidColorBrush);
 	}
 
 }

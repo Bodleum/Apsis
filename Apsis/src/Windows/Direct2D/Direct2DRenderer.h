@@ -17,10 +17,26 @@ namespace A {
 		virtual inline void SetClearColorImpl(Eigen::Vector4f& col) override { m_ClearColor = col; }
 		virtual void DrawCircleImpl(Eigen::Vector2i& position, float radius, Eigen::Vector4f& col) override;
 
-		virtual inline void BeginDrawImpl() override { m_RenderTarget->BeginDraw(); }
-		virtual inline void EndDrawImpl() override { m_RenderTarget->EndDraw(); }
+		virtual inline void BeginDrawImpl() override { if (!m_RenderTarget) { CreateGraphicsResources(); }m_RenderTarget->BeginDraw(); }
+		virtual inline void EndDrawImpl() override
+		{
+			HRESULT res = m_RenderTarget->EndDraw();
+			if (FAILED(res) || res == D2DERR_RECREATE_TARGET)
+			{
+				AP_WARN_C("Graphics device loss");
+				ReleaseGraphicsResources();
+			}
+		}
+
+
 
 	private:
+		bool CreateGraphicsResources();
+		void ReleaseGraphicsResources();
+		template <class T>
+		inline void SafeRelease(T** ppT) { if (*ppT) { (*ppT)->Release(); *ppT = NULL; } }
+
+		HWND m_WindowHandle;
 		ID2D1Factory* m_Factory;
 		ID2D1HwndRenderTarget* m_RenderTarget;
 		ID2D1SolidColorBrush* m_SolidColorBrush;
