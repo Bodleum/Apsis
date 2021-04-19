@@ -4,7 +4,7 @@
 namespace A {
 
 	Direct2DRenderer::Direct2DRenderer()
-		: m_Factory(NULL), m_RenderTarget(NULL)
+		: m_Factory(NULL), m_RenderTarget(NULL), m_SolidColorBrush(NULL)
 	{
 		AP_PROFILE_FN();
 	}
@@ -18,6 +18,9 @@ namespace A {
 
 		if (m_RenderTarget)
 			m_RenderTarget->Release();
+
+		if (m_SolidColorBrush)
+			m_SolidColorBrush->Release();
 	}
 
 	bool Direct2DRenderer::Init(void* window_handle)
@@ -50,7 +53,18 @@ namespace A {
 			}
 		}
 
+		{// Create solid color brush
+			AP_PROFILE_SCOPE("Create solid color brush");
+			HRESULT res = m_RenderTarget->CreateSolidColorBrush(D2D1::ColorF(0.0f, 0.0f, 0.0f, 0.0f), &m_SolidColorBrush);
+		}
+
 		return true;
+	}
+
+	void Direct2DRenderer::DrawCircle(Eigen::Vector2i& position, float radius, Eigen::Vector4f& col)
+	{
+		m_SolidColorBrush->SetColor(D2D1::ColorF((FLOAT)m_ClearColor.x(), (FLOAT)m_ClearColor.y(), (FLOAT)m_ClearColor.z()));
+		m_RenderTarget->DrawEllipse(D2D1::Ellipse(D2D1::Point2F(position.x(), position.y()), radius, radius), m_SolidColorBrush, 3.0f);
 	}
 
 }
