@@ -21,7 +21,8 @@ project "Apsis"
 	includedirs
 	{
 		"src",
-		"dependancies/spdlog/include"
+		"dependancies/spdlog/include",
+		"dependancies/DirectXMath/Inc"
 	}
 
 	pchheader "apch.h"

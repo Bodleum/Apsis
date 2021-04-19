@@ -16,6 +16,7 @@ project "Sandbox"
 	{
 		"%{wks.location}/Apsis/src",
 		"%{wks.location}/Apsis/dependancies/spdlog/include",
+		"%{wks.location}/Apsis/dependancies/DirectXMath/Inc"
 	}
 
 	links
