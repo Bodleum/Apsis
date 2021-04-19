@@ -116,6 +116,17 @@ namespace A {
 
 		switch (evt.GetType())
 		{
+		case EventType::WindowResize:
+		{
+			Renderer::OnResize();
+			break;
+		}
+
+		case EventType::WindowPaint:
+		{
+			OnRender();
+			break;
+		}
 
 		case EventType::WindowDestroy:
 		{

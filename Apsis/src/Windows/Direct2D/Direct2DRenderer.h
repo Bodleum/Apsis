@@ -15,6 +15,8 @@ namespace A {
 		virtual bool InitImpl(void* window_handle) override;
 		virtual inline void ClearImpl() override { m_RenderTarget->Clear(D2D1::ColorF(m_ClearColor.x(), m_ClearColor.y(), m_ClearColor.z())); }
 		virtual inline void SetClearColorImpl(Eigen::Vector4f& col) override { m_ClearColor = col; }
+		virtual void OnResizeImpl() override;
+
 		virtual void DrawCircleImpl(Eigen::Vector2i& position, float radius, Eigen::Vector4f& col) override;
 
 		virtual inline void BeginDrawImpl() override { if (!m_RenderTarget) { CreateGraphicsResources(); }m_RenderTarget->BeginDraw(); }

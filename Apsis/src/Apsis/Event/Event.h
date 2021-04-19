@@ -26,6 +26,7 @@ namespace A {
 		WindowClose,
 		WindowDestroy,
 		WindowResize,
+		WindowPaint,
 
 		// App
 		AppQuit
@@ -288,6 +289,17 @@ namespace A {
 
 	private:
 		unsigned int m_Width, m_Height;
+	};
+
+	class WindowPaintEvent : public Event
+	{
+	public:
+		WindowPaintEvent()
+		{
+		}
+
+		virtual std::string GetString() const override { return "WindowPaint"; }
+		AP_SET_EVENT_TYPE(WindowPaint)
 	};
 
 

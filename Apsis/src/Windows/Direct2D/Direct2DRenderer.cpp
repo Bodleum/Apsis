@@ -46,6 +46,18 @@ namespace A {
 		return true;
 	}
 
+	void Direct2DRenderer::OnResizeImpl()
+	{
+		if (m_RenderTarget)
+		{
+			RECT clientRect;
+			GetClientRect(m_WindowHandle, &clientRect);
+			D2D1_SIZE_U size = D2D1::SizeU(clientRect.right, clientRect.bottom);
+			m_RenderTarget->Resize(size);
+			InvalidateRect(m_WindowHandle, NULL, FALSE);	// force a repaint
+		}
+	}
+
 	void Direct2DRenderer::DrawCircleImpl(Eigen::Vector2i& position, float radius, Eigen::Vector4f& col)
 	{
 		m_SolidColorBrush->SetColor(D2D1::ColorF(col.x(), col.y(), col.z()));

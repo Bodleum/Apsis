@@ -15,6 +15,7 @@ namespace A {
 		static inline void EndDraw() { s_Instance->EndDrawImpl(); }
 		static inline void Clear() { s_Instance->ClearImpl(); }
 		static inline void SetClearColor(Eigen::Vector4f& col) { s_Instance->SetClearColorImpl(col); }
+		static inline void OnResize() { s_Instance->OnResizeImpl(); }
 
 		static inline void DrawCircle(Eigen::Vector2i& position, float radius, Eigen::Vector4f& col) { s_Instance->DrawCircleImpl(position, radius, col); }
 
@@ -27,6 +28,7 @@ namespace A {
 		virtual void EndDrawImpl() = 0;
 		virtual void ClearImpl() = 0;
 		virtual void SetClearColorImpl(Eigen::Vector4f& col) = 0;
+		virtual void OnResizeImpl() = 0;
 
 		virtual void DrawCircleImpl(Eigen::Vector2i& position, float radius, Eigen::Vector4f& col) = 0;
 

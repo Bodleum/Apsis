@@ -316,19 +316,13 @@ namespace A {
 
 
 			// ---   Other   ---
-			/*
 			case WM_PAINT:
 			{
 				PAINTSTRUCT ps;
 				HDC hdc = BeginPaint(hWnd, &ps);
-
-
-
-				FillRect(hdc, &ps.rcPaint, (HBRUSH)(COLOR_WINDOW + 1));
-
+				EventDispatcher::DispatchEvent(WindowPaintEvent());
 				EndPaint(hWnd, &ps);
 			}
-			*/
 		}
 
 		return DefWindowProc(hWnd, uMsg, wParam, lParam);	// Unhandled message, DefWindowProc performs default action
