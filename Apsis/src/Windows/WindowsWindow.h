@@ -17,7 +17,7 @@ namespace A {
 
 	private:
 		static LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
-		WNDCLASS m_WindowClass;
+		WNDCLASSEX m_WindowClass;
 		HWND m_WindowHandle;
 
 		unsigned int m_Width, m_Height;

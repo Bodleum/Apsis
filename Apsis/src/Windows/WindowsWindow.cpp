@@ -39,28 +39,36 @@ namespace A {
 		// Register window class
 		m_WindowClass = { 0 };
 		// Set parameters
+		m_WindowClass.cbSize = sizeof(WNDCLASSEX);
+		m_WindowClass.style = CS_HREDRAW | CS_VREDRAW | CS_DBLCLKS;
 		m_WindowClass.lpfnWndProc = WindowProc;
 		m_WindowClass.hInstance = hInstance;
+		m_WindowClass.hbrBackground = (HBRUSH)COLOR_WINDOW;
 		m_WindowClass.lpszClassName = className;
 		// Register
-		RegisterClass(&m_WindowClass);
+		ATOM registerClassRet = RegisterClassEx(&m_WindowClass);
+		AP_ASSERT_C(registerClassRet, "Failed to register window class.\n RegisterClassEx() returned {0}\n Error: {1}", registerClassRet, GetLastError());
+
+		// Don't include title bar and border in width and height
+		RECT windowRect{ 0, 0, width, height };
+		AdjustWindowRectEx(&windowRect, WS_OVERLAPPEDWINDOW, false, WS_EX_OVERLAPPEDWINDOW);
 
 		// Create instance
 		m_WindowHandle = CreateWindowEx(
-			0,						// Optional window styles.
+			WS_EX_OVERLAPPEDWINDOW,	// Optional window styles.
 			className,				// Window class
 			className,				// Window text (what appears in the title bar), set same as name.
 			WS_OVERLAPPEDWINDOW,	// Window style
 
 			// Size and position
-			CW_USEDEFAULT, CW_USEDEFAULT, width, height,
+			CW_USEDEFAULT, CW_USEDEFAULT, windowRect.right - windowRect.left, windowRect.bottom - windowRect.top,
 
 			NULL,		// Parent window    
 			NULL,		// Menu
 			hInstance,	// Instance handle
 			NULL		// Additional application data
 		);
-		AP_ASSERT_C(m_WindowHandle, "Failed to create instance of window class.\n CreateWindowEx() returned NULL");
+		AP_ASSERT_C(m_WindowHandle, "Failed to create instance of window class.\n Error: {0}", GetLastError());
 
 		// Show window
 		if (m_WindowHandle)
@@ -78,17 +86,17 @@ namespace A {
 	{
 		AP_PROFILE_FN();
 
-		bool eventsExist = false;
+		bool messagesExist = false;
 
 		MSG msg;
 		while (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE) > 0)  // PeekMessage is non blocking so use over GetMessage which is blocking
 		{
-			eventsExist = true;
+			messagesExist = true;
 			TranslateMessage(&msg);		// Turns keystrokes into chars
 			DispatchMessage(&msg);		// Dispatch to WindowProc for handling
 		}
 
-		return eventsExist;	
+		return messagesExist;	
 	}
 	
 	LRESULT WindowsWindow::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
@@ -259,7 +267,7 @@ namespace A {
 			{
 				// Setup of raw input devices
 				// Keyboard
-				RAWINPUTDEVICE rawInputDevices[1];
+				RAWINPUTDEVICE rawInputDevices[1] = {};
 				rawInputDevices[0].dwFlags = RIDEV_INPUTSINK;	// adds keyboard and also ignores legacy keyboard messages
 				rawInputDevices[0].hwndTarget = hWnd;
 				rawInputDevices[0].usUsagePage = 0x01;				// HID_USAGE_PAGE_GENERIC
