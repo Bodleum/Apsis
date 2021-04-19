@@ -19,7 +19,7 @@ namespace A {
 		static Shared<Renderer> Create();
 
 	protected:
-		Eigen::Vector4f m_ClearColor = { 0.8f, 0.2f, 0.8f };
+		Eigen::Vector4f m_ClearColor = { 0.8f, 0.2f, 0.8f, 1.0f };
 	};
 
 }
