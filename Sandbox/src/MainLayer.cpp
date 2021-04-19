@@ -49,3 +49,8 @@ bool MainLayer::testfn(A::MouseButtonDownEvent& evt)
 	AP_INFO("Test! {0}", evt);
 	return false;
 }
+
+void MainLayer::OnRender()
+{
+	
+}

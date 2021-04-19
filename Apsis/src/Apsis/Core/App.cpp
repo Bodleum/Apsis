@@ -35,6 +35,7 @@ namespace A {
 			// Do updates
 			while (m_TimeAccumulator >= m_TimeStep)
 			{
+				PollEvents();
 				OnUpdate(m_TimeStep);
 				m_TimeAccumulator -= m_TimeStep;
 			}
@@ -50,16 +51,28 @@ namespace A {
 		}
 	}
 
+	bool App::PollEvents()
+	{
+		AP_PROFILE_FN();
+		return EventDispatcher::PollWindowEvents(m_Window);
+	}
+
 	void App::OnUpdate(MicroSeconds time_step)
 	{
 		AP_PROFILE_FN();
-
-		EventDispatcher::PollWindowEvents(m_Window);
-
 		// Update each layer if enabled
 		for (Layer* layer : m_LayerStack)
 			if (layer->IsEnabled())
 				layer->OnUpdate(time_step);
+	}
+
+	void App::OnRender()
+	{
+		AP_PROFILE_FN();
+		// Render each layer from the bottom up
+		for (auto it = m_LayerStack.rbegin(); it != m_LayerStack.rend(); ++it)
+			if ((*it)->IsEnabled())
+				(*it)->OnRender();
 	}
 
 	void App::PushLayer(Layer* layer)

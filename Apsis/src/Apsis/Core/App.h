@@ -19,7 +19,9 @@ namespace A {
 		App();
 		virtual ~App() = default;
 
+		bool PollEvents();
 		void OnUpdate(MicroSeconds time_step);
+		void OnRender();
 		// Inherited via EventListener
 		virtual bool OnEvent(Event& evt) override;
 

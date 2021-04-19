@@ -10,6 +10,10 @@
 #include "Apsis/Core/Window.h"
 
 
+// ---   Renderer   ---
+#include "Apsis/Renderer/Renderer.h"
+
+
 // ---   Entry Point   ---
 // MUST BE LAST
 #include "Apsis/Core/Main.h"

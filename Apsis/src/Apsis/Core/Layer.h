@@ -17,6 +17,7 @@ namespace A {
 		virtual void OnRemove() = 0;
 
 		virtual void OnUpdate(MicroSeconds time_step) = 0;
+		virtual void OnRender() = 0;
 		virtual bool OnEvent(Event& evt) = 0;
 
 		const bool IsEnabled() const { return m_Enabled; }
