@@ -18,6 +18,7 @@ namespace A {
 		virtual void OnResizeImpl() override;
 
 		virtual void DrawCircleImpl(Eigen::Vector2i& position, float radius, Eigen::Vector4f& col) override;
+		virtual void DrawRectImpl(Eigen::Vector2i& position, float width, float height, Eigen::Vector4f& col) override;
 
 		virtual inline void BeginDrawImpl() override { if (!m_RenderTarget) { CreateGraphicsResources(); }m_RenderTarget->BeginDraw(); }
 		virtual inline void EndDrawImpl() override

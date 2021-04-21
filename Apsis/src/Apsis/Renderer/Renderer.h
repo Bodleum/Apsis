@@ -18,6 +18,7 @@ namespace A {
 		static inline void OnResize() { s_Instance->OnResizeImpl(); }
 
 		static inline void DrawCircle(Eigen::Vector2i& position, float radius, Eigen::Vector4f& col) { s_Instance->DrawCircleImpl(position, radius, col); }
+		static inline void DrawRect(Eigen::Vector2i& position, float width, float height, Eigen::Vector4f& col) { s_Instance->DrawRectImpl(position, width, height, col); }
 
 		static Shared<Renderer> Create();
 
@@ -31,6 +32,7 @@ namespace A {
 		virtual void OnResizeImpl() = 0;
 
 		virtual void DrawCircleImpl(Eigen::Vector2i& position, float radius, Eigen::Vector4f& col) = 0;
+		virtual void DrawRectImpl(Eigen::Vector2i& position, float width, float height, Eigen::Vector4f& col) = 0;
 
 		// ---   Vars   ---
 		Eigen::Vector4f m_ClearColor = { 0.8f, 0.2f, 0.8f, 1.0f };
