@@ -23,7 +23,7 @@ namespace A {
 		void OnUpdate(MicroSeconds time_step);
 		void OnRender();
 		// Inherited via EventListener
-		virtual bool OnEvent(Event& evt) override;
+		virtual bool OnEvent(Shared<Event> evt) override;
 
 		void PushLayer(Layer* layer);
 		void EmlpaceLayer(Layer* layer);

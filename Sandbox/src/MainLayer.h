@@ -12,7 +12,8 @@ public:
 	virtual void OnRemove() override;
 	virtual void OnUpdate(A::MicroSeconds time_step) override;
 	virtual void OnRender() override;
-	virtual bool OnEvent(A::Event& evt) override;
+	virtual bool OnEvent(A::Shared<A::Event> evt) override;
 
 	bool testfn(A::MouseButtonDownEvent& evt);
+	bool testfn2(A::TestEvent& evt);
 };

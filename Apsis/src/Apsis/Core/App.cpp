@@ -58,7 +58,9 @@ namespace A {
 	bool App::PollEvents()
 	{
 		AP_PROFILE_FN();
-		return EventDispatcher::PollWindowEvents(m_Window);
+		bool queueRes = EventDispatcher::PollQueuedEvents();
+		bool windowRes = EventDispatcher::PollWindowEvents(m_Window);
+		return queueRes || windowRes;
 	}
 
 	void App::OnUpdate(MicroSeconds time_step)
@@ -110,11 +112,11 @@ namespace A {
 		AP_INFO_C("Platform: {0}", SystemInfo::Platform);
 	}
 
-	bool App::OnEvent(Event& evt)
+	bool App::OnEvent(Shared<Event> evt)
 	{
 		AP_PROFILE_FN();
 
-		switch (evt.GetType())
+		switch (evt->GetType())
 		{
 		case EventType::WindowResize:
 		{

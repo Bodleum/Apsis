@@ -121,7 +121,7 @@ namespace A {
 			{
 				int x = GET_X_LPARAM(lParam);
 				int y = GET_Y_LPARAM(lParam);
-				EventDispatcher::DispatchEvent(MouseButtonDownEvent(x, y, Mouse::Left));
+				EventDispatcher::DispatchEvent(MakeShared<MouseButtonDownEvent>(x, y, Mouse::Left));
 				return 0;
 			}
 
@@ -129,7 +129,7 @@ namespace A {
 			{
 				int x = GET_X_LPARAM(lParam);
 				int y = GET_Y_LPARAM(lParam);
-				EventDispatcher::DispatchEvent(MouseButtonUpEvent(x, y, Mouse::Left));
+				EventDispatcher::DispatchEvent(MakeShared<MouseButtonUpEvent>(x, y, Mouse::Left));
 				return 0;
 			}
 
@@ -137,7 +137,7 @@ namespace A {
 			{
 				int x = GET_X_LPARAM(lParam);
 				int y = GET_Y_LPARAM(lParam);
-				EventDispatcher::DispatchEvent(MouseButtonDownEvent(x, y, Mouse::Middle));
+				EventDispatcher::DispatchEvent(MakeShared<MouseButtonDownEvent>(x, y, Mouse::Middle));
 				return 0;
 			}
 
@@ -145,7 +145,7 @@ namespace A {
 			{
 				int x = GET_X_LPARAM(lParam);
 				int y = GET_Y_LPARAM(lParam);
-				EventDispatcher::DispatchEvent(MouseButtonUpEvent(x, y, Mouse::Middle));
+				EventDispatcher::DispatchEvent(MakeShared<MouseButtonUpEvent>(x, y, Mouse::Middle));
 				return 0;
 			}
 
@@ -153,7 +153,7 @@ namespace A {
 			{
 				int x = GET_X_LPARAM(lParam);
 				int y = GET_Y_LPARAM(lParam);
-				EventDispatcher::DispatchEvent(MouseButtonDownEvent(x, y, Mouse::Right));
+				EventDispatcher::DispatchEvent(MakeShared<MouseButtonDownEvent>(x, y, Mouse::Right));
 				return 0;
 			}
 
@@ -161,7 +161,7 @@ namespace A {
 			{
 				int x = GET_X_LPARAM(lParam);
 				int y = GET_Y_LPARAM(lParam);
-				EventDispatcher::DispatchEvent(MouseButtonUpEvent(x, y, Mouse::Right));
+				EventDispatcher::DispatchEvent(MakeShared<MouseButtonUpEvent>(x, y, Mouse::Right));
 				return 0;
 			}
 
@@ -170,7 +170,7 @@ namespace A {
 				int x1or2 = GET_Y_LPARAM(wParam);
 				int x = GET_X_LPARAM(lParam);
 				int y = GET_Y_LPARAM(lParam);
-				EventDispatcher::DispatchEvent(MouseButtonDownEvent(x, y, x1or2 == 1 ? Mouse::X1 : Mouse::X2));
+				EventDispatcher::DispatchEvent(MakeShared<MouseButtonDownEvent>(x, y, x1or2 == 1 ? Mouse::X1 : Mouse::X2));
 				return 0;
 			}
 
@@ -179,7 +179,7 @@ namespace A {
 				int x1or2 = GET_Y_LPARAM(wParam);
 				int x = GET_X_LPARAM(lParam);
 				int y = GET_Y_LPARAM(lParam);
-				EventDispatcher::DispatchEvent(MouseButtonUpEvent(x, y, x1or2 == 1 ? Mouse::X1 : Mouse::X2));
+				EventDispatcher::DispatchEvent(MakeShared<MouseButtonUpEvent>(x, y, x1or2 == 1 ? Mouse::X1 : Mouse::X2));
 				return 0;
 			}
 
@@ -187,7 +187,7 @@ namespace A {
 			{
 				int x = GET_X_LPARAM(lParam);
 				int y = GET_Y_LPARAM(lParam);
-				EventDispatcher::DispatchEvent(MouseMoveEvent(x, y));
+				EventDispatcher::DispatchEvent(MakeShared<MouseMoveEvent>(x, y));
 				return 0;
 			}
 
@@ -196,7 +196,7 @@ namespace A {
 				int delta = GET_WHEEL_DELTA_WPARAM(wParam) / 120;
 				int x = GET_X_LPARAM(lParam);
 				int y = GET_Y_LPARAM(lParam);
-				EventDispatcher::DispatchEvent(MouseWheelEvent(x, y, delta));
+				EventDispatcher::DispatchEvent(MakeShared<MouseWheelEvent>(x, y, delta));
 				return 0;
 			}
 
@@ -246,14 +246,14 @@ namespace A {
 					//std::cout << virtualKeyCode << '\n';
 
 					if (up)
-						EventDispatcher::DispatchEvent(KeyUpEvent(keyCode));
+						EventDispatcher::DispatchEvent(MakeShared<KeyUpEvent>(keyCode));
 					else if (down)
 					{
-						EventDispatcher::DispatchEvent(KeyDownEvent(keyCode, repeat));
+						EventDispatcher::DispatchEvent(MakeShared<KeyDownEvent>(keyCode, repeat));
 						if (strlen(buffer) == 1)
 						{
 							char* character = buffer;
-							EventDispatcher::DispatchEvent(KeyCharEvent(keyCode, character, repeat));
+							EventDispatcher::DispatchEvent(MakeShared<KeyCharEvent>(keyCode, character, repeat));
 						}
 					}
 				}
@@ -283,17 +283,17 @@ namespace A {
 
 			case WM_CLOSE:
 			{
-				EventDispatcher::DispatchEvent(WindowCloseEvent());
+				EventDispatcher::DispatchEvent(MakeShared<WindowCloseEvent>());
 				break;	// Continue with the closing of the window
 			}
 
 			case WM_DESTROY:
 			{
-				EventDispatcher::DispatchEvent(WindowDestroyEvent());
-				#if AP_TRACE_WINMSG
-					for (auto& element : m_MessageTally)
-						AP_TRACE_C("Message: {0},\t{1} times", element.first, element.second);
-				#endif // AP_TRACE_WINMSG
+				EventDispatcher::DispatchEvent(MakeShared<WindowDestroyEvent>());
+#if AP_TRACE_WINMSG
+				for (auto& element : m_MessageTally)
+					AP_TRACE_C("Message: {0},\t{1} times", element.first, element.second);
+#endif // AP_TRACE_WINMSG
 				PostQuitMessage(0);
 				return 0;
 			}
@@ -302,7 +302,7 @@ namespace A {
 			{
 				UINT width = LOWORD(lParam);
 				UINT height = HIWORD(lParam);
-				EventDispatcher::DispatchEvent(WindowResizeEvent(width, height));
+				EventDispatcher::DispatchEvent(MakeShared<WindowResizeEvent>(width, height));
 				return 0;
 			}
 
@@ -310,7 +310,7 @@ namespace A {
 			// --- App   ---
 			case WM_QUIT:
 			{
-				EventDispatcher::DispatchEvent(AppQuitEvent());
+				EventDispatcher::DispatchEvent(MakeShared<AppQuitEvent>());
 				return 0;
 			}
 
@@ -320,7 +320,7 @@ namespace A {
 			{
 				PAINTSTRUCT ps;
 				HDC hdc = BeginPaint(hWnd, &ps);
-				EventDispatcher::DispatchEvent(WindowPaintEvent());
+				EventDispatcher::DispatchEvent(MakeShared<WindowPaintEvent>());
 				EndPaint(hWnd, &ps);
 			}
 		}

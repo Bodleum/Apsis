@@ -4,8 +4,8 @@
 class Tetris : public A::App
 {
 public:
-	Tetris(A::AppArgs args);
+	Tetris();
 	virtual ~Tetris() = default;
 };
 
-A::App* A::CreateApp(AppArgs args) { return new Tetris(args); }
+AP_CREATE_APP(Tetris);

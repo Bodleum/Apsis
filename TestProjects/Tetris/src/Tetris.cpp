@@ -2,8 +2,7 @@
 
 #include <iostream>
 
-Tetris::Tetris(A::AppArgs args)
-	: A::App(args)
+Tetris::Tetris()
 {
 	system("pause");
 }
