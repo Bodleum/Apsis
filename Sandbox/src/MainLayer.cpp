@@ -45,7 +45,8 @@ bool MainLayer::OnEvent(A::Shared<A::Event> evt)
 bool MainLayer::testfn(A::MouseButtonDownEvent& evt)
 {
 	AP_INFO("Test! {0}", evt);
-	A::EventDispatcher::SendEvent(A::MakeShared<A::TestEvent>("Delay!"), std::chrono::seconds{ 2 });
+	A::EventDispatcher::SendEvent(A::MakeShared<A::TestEvent>("Delay!"), 2s);
+	//std::chrono::seconds{ 2 }
 	return false;
 }
 

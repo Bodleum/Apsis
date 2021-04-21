@@ -1,5 +1,6 @@
 #pragma once
 #include <memory>
+#include <chrono>
 
 // Creating App
 #define AP_CREATE_APP(appname) A::App* A::CreateApp() { return new appname(); }
@@ -11,6 +12,11 @@
 
 // Bits
 #define BIT_AT(x) (1 << x)
+
+// Time
+using namespace std::literals;
+using namespace std::chrono_literals;
+using namespace std::literals::chrono_literals;
 
 // ---   Smart Pointers   ---
 namespace A {
