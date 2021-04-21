@@ -3,4 +3,4 @@
 	url = https://github.com/gabime/spdlog.git
 [submodule "Apsis/dependancies/eigen-3.3.9"]
 	path = Apsis/dependancies/eigen-3.3.9
-	url = git@github.com:Bodleum/Eigen-3.3.9.git
+	url = https://gitlab.com/libeigen/eigen.git
