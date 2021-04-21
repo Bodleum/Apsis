@@ -37,9 +37,8 @@ namespace A {
 
 	struct Event
 	{
-		static EventType GetTypeS() { return EventType::Unknown; }
-		virtual EventType GetType() const { return EventType::Unknown; }
-		virtual std::string GetString() const { return ""; }
+		virtual EventType GetType() const = 0;
+		virtual std::string GetString() const = 0;
 		inline bool IsComplete() const { return m_Complete; }
 
 		friend class LocalDispatcher;
