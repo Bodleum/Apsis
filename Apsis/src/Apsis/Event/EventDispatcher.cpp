@@ -30,31 +30,25 @@ namespace A {
 		return eventComleted;
 	}
 
-	//void EventDispatcher::SendEvent(Event& evt, std::chrono::nanoseconds delay)
-	//{
-	//	std::chrono::time_point<std::chrono::system_clock, std::chrono::nanoseconds> now = std::chrono::system_clock::now();
-	//	s_QueuedEvents.insert({ now + delay, evt });
-	//}
+	void EventDispatcher::SendEvent(Shared<Event> evt, std::chrono::nanoseconds delay)
+	{
+		std::chrono::time_point<std::chrono::system_clock, std::chrono::nanoseconds> now = std::chrono::system_clock::now();
+		s_QueuedEvents.insert({ now + delay, evt });
+	}
 
 	bool EventDispatcher::PollQueuedEvents()
 	{
-		bool eventsExist = false;
+		bool eventRes = false;
 		std::chrono::time_point<std::chrono::system_clock, std::chrono::nanoseconds> now = std::chrono::system_clock::now();
 
 		auto it = s_QueuedEvents.begin();
-		while (it != s_QueuedEvents.end())
+		while (it != s_QueuedEvents.end() && it->first <= now)
 		{
-			if (it->first <= now)
-			{
-				eventsExist = true;
-				EventDispatcher::DispatchEvent(it->second);
-				it = s_QueuedEvents.erase(it);
-			}
-			else
-				break;
+			eventRes = EventDispatcher::DispatchEvent(it->second);
+			it = s_QueuedEvents.erase(it);
 		}
 
-		return eventsExist;
+		return eventRes;
 	}
 
 	bool EventDispatcher::PollWindowEvents(Unique<Window>& window)

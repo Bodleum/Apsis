@@ -9,8 +9,6 @@ namespace A {
 
 	#define BIND_EVT_FN(x) std::bind(&x, this, std::placeholders::_1)
 
-	using NanoSeconds = std::chrono::nanoseconds;
-
 	class Window;
 	class EventListener;
 
@@ -21,12 +19,7 @@ namespace A {
 
 		static inline void AddListener(EventListener* inst) { s_ListenerList.push_back(inst); }
 		static bool DispatchEvent(Shared<Event> evt);
-		//template<typename T>
-		static void SendEvent(Shared<Event> evt, std::chrono::nanoseconds delay = std::chrono::nanoseconds{ 0 })
-		{
-			std::chrono::time_point<std::chrono::system_clock, std::chrono::nanoseconds> now = std::chrono::system_clock::now();
-			s_QueuedEvents.insert({ now + delay, evt });
-		}
+		static void SendEvent(Shared<Event> evt, std::chrono::nanoseconds delay = std::chrono::nanoseconds{ 0 });
 
 		static bool PollQueuedEvents();
 		static bool PollWindowEvents(Unique<Window>& window);
