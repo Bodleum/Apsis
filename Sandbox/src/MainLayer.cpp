@@ -8,8 +8,6 @@ MainLayer::MainLayer()
 
 void MainLayer::OnAdd()
 {
-	m_Enabled = true;
-
 	// Logging tests
 	#define LOGGING_TESTS 0
 	{
@@ -29,7 +27,6 @@ void MainLayer::OnAdd()
 
 void MainLayer::OnRemove()
 {
-	m_Enabled = false;
 }
 
 void MainLayer::OnUpdate(A::MicroSeconds time_step)

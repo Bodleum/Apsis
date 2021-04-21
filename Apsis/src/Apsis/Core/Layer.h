@@ -1,11 +1,13 @@
 #pragma once
 #include <deque>
-#include <chrono>
+//#include <chrono>		Included in EventDispatcher.h
 #include "Apsis/Event/EventDispatcher.h"
 
 namespace A {
 
 	using MicroSeconds = std::chrono::microseconds;
+
+	class App;
 
 	class Layer
 	{
@@ -24,6 +26,12 @@ namespace A {
 
 	protected:
 		bool m_Enabled;		// for turning on and off without removing layer from stack
+
+	private:
+		void OnAddBackend() { m_Enabled = true; OnAdd(); }
+		void OnRemoveBackend() { m_Enabled = false; OnRemove(); }
+		
+		friend class App;
 	};
 
 	/*

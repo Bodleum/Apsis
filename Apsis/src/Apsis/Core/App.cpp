@@ -88,20 +88,20 @@ namespace A {
 	{
 		AP_PROFILE_FN();
 		m_LayerStack.Push(layer);
-		layer->OnAdd();
+		layer->OnAddBackend();
 	}
 
 	void App::EmlpaceLayer(Layer* layer)
 	{
 		AP_PROFILE_FN();
 		m_LayerStack.Emplace(layer);
-		layer->OnAdd();
+		layer->OnAddBackend();
 	}
 
 	void App::PopLayer()
 	{
 		AP_PROFILE_FN();
-		m_LayerStack.Top()->OnRemove();
+		m_LayerStack.Top()->OnRemoveBackend();
 		m_LayerStack.Pop();
 	}
 
