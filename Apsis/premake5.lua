@@ -29,7 +29,8 @@ project "Apsis"
 	links
 	{
 		"spdlog",
-		"glad"
+		"glad",
+		"GLFW"
 	}
 
 	pchheader "apch.h"
