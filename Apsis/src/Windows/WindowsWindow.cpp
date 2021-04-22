@@ -69,6 +69,34 @@ namespace A {
 			NULL		// Additional application data
 		);
 		AP_ASSERT_C(m_WindowHandle, "Failed to create instance of window class.\n Error: {0}", GetLastError());
+		if (!m_WindowHandle) return;
+
+		m_PixelFormatDescriptor = {// Set pixel format descriptor
+			sizeof(PIXELFORMATDESCRIPTOR),
+				1,
+				PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER,    //Flags
+				PFD_TYPE_RGBA,        // The kind of framebuffer. RGBA or palette.
+				32,                   // Colordepth of the framebuffer.
+				0, 0, 0, 0, 0, 0,
+				0,
+				0,
+				0,
+				0, 0, 0, 0,
+				24,                   // Number of bits for the depthbuffer
+				8,                    // Number of bits for the stencilbuffer
+				0,                    // Number of Aux buffers in the framebuffer.
+				PFD_MAIN_PLANE,
+				0,
+				0, 0, 0
+		};
+
+		m_DeviceContexHandle = GetDC(m_WindowHandle);
+		AP_ASSERT_C(m_DeviceContexHandle, "Failed to get device context handle");
+		if (m_DeviceContexHandle == 0) return;
+
+		int pixelFormatIndex = ChoosePixelFormat(m_DeviceContexHandle, &m_PixelFormatDescriptor);
+		AP_ASSERT_C(pixelFormatIndex != 0, "Failed to match an appropriate pixel format, Error: {0}", GetLastError());
+		SetPixelFormat(m_DeviceContexHandle, pixelFormatIndex, &m_PixelFormatDescriptor);
 
 		// Show window
 		if (m_WindowHandle)

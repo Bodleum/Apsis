@@ -21,6 +21,8 @@ namespace A {
 		static LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 		WNDCLASSEX m_WindowClass;
 		HWND m_WindowHandle;
+		HDC m_DeviceContexHandle;
+		PIXELFORMATDESCRIPTOR m_PixelFormatDescriptor;
 
 		unsigned int m_Width, m_Height;
 
