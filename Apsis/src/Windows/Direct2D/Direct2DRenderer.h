@@ -12,7 +12,7 @@ namespace A {
 		virtual ~Direct2DRenderer();
 
 		// Inherited via Renderer
-		virtual bool InitImpl(void* window_handle) override;
+		virtual bool InitImpl(Unique<Window>& window) override;
 		virtual inline void ClearImpl() override { m_RenderTarget->Clear(D2D1::ColorF(m_ClearColor.x(), m_ClearColor.y(), m_ClearColor.z())); }
 		virtual inline void SetClearColorImpl(Eigen::Vector4f& col) override { m_ClearColor = col; }
 		virtual void OnResizeImpl() override;

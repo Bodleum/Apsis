@@ -4,6 +4,8 @@
 
 namespace A {
 
+	class Window;
+
 	typedef enum class RendererAPI
 	{
 		Unknown = 0,
@@ -16,7 +18,7 @@ namespace A {
 	public:
 		virtual ~Renderer() = default;
 
-		static inline bool Init(void* window_handle) { return s_Instance->InitImpl(window_handle); }
+		static inline bool Init(Unique<Window>& window) { return s_Instance->InitImpl(window); }
 		
 		static inline void BeginDraw() { s_Instance->BeginDrawImpl(); }
 		static inline void EndDraw() { s_Instance->EndDrawImpl(); }
@@ -33,7 +35,7 @@ namespace A {
 		static Shared<Renderer> Create();
 
 	protected:
-		virtual bool InitImpl(void* window_handle) = 0;
+		virtual bool InitImpl(Unique<Window>& window) = 0;
 
 		virtual void BeginDrawImpl() = 0;
 		virtual void EndDrawImpl() = 0;

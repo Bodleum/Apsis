@@ -14,6 +14,10 @@ namespace A {
 		virtual unsigned int GetHeight() const { return m_Height; }
 		virtual void* GetHandle() const = 0;
 
+		#ifdef AP_PLATFORM_WIN
+			virtual const HDC GetDeviceContextHandle() const = 0;
+		#endif // AP_PLATFORM_WIN
+
 		static Unique<Window> Create(MainFnArgs args, const std::string& name = "Window", unsigned int width = 1280, unsigned int height = 720);
 
 	protected:

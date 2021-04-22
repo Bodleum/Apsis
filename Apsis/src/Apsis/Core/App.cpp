@@ -17,7 +17,7 @@ namespace A {
 		m_Window = Window::Create(m_Args.MainFnArgs);
 		{// Init renderer
 			AP_PROFILE_SCOPE("Init renderer");
-			bool res = Renderer::Init(m_Window->GetHandle());
+			bool res = Renderer::Init(m_Window);
 			AP_ASSERT_C(res, "Failed to initialise renderer!");
 			return;
 		}

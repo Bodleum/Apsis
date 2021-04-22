@@ -1,6 +1,8 @@
 #include "apch.h"
 #include "Direct2DRenderer.h"
 
+#include "Apsis/Core/Window.h"
+
 namespace A {
 
 	Direct2DRenderer::Direct2DRenderer()
@@ -16,11 +18,11 @@ namespace A {
 		SafeRelease(&m_Factory);
 	}
 
-	bool Direct2DRenderer::InitImpl(void* window_handle)
+	bool Direct2DRenderer::InitImpl(Unique<Window>& window)
 	{
 		AP_PROFILE_FN();
 
-		m_WindowHandle = (HWND)window_handle;
+		m_WindowHandle = (HWND)(window->GetHandle());
 
 		{// Create Direct2D factory
 			AP_PROFILE_SCOPE("Create Direct2D factory");
