@@ -4,3 +4,6 @@
 [submodule "Apsis/dependancies/eigen-3.3.9"]
 	path = Apsis/dependancies/eigen-3.3.9
 	url = https://gitlab.com/libeigen/eigen.git
+[submodule "Apsis/dependancies/GLFW"]
+	path = Apsis/dependancies/GLFW
+	url = https://github.com/glfw/glfw.git
