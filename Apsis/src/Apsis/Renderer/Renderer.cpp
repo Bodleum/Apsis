@@ -2,6 +2,7 @@
 #include "Renderer.h"
 
 #include "Windows/Direct2D/Direct2DRenderer.h"
+#include "OpenGL/OpenGLRenderer.h"
 
 namespace A {
 
@@ -9,7 +10,7 @@ namespace A {
 
 	// Set default Renderer API
 	#ifdef AP_PLATFORM_WIN
-		RendererAPI Renderer::s_RendererAPI = RendererAPI::Direct2D;
+		RendererAPI Renderer::s_RendererAPI = RendererAPI::OpenGL;
 	#endif // AP_PLATFORM_WIN
 
 	Shared<Renderer> Renderer::Create()
@@ -19,7 +20,7 @@ namespace A {
 		case A::RendererAPI::Direct2D:
 			return MakeShared<Direct2DRenderer>();
 		case A::RendererAPI::OpenGL:
-			break;
+			return MakeShared<OpenGLRenderer>();
 		default:
 			break;
 		}
