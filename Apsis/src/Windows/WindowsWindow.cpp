@@ -40,7 +40,7 @@ namespace A {
 		m_WindowClass = { 0 };
 		// Set parameters
 		m_WindowClass.cbSize = sizeof(WNDCLASSEX);
-		m_WindowClass.style = CS_HREDRAW | CS_VREDRAW | CS_DBLCLKS;
+		m_WindowClass.style = CS_HREDRAW | CS_VREDRAW | CS_DBLCLKS | CS_OWNDC;
 		m_WindowClass.lpfnWndProc = WindowProc;
 		m_WindowClass.hInstance = hInstance;
 		m_WindowClass.hbrBackground = (HBRUSH)COLOR_WINDOW;
