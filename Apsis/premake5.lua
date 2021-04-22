@@ -21,8 +21,13 @@ project "Apsis"
 	includedirs
 	{
 		"src",
-		"dependancies/spdlog/include",
-		"dependancies/eigen-3.3.9"
+		"%{wks.location}/Apsis/dependancies/spdlog/include",
+		"%{wks.location}/Apsis/dependancies/eigen-3.3.9"
+	}
+
+	links
+	{
+		"spdlog"
 	}
 
 	pchheader "apch.h"

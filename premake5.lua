@@ -20,6 +20,9 @@ workspace "Apsis"
 group "TestProjects"
 	include "TestProjects/Tetris"
 
+group "Dependancies"
+	include "Apsis/dependancies"
+
 group ""
 include "Apsis"
 include "Sandbox"
