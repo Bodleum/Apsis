@@ -1,6 +1,8 @@
 #include "apch.h"
 #include "OpenGLRenderer.h"
 
+#include <glad/glad.h>
+
 #ifdef AP_PLATFORM_WIN
 	#include "OpenGL/Platform/ContextWindows.h"
 #endif // AP_PLATFORM_WIN
@@ -29,11 +31,28 @@ namespace A {
 
 	}
 
+	void OpenGLRenderer::RecreateContext(OpenGLContext* context, Unique<Window>& window, bool make_current)
+		{
+		AP_PROFILE_FN();
+
+		#ifdef AP_PLATFORM_WIN
+			RecreateOpenGLContextWin(context, window, make_current);
+		#endif // AP_PLATFORM_WIN
+
+	}
 	bool OpenGLRenderer::InitImpl(Unique<Window>& window)
 	{
 		AP_PROFILE_FN();
 
 		CreateContext(&m_Context, window, true);
+		AP_TRACE_C("Created dummy OpenGL context");
+		if (!gladLoadGL())
+		{
+			AP_CRIT_C("Failed to initialise glad");
+			return false;
+		}
+		RecreateContext(&m_Context, window, true);
+		AP_TRACE_C("Created proper OpenGL context");
 		return true;
 	}
 

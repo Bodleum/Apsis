@@ -13,8 +13,19 @@ namespace A {
 		HDC deviceContextHandle = window->GetDeviceContextHandle();
 		*context = wglCreateContext(deviceContextHandle);
 		if (make_current) wglMakeCurrent(deviceContextHandle , *context);
+	}
 
-		MessageBoxA(0, (char*)glGetString(GL_VERSION), "OPENGL VERSION", 0);
+	void RecreateOpenGLContextWin(OpenGLContext* context, Unique<Window>& window, bool make_current)
+	{
+		wglDeleteContext(*context);
+
+		/*
+		* Set new context with extensions and attributes
+		*/
+
+		HDC deviceContextHandle = window->GetDeviceContextHandle();
+		*context = wglCreateContext(deviceContextHandle);
+		if (make_current) wglMakeCurrent(deviceContextHandle, *context);
 	}
 
 }

@@ -12,7 +12,6 @@ namespace A {
 		OpenGLRenderer();
 		virtual ~OpenGLRenderer();
 
-		void CreateContext(OpenGLContext* context, Unique<Window>& window, bool make_current);
 
 		// Inherited via Renderer
 		virtual bool InitImpl(Unique<Window>& window) override;
@@ -27,6 +26,9 @@ namespace A {
 		virtual void EndDrawImpl() override;
 
 	private:
+		void CreateContext(OpenGLContext* context, Unique<Window>& window, bool make_current);
+		void RecreateContext(OpenGLContext* context, Unique<Window>& window, bool make_current);
+
 		OpenGLContext m_Context;
 	};
 
