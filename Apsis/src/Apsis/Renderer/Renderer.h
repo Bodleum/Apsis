@@ -4,6 +4,13 @@
 
 namespace A {
 
+	typedef enum class RendererAPI
+	{
+		Unknown = 0,
+		Direct2D,
+		OpenGL
+	} RendererAPI;
+
 	class Renderer
 	{
 	public:
@@ -19,6 +26,9 @@ namespace A {
 
 		static inline void DrawCircle(Eigen::Vector2i& position, float radius, Eigen::Vector4f& col) { s_Instance->DrawCircleImpl(position, radius, col); }
 		static inline void DrawRect(Eigen::Vector2i& position, float width, float height, Eigen::Vector4f& col) { s_Instance->DrawRectImpl(position, width, height, col); }
+
+		static inline RendererAPI GetAPI() { return s_RendererAPI; }
+		static inline void SetAPI(RendererAPI api) { s_RendererAPI = api; }
 
 		static Shared<Renderer> Create();
 
@@ -38,6 +48,7 @@ namespace A {
 		Eigen::Vector4f m_ClearColor = { 0.8f, 0.2f, 0.8f, 1.0f };
 
 	private:
+		static RendererAPI s_RendererAPI;
 		static Shared<Renderer> s_Instance;
 	};
 
