@@ -12,7 +12,7 @@ namespace A {
 		OpenGLRenderer();
 		virtual ~OpenGLRenderer();
 
-		void CreateContext(OpenGLContext* context, Unique<Window>& window);
+		void CreateContext(OpenGLContext* context, Unique<Window>& window, bool make_current);
 
 		// Inherited via Renderer
 		virtual bool InitImpl(Unique<Window>& window) override;

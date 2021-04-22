@@ -8,11 +8,11 @@ namespace A {
 
 	using OpenGLContext = HGLRC;
 
-	void CreateOpenGLContextWin(OpenGLContext* context, Unique<Window>& window)
+	void CreateOpenGLContextWin(OpenGLContext* context, Unique<Window>& window, bool make_current)
 	{
 		HDC deviceContextHandle = window->GetDeviceContextHandle();
 		*context = wglCreateContext(deviceContextHandle);
-		//wglMakeCurrent(deviceContextHandle , *context);
+		if (make_current) wglMakeCurrent(deviceContextHandle , *context);
 
 		MessageBoxA(0, (char*)glGetString(GL_VERSION), "OPENGL VERSION", 0);
 	}

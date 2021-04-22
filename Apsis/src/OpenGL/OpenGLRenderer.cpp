@@ -19,12 +19,12 @@ namespace A {
 		AP_PROFILE_FN();
 	}
 
-	void OpenGLRenderer::CreateContext(OpenGLContext* context, Unique<Window>& window)
+	void OpenGLRenderer::CreateContext(OpenGLContext* context, Unique<Window>& window, bool make_current)
 	{
 		AP_PROFILE_FN();
 
 		#ifdef AP_PLATFORM_WIN
-			CreateOpenGLContextWin(context, window);
+			CreateOpenGLContextWin(context, window, make_current);
 		#endif // AP_PLATFORM_WIN
 
 	}
@@ -33,7 +33,7 @@ namespace A {
 	{
 		AP_PROFILE_FN();
 
-		CreateContext(&m_Context, window);
+		CreateContext(&m_Context, window, true);
 		return true;
 	}
 
