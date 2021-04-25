@@ -23,7 +23,8 @@ project "Apsis"
 		"src",
 		"%{wks.location}/Apsis/dependancies/spdlog/include",
 		"%{wks.location}/Apsis/dependancies/eigen-3.3.9",
-		"%{wks.location}/Apsis/dependancies/glad/include"
+		"%{wks.location}/Apsis/dependancies/glad/include",
+		"%{wks.location}/Apsis/dependancies/GLFW/include"
 	}
 
 	links
@@ -40,17 +41,20 @@ project "Apsis"
 		defines "AP_DEBUG"
 		runtime "Debug"
 		symbols "On"
-
-	filter { "configurations:Release" }
+		ignoredefaultlibraries { "msvcrt", "libcmt", "msvcrtd"}
+		
+		filter { "configurations:Release" }
 		defines "AP_RELEASE"
 		runtime "Release"
 		symbols "On"
 		optimize "Full"
-
-	filter { "configurations:Final" }
+		ignoredefaultlibraries { "msvcrt", "libcmtd", "msvcrtd"}
+		
+		filter { "configurations:Final" }
 		defines "AP_FINAL"
 		runtime "Release"
 		optimize "Full"
+		ignoredefaultlibraries { "msvcrt", "libcmtd", "msvcrtd"}
 
 	filter { "system:Windows" }
 		systemversion "latest"

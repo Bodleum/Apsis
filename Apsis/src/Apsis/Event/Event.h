@@ -23,6 +23,8 @@ namespace A {
 		KeyChar,
 
 		// Window
+		MouseEnter,
+		MouseExit,
 		WindowClose,
 		WindowDestroy,
 		WindowResize,
@@ -220,10 +222,10 @@ namespace A {
 		AP_SET_EVENT_TYPE(KeyUp)
 	};
 
-	class KeyCharEvent : public KeyEvent
+	class KeyASCIICharEvent : public KeyEvent
 	{
 	public:
-		KeyCharEvent(KeyCode key_code, char* character, bool repeat)
+		KeyASCIICharEvent(KeyCode key_code, char* character, bool repeat)
 			: KeyEvent(key_code), m_Char(character), m_Repeat(repeat)
 		{
 		}
@@ -245,8 +247,55 @@ namespace A {
 		bool m_Repeat;
 	};
 
+	class KeyUnicodeCharEvent : public KeyEvent
+	{
+	public:
+		KeyUnicodeCharEvent(KeyCode key_code, wchar_t* character, bool repeat)
+			: KeyEvent(key_code), m_Char(character), m_Repeat(repeat)
+		{
+		}
+
+		inline wchar_t* GetKeyChar() const { return m_Char; }
+		virtual std::string GetString() const override
+		{
+			std::stringstream ss;
+			ss << m_Char << " Char";
+			if (m_Repeat)
+				ss << "\tRepeat";
+			return ss.str();
+		}
+
+		AP_SET_EVENT_TYPE(KeyChar)
+
+	private:
+		wchar_t* m_Char;
+		bool m_Repeat;
+	};
+
 
 	// ---   Window   ---
+	class MouseEnterEvent : public Event
+	{
+	public:
+		MouseEnterEvent()
+		{
+		}
+
+		virtual std::string GetString() const override { return "MouseEnter"; }
+		AP_SET_EVENT_TYPE(MouseEnter)
+	};
+
+	class MouseExitEvent : public Event
+	{
+	public:
+		MouseExitEvent()
+		{
+		}
+
+		virtual std::string GetString() const override { return "MouseExit"; }
+		AP_SET_EVENT_TYPE(MouseExit)
+	};
+
 	class WindowCloseEvent : public Event
 	{
 	public:

@@ -17,11 +17,11 @@ namespace A {
 		switch (mouse_code)
 		{
 			case MouseCode::Unknown:	return "Unknown";
-			case MouseCode::Left:	return "Left";
-			case MouseCode::Right:	return "Right";
-			case MouseCode::Middle:	return "Middle";
-			case MouseCode::X1:		return "X1";
-			case MouseCode::X2:		return "X2";
+			case MouseCode::Left:		return "Left";
+			case MouseCode::Right:		return "Right";
+			case MouseCode::Middle:		return "Middle";
+			case MouseCode::X1:			return "X1";
+			case MouseCode::X2:			return "X2";
 			default:					return "Unknown";
 		}
 	}

@@ -11,7 +11,7 @@ namespace A {
 	std::map<unsigned int, int> WindowsWindow::m_MessageTally = {};
 
 	WindowsWindow::WindowsWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR pCmdLine, int nShowCmd, const std::string& name, unsigned int width, unsigned int height)
-		: m_Width(width), m_Height(height)
+		: m_DeviceContexHandle(nullptr), m_PixelFormatDescriptor({ 0 }), m_Width(width), m_Height(height)
 	{
 		AP_PROFILE_FN();
 
@@ -281,7 +281,7 @@ namespace A {
 						if (strlen(buffer) == 1)
 						{
 							char* character = buffer;
-							EventDispatcher::DispatchEvent(MakeShared<KeyCharEvent>(keyCode, character, repeat));
+							EventDispatcher::DispatchEvent(MakeShared<KeyASCIICharEvent>(keyCode, character, repeat));
 						}
 					}
 				}
