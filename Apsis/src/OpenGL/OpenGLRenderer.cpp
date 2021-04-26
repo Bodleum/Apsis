@@ -24,7 +24,7 @@ namespace A {
 
 		{// Create vertex buffer
 			AP_PROFILE_SCOPE("Create vertex buffer");
-			float positions[6] =
+			float positions[3 * 2] =
 			{
 				-0.5f, -0.5f,
 				 0.0f,  0.5f,
@@ -32,7 +32,9 @@ namespace A {
 			};
 			glGenBuffers(1, &m_VertexBufferID);
 			glBindBuffer(GL_ARRAY_BUFFER, m_VertexBufferID);
-			glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(float), positions, GL_STATIC_DRAW);
+			glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(float), positions, GL_STATIC_DRAW);	// Fill with data
+			glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), 0);
+			glEnableVertexAttribArray(0);
 		}
 
 		return true;
