@@ -1,6 +1,6 @@
 #pragma once
-#include "apch.h"		// Shared
-#include "InputCodes.h"
+#include "Apsis/Core/Core.h"	// Unique
+#include "Apsis/Core/InputCodes.h"
 
 namespace A {
 
