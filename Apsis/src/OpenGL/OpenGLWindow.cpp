@@ -89,8 +89,8 @@ namespace A {
 
 			glfwSetCharCallback(m_WindowHandle, [](GLFWwindow* window, unsigned int codepoint)
 				{
-					char placeholder = 'A';
-					EventDispatcher::SendEvent(MakeShared<KeyUnicodeCharEvent>(GLFWKeyCodeTranslator[codepoint], (wchar_t*)(codepoint), false));
+					AP_TRACE_C(codepoint);
+					EventDispatcher::SendEvent(MakeShared<KeyCharEvent>(GLFWKeyCodeTranslator[codepoint], (char)codepoint, false));
 				}
 			);
 

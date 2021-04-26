@@ -222,15 +222,15 @@ namespace A {
 		AP_SET_EVENT_TYPE(KeyUp)
 	};
 
-	class KeyASCIICharEvent : public KeyEvent
+	class KeyCharEvent : public KeyEvent
 	{
 	public:
-		KeyASCIICharEvent(KeyCode key_code, char* character, bool repeat)
+		KeyCharEvent(KeyCode key_code, const char character, bool repeat)
 			: KeyEvent(key_code), m_Char(character), m_Repeat(repeat)
 		{
 		}
 
-		inline char* GetKeyChar() const { return m_Char; }
+		inline const char GetKeyChar() const { return m_Char; }
 		virtual std::string GetString() const override
 		{
 			std::stringstream ss;
@@ -243,32 +243,7 @@ namespace A {
 		AP_SET_EVENT_TYPE(KeyChar)
 
 	private:
-		char* m_Char;
-		bool m_Repeat;
-	};
-
-	class KeyUnicodeCharEvent : public KeyEvent
-	{
-	public:
-		KeyUnicodeCharEvent(KeyCode key_code, wchar_t* character, bool repeat)
-			: KeyEvent(key_code), m_Char(character), m_Repeat(repeat)
-		{
-		}
-
-		inline wchar_t* GetKeyChar() const { return m_Char; }
-		virtual std::string GetString() const override
-		{
-			std::stringstream ss;
-			ss << m_Char << " Char";
-			if (m_Repeat)
-				ss << "\tRepeat";
-			return ss.str();
-		}
-
-		AP_SET_EVENT_TYPE(KeyChar)
-
-	private:
-		wchar_t* m_Char;
+		const char m_Char;
 		bool m_Repeat;
 	};
 

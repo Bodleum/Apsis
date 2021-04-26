@@ -281,7 +281,7 @@ namespace A {
 						if (strlen(buffer) == 1)
 						{
 							char* character = buffer;
-							EventDispatcher::DispatchEvent(MakeShared<KeyASCIICharEvent>(keyCode, character, repeat));
+							EventDispatcher::DispatchEvent(MakeShared<KeyCharEvent>(keyCode, *character, repeat));
 						}
 					}
 				}
