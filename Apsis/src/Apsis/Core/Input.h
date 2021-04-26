@@ -7,8 +7,9 @@ namespace A {
 	class Input
 	{
 	public:
-		static Unique<Input>& Create();
+		static const Unique<Input>& Create();
 
+		static inline void Init() { s_Instance->InitImpl(); }
 		static inline bool IsKeyDown(KeyCode key_code) { return s_Instance->IsKeyDownImpl(key_code); }
 		static inline bool WasKeyDown(KeyCode key_code) { return s_Instance->WasKeyDownImpl(key_code); }
 		static inline bool IsMouseButtonDown(MouseCode mouse_code) { return s_Instance->IsMouseButtonDownImpl(mouse_code); }
@@ -23,6 +24,7 @@ namespace A {
 	protected:
 		Input() = default;
 
+		virtual void InitImpl() = 0;
 		virtual bool IsKeyDownImpl(KeyCode key_code) = 0;
 		virtual bool WasKeyDownImpl(KeyCode key_code) = 0;
 		virtual bool IsMouseButtonDownImpl(MouseCode mouse_code) = 0;
@@ -32,6 +34,7 @@ namespace A {
 		virtual int GetMouseYImpl() = 0;
 
 	private:
+		static RendererAPI s_RendererAPI;
 		static Unique<Input> s_Instance;
 	};
 

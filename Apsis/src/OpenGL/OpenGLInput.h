@@ -1,13 +1,15 @@
 #pragma once
 #include "Apsis/Core/Input.h"
 
+struct GLFWwindow;
+
 namespace A {
 
-	class WindowsInput : public Input
+	class OpenGlInput : public Input
 	{
 	public:
 		// Inherited via Input
-		virtual void InitImpl() override {}
+		virtual void InitImpl() override;
 		virtual bool IsKeyDownImpl(KeyCode key_code) override;
 		virtual bool WasKeyDownImpl(KeyCode key_code) override;
 		virtual bool IsMouseButtonDownImpl(MouseCode mouse_code) override;
@@ -17,8 +19,7 @@ namespace A {
 		virtual int GetMouseYImpl() override;
 
 	private:
-		int KeyCodeToVirtualKeyCode(KeyCode key_code);
-		int MouseCodeToVirtualKeyCode(MouseCode mouse_code);
+		GLFWwindow* m_WindowHandle;
 	};
 
 }

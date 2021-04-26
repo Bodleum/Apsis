@@ -6,6 +6,7 @@
 
 namespace A {
 
+	App* App::s_Instance = nullptr;
 	AppArgs App::m_Args = AppArgs();
 
 	App::App()
@@ -13,6 +14,7 @@ namespace A {
 	{
 		AP_PROFILE_FN();
 
+		s_Instance = this,
 		AP_INFO_C("Created App");
 		m_Window = Window::Create(m_Args.MainFnArgs);
 		m_Renderer = Renderer::Create(m_Window);

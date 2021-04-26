@@ -18,6 +18,8 @@ namespace A {
 	public:
 		App();
 		virtual ~App() = default;
+		static inline App* Get() { return s_Instance; }
+		inline const Unique<Window>& GetWindow() { return m_Window; }
 
 		bool PollEvents();
 		void OnUpdate(MicroSeconds time_step);
@@ -44,6 +46,7 @@ namespace A {
 
 		bool m_Running = true;
 		static AppArgs m_Args;
+		static App* s_Instance;
 		// Assets
 		LayerStack m_LayerStack;
 		Unique<Window> m_Window;
