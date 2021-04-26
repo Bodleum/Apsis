@@ -5,26 +5,31 @@ namespace A {
 
 	bool WindowsInput::IsKeyDownImpl(KeyCode key_code)
 	{
+		AP_PROFILE_FN();
 		return 0x80000000 & GetAsyncKeyState(KeyCodeToVirtualKeyCode(key_code));
 	}
 
 	bool WindowsInput::WasKeyDownImpl(KeyCode key_code)
 	{
+		AP_PROFILE_FN();
 		return 0x00000001 & GetAsyncKeyState(KeyCodeToVirtualKeyCode(key_code));
 	}
 
 	bool WindowsInput::IsMouseButtonDownImpl(MouseCode mouse_code)
 	{
+		AP_PROFILE_FN();
 		return 0x80000000 & GetAsyncKeyState(MouseCodeToVirtualKeyCode(mouse_code));
 	}
 
 	bool WindowsInput::WasMouseButtonDownImpl(MouseCode mouse_code)
 	{
+		AP_PROFILE_FN();
 		return 0x00000001 & GetAsyncKeyState(MouseCodeToVirtualKeyCode(mouse_code));
 	}
 
 	std::array<int, 2> WindowsInput::GetMousePosImpl()
 	{
+		AP_PROFILE_FN();
 		POINT point;
 		GetCursorPos(&point);
 		return std::array<int, 2>({ (int)point.x, (int)point.y });
@@ -32,11 +37,13 @@ namespace A {
 
 	int WindowsInput::GetMouseXImpl()
 	{
+		AP_PROFILE_FN();
 		return GetMousePos()[0];
 	}
 
 	int WindowsInput::GetMouseYImpl()
 	{
+		AP_PROFILE_FN();
 		return GetMousePos()[1];
 	}
 
@@ -44,6 +51,7 @@ namespace A {
 	// ---   Private   ---
 	int WindowsInput::KeyCodeToVirtualKeyCode(KeyCode key_code)
 	{
+		AP_PROFILE_FN();
 		switch (key_code)
 		{
 		case A::KeyCode::Unknown:
@@ -301,6 +309,7 @@ namespace A {
 
 	int WindowsInput::MouseCodeToVirtualKeyCode(MouseCode mouse_code)
 	{
+		AP_PROFILE_FN();
 		switch (mouse_code)
 		{
 		case A::MouseCode::Unknown:

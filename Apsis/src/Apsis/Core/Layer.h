@@ -12,7 +12,7 @@ namespace A {
 	class Layer
 	{
 	public:
-		Layer();
+		Layer() = default;
 		virtual ~Layer() = default;
 
 		virtual void OnAdd() = 0;
@@ -25,7 +25,7 @@ namespace A {
 		const bool IsEnabled() const { return m_Enabled; }
 
 	protected:
-		bool m_Enabled;		// for turning on and off without removing layer from stack
+		bool m_Enabled = false;		// for turning on and off without removing layer from stack
 
 	private:
 		void OnAddBackend() { m_Enabled = true; OnAdd(); }

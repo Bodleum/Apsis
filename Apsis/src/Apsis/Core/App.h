@@ -35,7 +35,6 @@ namespace A {
 		void Run();
 
 		static inline void SetAppArgs(AppArgs args) { m_Args = args; }
-		static void LogInfo();
 
 		#ifdef AP_PLATFORM_WIN
 			friend int WINAPI ::wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPWSTR pCmdLine, _In_ int nShowCmd);
@@ -45,9 +44,11 @@ namespace A {
 
 		bool m_Running = true;
 		static AppArgs m_Args;
+		// Assets
 		LayerStack m_LayerStack;
 		Unique<Window> m_Window;
-		//Timing
+		Shared<Renderer> m_Renderer;
+		// Timing
 		MicroSeconds m_TimeStep{ 16667 };	// 60ups by default
 		MicroSeconds m_TimeAccumulator{ 0 };
 		MicroSeconds m_FrameTime{ 0 };

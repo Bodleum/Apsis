@@ -3,6 +3,7 @@
 
 #include "Apsis/Core/App.h"
 //#include "Apsis/Core/Logger.h"	Included in pch
+#include "Apsis/Core/Input.h"
 
 extern A::App* A::CreateApp();
 
@@ -42,7 +43,8 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 
 	AP_PROFILE_BEGIN_SESSION("Startup", "Apsis - Startup.json");
 		A::Logger::Init();
-		A::App::LogInfo();
+		A::SystemInfo::Create();
+		A::Input::Create();
 		{
 			A::AppArgs args;
 			args.MainFnArgs.hInstance = hInstance;

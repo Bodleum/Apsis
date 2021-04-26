@@ -7,7 +7,7 @@ namespace A {
 	class Input
 	{
 	public:
-		static Unique<Input> Create();
+		static Unique<Input>& Create();
 
 		static inline bool IsKeyDown(KeyCode key_code) { return s_Instance->IsKeyDownImpl(key_code); }
 		static inline bool WasKeyDown(KeyCode key_code) { return s_Instance->WasKeyDownImpl(key_code); }

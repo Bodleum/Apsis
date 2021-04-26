@@ -318,10 +318,10 @@ namespace A {
 			case WM_DESTROY:
 			{
 				EventDispatcher::DispatchEvent(MakeShared<WindowDestroyEvent>());
-#if AP_TRACE_WINMSG
-				for (auto& element : m_MessageTally)
-					AP_TRACE_C("Message: {0},\t{1} times", element.first, element.second);
-#endif // AP_TRACE_WINMSG
+				#if AP_TRACE_WINMSG
+					for (auto& element : m_MessageTally)
+						AP_TRACE_C("Message: {0},\t{1} times", element.first, element.second);
+				#endif // AP_TRACE_WINMSG
 				PostQuitMessage(0);
 				return 0;
 			}
@@ -361,6 +361,7 @@ namespace A {
 
 		KeyCode ScanCodeToKeyCode(unsigned short scan_code, bool E0/* = false*/, bool E1/* = false*/)
 		{
+			AP_PROFILE_FN();
 			switch (scan_code)
 			{
 				case 0x1E:			return Key::A;

@@ -50,6 +50,8 @@ namespace A {
 
 	void Direct2DRenderer::OnResizeImpl()
 	{
+		AP_PROFILE_FN();
+
 		if (m_RenderTarget)
 		{
 			RECT clientRect;
@@ -62,12 +64,14 @@ namespace A {
 
 	void Direct2DRenderer::DrawCircleImpl(Eigen::Vector2i& position, float radius, Eigen::Vector4f& col)
 	{
+		AP_PROFILE_FN();
 		m_SolidColorBrush->SetColor(D2D1::ColorF(col.x(), col.y(), col.z()));
 		m_RenderTarget->DrawEllipse(D2D1::Ellipse(D2D1::Point2F(position.x(), position.y()), radius, radius), m_SolidColorBrush, 2.0f);
 	}
 
 	void Direct2DRenderer::DrawRectImpl(Eigen::Vector2i& position, float width, float height, Eigen::Vector4f& col)
 	{
+		AP_PROFILE_FN();
 		m_SolidColorBrush->SetColor(D2D1::ColorF(col.x(), col.y(), col.z()));
 		m_RenderTarget->DrawRectangle(D2D1::Rect(position.x(), position.y(), (int)(position.x() + width), (int)(position.y() + height)), m_SolidColorBrush, 2.0f);
 	}

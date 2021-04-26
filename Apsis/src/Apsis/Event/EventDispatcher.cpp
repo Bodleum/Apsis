@@ -32,12 +32,15 @@ namespace A {
 
 	void EventDispatcher::SendEvent(Shared<Event> evt, std::chrono::nanoseconds delay)
 	{
+		AP_PROFILE_FN();
 		std::chrono::time_point<std::chrono::system_clock, std::chrono::nanoseconds> now = std::chrono::system_clock::now();
 		s_QueuedEvents.insert({ now + delay, evt });
 	}
 
 	bool EventDispatcher::PollQueuedEvents()
 	{
+		AP_PROFILE_FN();
+
 		bool eventRes = false;
 		std::chrono::time_point<std::chrono::system_clock, std::chrono::nanoseconds> now = std::chrono::system_clock::now();
 

@@ -15,12 +15,7 @@ namespace A {
 
 		AP_INFO_C("Created App");
 		m_Window = Window::Create(m_Args.MainFnArgs);
-		{// Init renderer
-			AP_PROFILE_SCOPE("Init renderer");
-			bool res = Renderer::Init(m_Window);
-			AP_ASSERT_C(res, "Failed to initialise renderer!");
-			return;
-		}
+		m_Renderer = Renderer::Create(m_Window);
 	}
 
 	void App::Run()
@@ -105,46 +100,21 @@ namespace A {
 		m_LayerStack.Pop();
 	}
 
-	void App::LogInfo()
-	{
-		AP_PROFILE_FN();
-
-		AP_INFO_C("Platform: {0}", SystemInfo::Platform);
-	}
-
 	bool App::OnEvent(Shared<Event> evt)
 	{
 		AP_PROFILE_FN();
 
 		switch (evt->GetType())
 		{
-		case EventType::WindowResize:
-		{
-			Renderer::OnResize();
-			break;
-		}
-
-		case EventType::WindowPaint:
-		{
-			OnRender();
-			break;
-		}
-
-		case EventType::WindowDestroy:
-		{
-			m_Running = false;
-			break;
-		}
-
-		default:
-			break;
+		case EventType::WindowResize:	Renderer::OnResize();	break;
+		case EventType::WindowPaint:	OnRender();				break;
+		case EventType::WindowDestroy:	m_Running = false;		break;
+		default:												break;
 		}
 
 		for (Layer* layer : m_LayerStack)
-		{
 			if (layer->OnEvent(evt))
 				return true;
-		}
 
 		return false;
 	}

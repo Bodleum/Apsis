@@ -6,21 +6,42 @@
 
 namespace A {
 
-	Shared<Renderer> Renderer::s_Instance = Renderer::Create();
+	RendererAPI Renderer::s_RendererAPI = SystemInfo::GetRendererAPI();
+	Shared<Renderer> Renderer::s_Instance = nullptr;
 
-	// Set default Renderer API
-	#ifdef AP_PLATFORM_WIN
-		RendererAPI Renderer::s_RendererAPI = RendererAPI::OpenGL;
-	#endif // AP_PLATFORM_WIN
-
-	Shared<Renderer> Renderer::Create()
+	Shared<Renderer> Renderer::Create(Unique<Window>& window)
 	{
+		AP_PROFILE_FN();
+
+		s_RendererAPI = SystemInfo::GetRendererAPI();	// Update
 		switch (s_RendererAPI)
 		{
 		case A::RendererAPI::Direct2D:
-			return MakeShared<Direct2DRenderer>();
+			s_Instance = MakeShared<Direct2DRenderer>();
+			{// Init renderer
+				AP_PROFILE_SCOPE("Init renderer");
+				bool res = Renderer::Init(window);
+				if (!res)
+				{
+					AP_CRIT_C("Failed to initialise renderer!");
+					break;
+				}
+				AP_INFO_C("Initialised Direct2D renderer");
+			}
+			return s_Instance;
 		case A::RendererAPI::OpenGL:
-			return MakeShared<OpenGLRenderer>();
+			s_Instance = MakeShared<OpenGLRenderer>();
+			{// Init renderer
+				AP_PROFILE_SCOPE("Init renderer");
+				bool res = Renderer::Init(window);
+				if (!res)
+				{
+					AP_CRIT_C("Failed to initialise renderer!");
+					break;
+				}
+				AP_INFO_C("Initialised OpenGL renderer");
+			}
+			return s_Instance;
 		default:
 			break;
 		}

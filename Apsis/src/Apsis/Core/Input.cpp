@@ -5,12 +5,14 @@
 
 namespace A {
 
-	Unique<Input> Input::s_Instance = Input::Create();
+	Unique<Input> Input::s_Instance = nullptr;
 
-	Unique<Input> Input::Create()
+	Unique<Input>& Input::Create()
 	{
+		AP_PROFILE_FN();
 		#if defined(AP_PLATFORM_WIN)
-			return MakeUnique<WindowsInput>();
+			s_Instance = MakeUnique<WindowsInput>();
+			return s_Instance;
 		#else
 			return nullptr;
 		#endif

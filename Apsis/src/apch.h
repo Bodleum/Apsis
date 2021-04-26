@@ -21,3 +21,4 @@
 
 #include "Apsis/Core/Logger.h"
 #include "Apsis/Utility/Instrumentor.h"
+#include "Apsis/Core/SystemInfo.h"

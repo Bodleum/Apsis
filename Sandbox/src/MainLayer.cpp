@@ -35,25 +35,6 @@ void MainLayer::OnUpdate(A::MicroSeconds time_step)
 
 bool MainLayer::OnEvent(A::Shared<A::Event> evt)
 {
-	AP_INFO(*evt);
-	A::LocalDispatcher ld(evt);
-	ld.Dispatch<A::MouseButtonDownEvent>(BIND_EVT_FN(MainLayer::testfn));
-	ld.Dispatch<A::TestEvent>(BIND_EVT_FN(MainLayer::testfn2));
-
-	return false;
-}
-
-bool MainLayer::testfn(A::MouseButtonDownEvent& evt)
-{
-	AP_INFO("Test! {0}", evt);
-	A::EventDispatcher::SendEvent(A::MakeShared<A::TestEvent>("Delay!"), 2s);
-	//std::chrono::seconds{ 2 }
-	return false;
-}
-
-bool MainLayer::testfn2(A::TestEvent& evt)
-{
-	AP_INFO(evt);
 	return false;
 }
 
