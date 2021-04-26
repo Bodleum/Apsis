@@ -1,10 +1,14 @@
 #include "apch.h"
 #include "OpenGLRenderer.h"
 
+#include <glad/glad.h>
+#define GLFW_INCLUDE_NONE
+#include <GLFW/glfw3.h>
+
+
 namespace A {
 
 	OpenGLRenderer::OpenGLRenderer()
-		: m_Context(nullptr)
 	{
 		AP_PROFILE_FN();
 	}
@@ -14,18 +18,23 @@ namespace A {
 		AP_PROFILE_FN();
 	}
 
-	void OpenGLRenderer::CreateContext(OpenGLContext* context, Unique<Window>& window, bool make_current)
-	{
-		AP_PROFILE_FN();
-	}
-
-	void OpenGLRenderer::RecreateContext(OpenGLContext* context, Unique<Window>& window, bool make_current)
-	{
-		AP_PROFILE_FN();
-	}
 	bool OpenGLRenderer::InitImpl(Unique<Window>& window)
 	{
 		AP_PROFILE_FN();
+
+		{// Create vertex buffer
+			AP_PROFILE_SCOPE("Create vertex buffer");
+			float positions[6] =
+			{
+				-0.5f, -0.5f,
+				 0.0f,  0.5f,
+				 0.5f, -0.5f
+			};
+			glGenBuffers(1, &m_VertexBufferID);
+			glBindBuffer(GL_ARRAY_BUFFER, m_VertexBufferID);
+			glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(float), positions, GL_STATIC_DRAW);
+		}
+
 		return true;
 	}
 

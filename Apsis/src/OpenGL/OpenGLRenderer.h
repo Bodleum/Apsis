@@ -4,7 +4,6 @@
 
 namespace A {
 
-	using OpenGLContext = HGLRC;
 
 	class OpenGLRenderer : public Renderer
 	{
@@ -26,10 +25,7 @@ namespace A {
 		virtual void EndDrawImpl() override;
 
 	private:
-		void CreateContext(OpenGLContext* context, Unique<Window>& window, bool make_current);
-		void RecreateContext(OpenGLContext* context, Unique<Window>& window, bool make_current);
-
-		OpenGLContext m_Context;
+		unsigned int m_VertexBufferID = 0;
 	};
 
 }
