@@ -18,6 +18,7 @@
 // ---   Renderer   ---
 #include "Apsis/Renderer/Renderer.h"
 //#include "Apsis/Renderer/RendererAPI.h"	Included in SystemInfo.h
+#include "Apsis/Renderer/Shader.h"
 
 
 // ---   Entry Point   ---

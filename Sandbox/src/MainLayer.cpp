@@ -23,6 +23,8 @@ void MainLayer::OnAdd()
 		system("pause");
 		#endif // LOGGING_TESTS
 	}
+
+	A::Shader::Create(A::ShaderType::Vertex, "D:/Dev/C++/Apsis/Apsis/src/Assets/OpenGL/DefaultShader.glsl");
 }
 
 void MainLayer::OnRemove()

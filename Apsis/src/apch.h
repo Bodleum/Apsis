@@ -13,6 +13,8 @@
 	#include <array>
 	#include <vector>
 	#include <map>
+	#include <unordered_map>
+
 
 	#ifdef AP_PLATFORM_WIN
 		#include <Windows.h>
