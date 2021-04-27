@@ -1,10 +1,6 @@
 #include "apch.h"
 #include "OpenGLRenderer.h"
-
-#include <glad/glad.h>
-#define GLFW_INCLUDE_NONE
-#include <GLFW/glfw3.h>
-
+#include "OpenGLHeaders.h"
 
 namespace A {
 

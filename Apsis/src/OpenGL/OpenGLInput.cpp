@@ -3,7 +3,7 @@
 
 #include "Apsis/Core/App.h"
 #include "Translators.h"
-#include <GLFW/glfw3.h>
+#include "OpenGLHeaders.h"
 
 namespace A {
 
