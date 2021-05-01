@@ -24,7 +24,6 @@ void MainLayer::OnAdd()
 		#endif // LOGGING_TESTS
 	}
 
-	A::Shader::Create(A::ShaderType::Vertex, "D:/Dev/C++/Apsis/Apsis/src/Assets/OpenGL/DefaultShader.glsl");
 }
 
 void MainLayer::OnRemove()
@@ -37,23 +36,16 @@ void MainLayer::OnUpdate(A::MicroSeconds time_step)
 
 bool MainLayer::OnEvent(A::Shared<A::Event> evt)
 {
-	AP_TRACE(*evt);
-	A::LocalDispatcher ld(evt);
-
-	ld.Dispatch<A::MouseButtonDownEvent>(BIND_EVT_FN(MainLayer::testfn));
 	return false;
 }
 
 bool MainLayer::testfn(A::MouseButtonDownEvent& evt)
 {
-	A::EventDispatcher::SendEvent(A::MakeShared<A::TestEvent>("Make me a cup of coffee!"), 4s);
-
-
 	return false;
 }
 
 void MainLayer::OnRender()
 {
-	A::Renderer::DrawCircle(Eigen::Vector2i(100, 100), 100, Eigen::Vector4f(1.0f, 1.0f, 0.5f, 1.0f));
+	//A::Renderer::DrawCircle(Eigen::Vector2i(100, 100), 100, Eigen::Vector4f(1.0f, 1.0f, 0.5f, 1.0f));
 	//A::Renderer::DrawRect(Eigen::Vector2i(250, 250), 100, 150, Eigen::Vector4f(1.0f, 1.0f, 0.5f, 1.0f));
 }

@@ -2,6 +2,8 @@
 #include "Apsis/Renderer/Renderer.h"
 #include "Apsis/Core/Window.h"
 
+struct GLFWwindow;
+
 namespace A {
 
 
@@ -25,7 +27,9 @@ namespace A {
 		virtual void EndDrawImpl() override;
 
 	private:
+		GLFWwindow* m_WindowHandle;
 		unsigned int m_VertexBufferID = 0;
+		unsigned int m_IndexBufferID = 0;
 	};
 
 }
