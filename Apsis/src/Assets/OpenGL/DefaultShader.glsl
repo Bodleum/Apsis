@@ -1,12 +1,12 @@
-Some stuff before
-
 ShaderType::Vertex
-This is a vertex shader
-hello!
-more
-tests
+#version 450
+void main()
+{
+}
 
 
 ShaderType::Pixel
-This is a pixel shader
-
+#version 450
+void main()
+{
+}

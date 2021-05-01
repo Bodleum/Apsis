@@ -37,6 +37,18 @@ void MainLayer::OnUpdate(A::MicroSeconds time_step)
 
 bool MainLayer::OnEvent(A::Shared<A::Event> evt)
 {
+	AP_TRACE(*evt);
+	A::LocalDispatcher ld(evt);
+
+	ld.Dispatch<A::MouseButtonDownEvent>(BIND_EVT_FN(MainLayer::testfn));
+	return false;
+}
+
+bool MainLayer::testfn(A::MouseButtonDownEvent& evt)
+{
+	A::EventDispatcher::SendEvent(A::MakeShared<A::TestEvent>("Make me a cup of coffee!"), 4s);
+
+
 	return false;
 }
 

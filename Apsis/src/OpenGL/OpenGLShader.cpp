@@ -6,7 +6,7 @@
 
 namespace A {
 
-	A::OpenGLShader::OpenGLShader(ShaderType type, const std::string& path)
+	OpenGLShader::OpenGLShader(ShaderType type, const std::string& path)
 	{
 		AP_PROFILE_FN();
 
@@ -95,7 +95,7 @@ namespace A {
 			// We don't need the shader anymore.
 			glDeleteShader(shader);
 
-			AP_ERROR_C("{0} shader failed to compile:\n\t{1}", ShaderTypeToString[type], infoLog.data());
+			AP_ERROR_C("{0} shader failed to compile:\n{1}", ShaderTypeToString[type], infoLog.data());
 
 			return;
 		}
@@ -136,4 +136,13 @@ namespace A {
 		m_ShaderID = program;
 	}
 
+	OpenGLShader::~OpenGLShader()
+	{
+		glDeleteProgram(m_ShaderID);
+	}
+
+	void OpenGLShader::Bind()
+	{
+		glUseProgram(m_ShaderID);
+	}
 }

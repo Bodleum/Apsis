@@ -7,7 +7,9 @@ namespace A {
 	{
 	public:
 		OpenGLShader(ShaderType type, const std::string& path);
-		virtual ~OpenGLShader() = default;
+		virtual ~OpenGLShader();
+
+		virtual void Bind() override;
 	};
 
 }

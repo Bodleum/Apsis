@@ -31,6 +31,8 @@ namespace A {
 		virtual ~Shader() = default;
 		static Shared<Shader> Create(ShaderType type, const std::string& path);
 
+		virtual void Bind() = 0;
+
 	protected:
 		unsigned int m_ShaderID;
 		ShaderType m_Type;
