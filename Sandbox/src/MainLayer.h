@@ -15,5 +15,8 @@ public:
 	virtual bool OnEvent(A::Shared<A::Event> evt) override;
 
 	bool testfn(A::MouseButtonDownEvent& evt);
-	bool testfn2(A::TestEvent& evt);
+
+private:
+	float m_RedChannel = 0.0f;
+	float m_Increment = 0.05f;
 };
