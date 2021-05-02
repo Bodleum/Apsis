@@ -34,6 +34,7 @@ namespace A {
 		unsigned int m_VertexBufferID = 0;
 		unsigned int m_IndexBufferID = 0;
 		Shared<Shader> m_Shader;
+		std::unordered_map<std::string, int> m_UniformLocations;
 	};
 
 }

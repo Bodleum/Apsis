@@ -59,6 +59,21 @@ namespace A {
 	void OpenGLRenderer::BeginDrawImpl()
 	{
 		AP_PROFILE_FN();
+		std::vector<std::string> uniformsList = 
+		{
+			"u_Color"
+		};
+
+		for (auto& uniform : uniformsList)
+		{
+			int location = glGetUniformLocation(m_Shader->GetID(), uniform.c_str());
+			if (location == -1)
+			{
+				AP_WARN_C("Uniform {0} not found", uniform);
+				continue;
+			}
+			m_UniformLocations[uniform] = location;
+		}
 	}
 
 	void OpenGLRenderer::EndDrawImpl()
@@ -94,6 +109,7 @@ namespace A {
 	{
 		AP_PROFILE_FN();
 		glBindVertexArray(m_VertexArrayID);
+		glUniform4f(m_UniformLocations["u_Color"], col.x(), col.y(), col.z(), col.w());
 		glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
 	}
 

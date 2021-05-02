@@ -32,6 +32,7 @@ namespace A {
 		static Shared<Shader> Create(const std::string& path);
 
 		virtual void Bind() = 0;
+		virtual inline const unsigned int GetID() const { return m_ShaderProgramID; }
 
 	protected:
 		virtual const std::unordered_map<ShaderType, std::string> Read(const std::string& path) = 0;
