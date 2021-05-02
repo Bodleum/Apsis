@@ -29,13 +29,15 @@ namespace A {
 	{
 	public:
 		virtual ~Shader() = default;
-		static Shared<Shader> Create(ShaderType type, const std::string& path);
+		static Shared<Shader> Create(const std::string& path);
 
 		virtual void Bind() = 0;
 
 	protected:
-		unsigned int m_ShaderID;
-		ShaderType m_Type;
+		virtual const std::unordered_map<ShaderType, std::string> Read(const std::string& path) = 0;
+		virtual void CompileAndLink(std::unordered_map<ShaderType, std::string> shader_sources) = 0;
+
+		unsigned int m_ShaderProgramID;
 	};
 
 }

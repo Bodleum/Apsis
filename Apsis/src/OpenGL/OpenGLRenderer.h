@@ -1,6 +1,8 @@
 #pragma once
-#include "Apsis/Renderer/Renderer.h"
 #include "Apsis/Core/Window.h"
+#include "Apsis/Renderer/Renderer.h"
+#include "OpenGL/OpenGLShader.h"
+
 
 struct GLFWwindow;
 
@@ -28,8 +30,10 @@ namespace A {
 
 	private:
 		GLFWwindow* m_WindowHandle;
+		unsigned int m_VertexArrayID = 0;
 		unsigned int m_VertexBufferID = 0;
 		unsigned int m_IndexBufferID = 0;
+		Shared<Shader> m_Shader;
 	};
 
 }

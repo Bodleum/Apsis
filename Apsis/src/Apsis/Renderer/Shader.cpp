@@ -5,13 +5,13 @@
 
 namespace A {
 
-	Shared<Shader> Shader::Create(ShaderType type, const std::string& path)
+	Shared<Shader> Shader::Create(const std::string& path)
 	{
 		AP_PROFILE_FN();
 
 		switch (SystemInfo::GetRendererAPI())
 		{
-		case RendererAPI::OpenGL:	return MakeShared<OpenGLShader>(type, path);
+		case RendererAPI::OpenGL:	return MakeShared<OpenGLShader>(path);
 		default:		break;
 		}
 		AP_ERROR_C("Unknown renderer API, could not create shader");
