@@ -9,6 +9,8 @@
 
 namespace A {
 
+	void APIENTRY OpenGLErrorCallbackFunction(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam);
+
 	OpenGLWindow::OpenGLWindow(unsigned int width, unsigned int height, std::string name)
 		: m_WindowHandle(nullptr), m_Width(width), m_Height(height), m_Name(name)
 	{
@@ -62,6 +64,12 @@ namespace A {
 
 		{// Set callbacks
 			AP_PROFILE_SCOPE("Set callbacks");
+
+			glEnable(GL_DEBUG_OUTPUT);
+			glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
+			glDebugMessageCallback(OpenGLErrorCallbackFunction, nullptr);
+			GLuint unusedIds = 0;
+			glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, &unusedIds, true);
 
 			glfwSetKeyCallback(m_WindowHandle, [](GLFWwindow* window, int key, int scancode, int action, int mods)
 				{
@@ -175,6 +183,51 @@ namespace A {
 	{
 		AP_PROFILE_FN();
 		return HDC();
+	}
+
+
+	void APIENTRY OpenGLErrorCallbackFunction(
+		GLenum source,
+		GLenum type,
+		GLuint id,
+		GLenum severity,
+		GLsizei length,
+		const GLchar* message,
+		const void* userParam)
+	{
+		std::stringstream ss;
+		ss << "OpenGL Error: " << id << '\n';
+		ss << "Type: ";
+		switch (type)
+		{
+			case GL_DEBUG_TYPE_ERROR:
+				ss << "Error";
+				break;
+			case GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR:
+				ss << "Deprecated behavior";
+				break;
+			case GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR:
+				ss << "Undefined behavior";
+				break;
+			case GL_DEBUG_TYPE_PORTABILITY:
+				ss << "Portability";
+				break;
+			case GL_DEBUG_TYPE_PERFORMANCE:
+				ss << "Performance";
+				break;
+			case GL_DEBUG_TYPE_OTHER:
+				ss << "Other";
+				break;
+		}
+
+		ss << '\n' << message;
+
+		switch (severity)
+		{
+			case GL_DEBUG_SEVERITY_LOW:		AP_WARN_C(ss.str());
+			case GL_DEBUG_SEVERITY_MEDIUM:	AP_ERROR_C(ss.str());
+			case GL_DEBUG_SEVERITY_HIGH:	AP_CRIT_C(ss.str());
+		}
 	}
 
 }
