@@ -21,6 +21,10 @@
 #include "Apsis/Renderer/Shader.h"
 
 
+// ---   Utility   ---
+#include "Apsis/Utility/Color.h"
+
+
 // ---   Entry Point   ---
 // MUST BE LAST
 #include "Apsis/Core/Main.h"

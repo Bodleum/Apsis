@@ -17,6 +17,6 @@ public:
 	bool testfn(A::MouseButtonDownEvent& evt);
 
 private:
-	float m_RedChannel = 0.0f;
-	float m_Increment = 0.05f;
+	Eigen::Vector4f m_ColorHSV = { 0.0f, 1.0f, 1.0f, 1.0f };
+	Eigen::Vector4f m_ColorRGB = { 1.0f, 0.0f, 0.0f, 1.0f };
 };
