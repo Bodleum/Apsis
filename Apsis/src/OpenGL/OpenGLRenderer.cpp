@@ -89,7 +89,7 @@ namespace A {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 
-	void OpenGLRenderer::SetClearColorImpl(Eigen::Vector4f& col)
+	void OpenGLRenderer::SetClearColorImpl(const Eigen::Vector4f& col)
 	{
 		AP_PROFILE_FN();
 		m_ClearColor = col;
@@ -100,12 +100,12 @@ namespace A {
 		AP_PROFILE_FN();
 	}
 
-	void OpenGLRenderer::DrawCircleImpl(Eigen::Vector2i& position, float radius, Eigen::Vector4f& col)
+	void OpenGLRenderer::DrawCircleImpl(const Eigen::Vector2i& position, float radius, const Eigen::Vector4f& col)
 	{
 		AP_PROFILE_FN();
 	}
 
-	void OpenGLRenderer::DrawRectImpl(Eigen::Vector2i& position, float width, float height, Eigen::Vector4f& col)
+	void OpenGLRenderer::DrawRectImpl(const Eigen::Vector2i& position, float width, float height, const Eigen::Vector4f& col)
 	{
 		AP_PROFILE_FN();
 		glBindVertexArray(m_VertexArrayID);

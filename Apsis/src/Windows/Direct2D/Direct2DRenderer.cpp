@@ -62,14 +62,14 @@ namespace A {
 		}
 	}
 
-	void Direct2DRenderer::DrawCircleImpl(Eigen::Vector2i& position, float radius, Eigen::Vector4f& col)
+	void Direct2DRenderer::DrawCircleImpl(const Eigen::Vector2i& position, float radius, const Eigen::Vector4f& col)
 	{
 		AP_PROFILE_FN();
 		m_SolidColorBrush->SetColor(D2D1::ColorF(col.x(), col.y(), col.z()));
 		m_RenderTarget->DrawEllipse(D2D1::Ellipse(D2D1::Point2F(position.x(), position.y()), radius, radius), m_SolidColorBrush, 2.0f);
 	}
 
-	void Direct2DRenderer::DrawRectImpl(Eigen::Vector2i& position, float width, float height, Eigen::Vector4f& col)
+	void Direct2DRenderer::DrawRectImpl(const Eigen::Vector2i& position, float width, float height, const Eigen::Vector4f& col)
 	{
 		AP_PROFILE_FN();
 		m_SolidColorBrush->SetColor(D2D1::ColorF(col.x(), col.y(), col.z()));
