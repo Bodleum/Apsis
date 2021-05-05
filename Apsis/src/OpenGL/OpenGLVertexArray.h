@@ -11,6 +11,7 @@ namespace A {
 		inline static Unique<OpenGLVertexArray> Create() { return MakeUnique<OpenGLVertexArray>(); }
 
 		inline const unsigned int GetID() const { return m_VertexArrayID; }
+		inline const unsigned int GetIndexCount() const { return m_IndexBuffer->GetIndexCount(); }
 		void Bind();
 
 		void AddVertexBuffer(const std::vector<float>& vertex_buffer);

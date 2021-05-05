@@ -27,9 +27,11 @@ namespace A {
 
 		virtual void Bind() = 0;
 		virtual const unsigned int GetID() const { return m_ID; }
+		virtual const unsigned int GetIndexCount() const { return m_IndexCount; }
 
 	protected:
 		unsigned int m_ID = 0;
+		unsigned int m_IndexCount = 0;
 	};
 
 }

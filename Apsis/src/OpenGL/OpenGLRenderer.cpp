@@ -21,8 +21,8 @@ namespace A {
 		AP_PROFILE_FN();
 
 		m_WindowHandle = (GLFWwindow*)window->GetHandle();
-		m_TriangleVA = OpenGLVertexArray::Create();
-		m_TriangleVA->Bind();
+		m_RectVA = OpenGLVertexArray::Create();
+		m_RectVA->Bind();
 
 		{// Create shader
 			AP_PROFILE_SCOPE("Create shader");
@@ -32,16 +32,17 @@ namespace A {
 
 		{// Create vertex buffer
 			AP_PROFILE_SCOPE("Create vertex buffer");
-			m_TriangleVA->AddVertexBuffer({
+			m_RectVA->AddVertexBuffer({
 				-0.5f, -0.5f, 0.0f,
 				 0.5f, -0.5f, 0.0f,
-				 0.0f,  0.5f, 0.0f
+				 0.5f,  0.5f, 0.0f,
+				-0.5f,  0.5f, 0.0f
 			});
 		}
 
 		{// Create index buffer
 			AP_PROFILE_SCOPE("Create index buffer");
-			m_TriangleVA->AddIndexBuffer({ 0, 1, 2 });
+			m_RectVA->AddIndexBuffer({ 0, 1, 2, 0, 2, 3 });
 		}
 
 
@@ -100,9 +101,9 @@ namespace A {
 	void OpenGLRenderer::DrawRectImpl(const Eigen::Vector2i& position, float width, float height, const Eigen::Vector4f& col)
 	{
 		AP_PROFILE_FN();
-		glBindVertexArray(m_TriangleVA->GetID());
+		glBindVertexArray(m_RectVA->GetID());
 		glUniform4f(m_UniformLocations["u_Color"], col.x(), col.y(), col.z(), col.w());
-		glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
+		glDrawElements(GL_TRIANGLES, m_RectVA->GetIndexCount(), GL_UNSIGNED_INT, nullptr);
 	}
 
 }

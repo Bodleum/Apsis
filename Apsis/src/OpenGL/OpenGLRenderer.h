@@ -31,11 +31,8 @@ namespace A {
 
 	private:
 		GLFWwindow* m_WindowHandle;
-		Unique<OpenGLVertexArray> m_TriangleVA = nullptr;
+		Unique<OpenGLVertexArray> m_RectVA = nullptr;
 		std::unordered_map<std::string, int> m_UniformLocations;
-		
-		// Temp
-		unsigned int m_VertexBufferID = 0;
 	};
 
 }
