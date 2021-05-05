@@ -7,6 +7,7 @@
 namespace A {
 
 	RendererAPI Renderer::s_RendererAPI = SystemInfo::GetRendererAPI();
+	Shared<Shader> Renderer::s_Shader = nullptr;
 	Shared<Renderer> Renderer::s_Instance = nullptr;
 
 	Shared<Renderer> Renderer::Create(Unique<Window>& window)

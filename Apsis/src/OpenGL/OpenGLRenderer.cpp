@@ -5,8 +5,9 @@
 namespace A {
 
 	OpenGLRenderer::OpenGLRenderer()
-		: m_WindowHandle(nullptr), m_Shader(nullptr)
+		: m_WindowHandle(nullptr)
 	{
+		s_Shader = nullptr;
 		AP_PROFILE_FN();
 	}
 
@@ -20,9 +21,14 @@ namespace A {
 		AP_PROFILE_FN();
 
 		m_WindowHandle = (GLFWwindow*)window->GetHandle();
+		m_TriangleVA = OpenGLVertexArray::Create();
+		m_TriangleVA->Bind();
 
-		glCreateVertexArrays(1, &m_VertexArrayID);
-		glBindVertexArray(m_VertexArrayID);
+		{// Create shader
+			AP_PROFILE_SCOPE("Create shader");
+			s_Shader = Shader::Create("D:/Dev/C++/Apsis/Apsis/src/Assets/OpenGL/DefaultShader.glsl");
+			s_Shader->Bind();
+		}
 
 		{// Create vertex buffer
 			AP_PROFILE_SCOPE("Create vertex buffer");
@@ -32,26 +38,15 @@ namespace A {
 				 0.5f, -0.5f, 0.0f,
 				 0.0f,  0.5f, 0.0f
 			};
-			glCreateBuffers(1, &m_VertexBufferID);
-			glBindBuffer(GL_ARRAY_BUFFER, m_VertexBufferID);
-			glBufferData(GL_ARRAY_BUFFER, 9 * sizeof(float), positions, GL_STATIC_DRAW);	// Fill with data
-			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);
-			glEnableVertexAttribArray(0);
+			m_TriangleVA->AddVertexBuffer(positions, sizeof(positions));
 		}
 
 		{// Create index buffer
 			AP_PROFILE_SCOPE("Create index buffer");
 			unsigned int indices[3] = { 0, 1, 2 };
-			glCreateBuffers(1, &m_IndexBufferID);
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IndexBufferID);
-			glBufferData(GL_ELEMENT_ARRAY_BUFFER, 3 * sizeof(unsigned int), indices, GL_STATIC_DRAW);
+			m_TriangleVA->AddIndexBuffer(indices, sizeof(indices));
 		}
 
-		{// Create shader
-			AP_PROFILE_SCOPE("Create shader");
-			m_Shader = Shader::Create("D:/Dev/C++/Apsis/Apsis/src/Assets/OpenGL/DefaultShader.glsl");
-			m_Shader->Bind();
-		}
 
 		return true;
 	}
@@ -66,7 +61,7 @@ namespace A {
 
 		for (auto& uniform : uniformsList)
 		{
-			int location = glGetUniformLocation(m_Shader->GetID(), uniform.c_str());
+			int location = glGetUniformLocation(s_Shader->GetID(), uniform.c_str());
 			if (location == -1)
 			{
 				AP_WARN_C("Uniform {0} not found", uniform);
@@ -108,7 +103,7 @@ namespace A {
 	void OpenGLRenderer::DrawRectImpl(const Eigen::Vector2i& position, float width, float height, const Eigen::Vector4f& col)
 	{
 		AP_PROFILE_FN();
-		glBindVertexArray(m_VertexArrayID);
+		glBindVertexArray(m_TriangleVA->GetID());
 		glUniform4f(m_UniformLocations["u_Color"], col.x(), col.y(), col.z(), col.w());
 		glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
 	}

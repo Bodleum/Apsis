@@ -1,5 +1,6 @@
 #pragma once
 #include "Apsis/Core/Core.h"	// Shared
+#include "Apsis/Renderer/Shader.h"
 #include <Eigen/Core>
 
 namespace A {
@@ -25,6 +26,7 @@ namespace A {
 
 		static inline RendererAPI GetAPI() { return SystemInfo::GetRendererAPI(); }
 		static inline void SetAPI(RendererAPI api) { s_RendererAPI = api; }
+		static inline Shared<Shader> GetShader() { return s_Shader; }
 
 	protected:
 		virtual bool InitImpl(Unique<Window>& window) = 0;
@@ -38,7 +40,8 @@ namespace A {
 		virtual void DrawCircleImpl(const Eigen::Vector2i& position, float radius, const Eigen::Vector4f& col) = 0;
 		virtual void DrawRectImpl(const Eigen::Vector2i& position, float width, float height, const Eigen::Vector4f& col) = 0;
 
-		// ---   Vars   ---
+
+		static Shared<Shader> s_Shader;
 		Eigen::Vector4f m_ClearColor = { 0.8f, 0.2f, 0.8f, 1.0f };
 
 	private:

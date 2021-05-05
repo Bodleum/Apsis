@@ -2,6 +2,7 @@
 #include "Apsis/Core/Window.h"
 #include "Apsis/Renderer/Renderer.h"
 #include "OpenGL/OpenGLShader.h"
+#include "OpenGL/OpenGLVertexArray.h"
 
 
 struct GLFWwindow;
@@ -30,11 +31,11 @@ namespace A {
 
 	private:
 		GLFWwindow* m_WindowHandle;
-		unsigned int m_VertexArrayID = 0;
-		unsigned int m_VertexBufferID = 0;
-		unsigned int m_IndexBufferID = 0;
-		Shared<Shader> m_Shader;
+		Unique<OpenGLVertexArray> m_TriangleVA = nullptr;
 		std::unordered_map<std::string, int> m_UniformLocations;
+		
+		// Temp
+		unsigned int m_VertexBufferID = 0;
 	};
 
 }

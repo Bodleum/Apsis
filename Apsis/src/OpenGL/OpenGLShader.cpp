@@ -12,6 +12,7 @@ namespace A {
 
 		auto shaderSources = Read(path);
 		CompileAndLink(shaderSources);
+		m_VertexBufferLayout = DetectVertexBufferLayout(shaderSources[ShaderType::Vertex]);
 	}
 
 	OpenGLShader::~OpenGLShader()
@@ -176,7 +177,7 @@ namespace A {
 			// We don't need the program anymore.
 			glDeleteProgram(program);
 			// Don't leak shaders either.
-			for (auto [type, shader] : compiledShaders)
+			for (auto& [type, shader] : compiledShaders)
 				glDeleteShader(shader);
 
 			AP_ERROR_C("Shader failed to link:\n{1}", infoLog.data());
@@ -185,12 +186,94 @@ namespace A {
 		}
 
 		// Always detach shaders after a successful link.
-		for (auto [type, shader] : compiledShaders)
+		for (auto& [type, shader] : compiledShaders)
 		{
 			glDetachShader(program, shader);
 			glDeleteShader(shader);
 		}
 
 		m_ShaderProgramID = program;
+	}
+
+	Shared<VertexBufferLayout> OpenGLShader::DetectVertexBufferLayout(const std::string& vertex_shader_source)
+	{
+		size_t pos, eol;
+		pos = vertex_shader_source.find(" in ");
+		std::string line;
+		std::vector<BufferElement> elements{};
+
+		while (pos != std::string::npos)
+		{
+			pos++; // + 1 for space at start
+			eol = vertex_shader_source.find_first_of(";", pos);
+			line = vertex_shader_source.substr(pos, eol - pos);
+			size_t linePos = 0;
+
+			linePos = line.find_first_not_of(" \t\n\r\f\v", linePos + 2); // + 2 for length of "in"
+			size_t typeEndPos = line.find(" ", linePos);
+			std::string typeString = line.substr(linePos, typeEndPos - linePos);
+			ShaderDataType type = GLSLTypeToShaderDataType(typeString);
+
+			// Get count
+			unsigned int count;
+			{
+				linePos = line.find_first_of("1234567890", linePos);
+				size_t countEndPos = line.find_last_of("1234567890", typeEndPos);
+				std::stringstream ss(line.substr(linePos, countEndPos - linePos + 1));
+				ss >> count;
+			}
+
+			// Get name
+			linePos = line.find_first_not_of(" \t\n\r\f\v", typeEndPos);
+			std::string name = line.substr(linePos, eol - linePos);
+
+			elements.push_back({ type, count, name });
+			pos = vertex_shader_source.find(" in ", eol);
+		}
+
+		return MakeShared<VertexBufferLayout>(elements);
+	}
+
+	const ShaderDataType OpenGLShader::GLSLTypeToShaderDataType(const std::string& type) const
+	{
+		// Clip off numbers
+		size_t typeStringEnd = type.find_last_not_of("1234567890");
+		std::string newType = type.substr(0, typeStringEnd + 1);
+
+		static std::unordered_map<std::string, ShaderDataType> typeMap =
+		{
+			{"bool", ShaderDataType::Bool},
+			{"int", ShaderDataType::Int},
+			{"uint", ShaderDataType::UnsignedInt},
+			{"float", ShaderDataType::Float},
+			{"double", ShaderDataType::Double},
+
+			{"bvec", ShaderDataType::Bool},
+			{"ivec", ShaderDataType::Int},
+			{"uvec", ShaderDataType::UnsignedInt},
+			{"vec", ShaderDataType::Float},
+			{"dvec", ShaderDataType::Double},
+
+			{"mat", ShaderDataType::Float},
+			{"dmat", ShaderDataType::Double}
+		};
+
+		return typeMap[newType];
+	}
+
+
+
+	const unsigned int ShaderDataTypeToOpenGLType(ShaderDataType type)
+	{
+		static std::unordered_map<ShaderDataType, GLenum> typeMap =
+		{
+			{ShaderDataType::Bool, GL_BOOL},
+			{ShaderDataType::Int, GL_INT},
+			{ShaderDataType::UnsignedInt, GL_UNSIGNED_INT},
+			{ShaderDataType::Float, GL_FLOAT},
+			{ShaderDataType::Double, GL_DOUBLE}
+		};
+
+		return typeMap[type];
 	}
 }
