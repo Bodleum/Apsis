@@ -6,12 +6,12 @@ namespace A {
 	class OpenGLVertexBuffer : public VertexBuffer
 	{
 	public:
-		OpenGLVertexBuffer(float* vertex_buffer, unsigned int size);
+		OpenGLVertexBuffer(const std::vector<float>& vertex_buffer);
 		virtual ~OpenGLVertexBuffer();
 
 		// Inherited via VertexBuffer
 		virtual void Bind() override;
-		virtual bool ValidateLayout(float* vertex_buffer, unsigned int size) override;
+		virtual bool ValidateLayout(const std::vector<float>& vertex_buffer) override;
 	};
 
 	class OpenGLIndexBuffer : public IndexBuffer

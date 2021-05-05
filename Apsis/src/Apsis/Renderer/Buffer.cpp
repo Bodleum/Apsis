@@ -5,11 +5,11 @@
 
 namespace A {
 
-	Unique<VertexBuffer> VertexBuffer::Create(float* vertex_buffer, unsigned int size)
+	Unique<VertexBuffer> VertexBuffer::Create(const std::vector<float>& vertex_buffer)
 	{
 		switch (SystemInfo::GetRendererAPI())
 		{
-			case RendererAPI::OpenGL: return MakeUnique<OpenGLVertexBuffer>(vertex_buffer, size);
+			case RendererAPI::OpenGL: return MakeUnique<OpenGLVertexBuffer>(vertex_buffer);
 		}
 		AP_CRIT_C("Unknown renderer API");
 		return nullptr;

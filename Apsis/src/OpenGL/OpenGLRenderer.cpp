@@ -32,13 +32,11 @@ namespace A {
 
 		{// Create vertex buffer
 			AP_PROFILE_SCOPE("Create vertex buffer");
-			float positions[3 * 3] =
-			{
+			m_TriangleVA->AddVertexBuffer({
 				-0.5f, -0.5f, 0.0f,
 				 0.5f, -0.5f, 0.0f,
 				 0.0f,  0.5f, 0.0f
-			};
-			m_TriangleVA->AddVertexBuffer(positions, sizeof(positions));
+			});
 		}
 
 		{// Create index buffer

@@ -13,7 +13,7 @@ namespace A {
 		inline const unsigned int GetID() const { return m_VertexArrayID; }
 		void Bind();
 
-		void AddVertexBuffer(float* vertex_buffer, unsigned int size);
+		void AddVertexBuffer(const std::vector<float>& vertex_buffer);
 		void AddIndexBuffer(unsigned int* index_buffer, unsigned int size);
 
 	private:

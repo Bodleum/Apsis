@@ -22,7 +22,7 @@ namespace A {
 		glBindVertexArray(m_VertexArrayID);
 	}
 
-	void OpenGLVertexArray::AddVertexBuffer(float* vertex_buffer, unsigned int size)
+	void OpenGLVertexArray::AddVertexBuffer(const std::vector<float>& vertex_buffer)
 	{
 		AP_PROFILE_FN();
 		
@@ -33,7 +33,7 @@ namespace A {
 		}
 
 		glBindVertexArray(m_VertexArrayID);
-		m_VertexBuffer = VertexBuffer::Create(vertex_buffer, size);
+		m_VertexBuffer = VertexBuffer::Create(vertex_buffer);
 		m_VertexBuffer->Bind();
 
 		// Set layout
