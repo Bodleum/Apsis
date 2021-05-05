@@ -31,6 +31,13 @@ namespace A {
 
 	bool OpenGLVertexBuffer::ValidateLayout(float* vertex_buffer, unsigned int size)
 	{
+		AP_PROFILE_FN();
+
+		// Check total size
+		unsigned int stride = m_Layout->GetStride();
+		if (size % stride != 0)
+			return false;
+
 		return true;
 	}
 
