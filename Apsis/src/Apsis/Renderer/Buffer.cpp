@@ -15,4 +15,14 @@ namespace A {
 		return nullptr;
 	}
 
+	Unique<IndexBuffer> IndexBuffer::Create(const std::vector<unsigned int>& index_buffer)
+	{
+		switch (SystemInfo::GetRendererAPI())
+		{
+			case RendererAPI::OpenGL: return MakeUnique<OpenGLIndexBuffer>(index_buffer);
+		}
+		AP_CRIT_C("Unknown renderer API");
+		return nullptr;
+	}
+
 }

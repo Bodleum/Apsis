@@ -16,7 +16,12 @@ namespace A {
 
 	class OpenGLIndexBuffer : public IndexBuffer
 	{
+	public:
+		OpenGLIndexBuffer(const std::vector<unsigned int>& index_buffer);
+		virtual ~OpenGLIndexBuffer();
 
+		// Inherited via IndexBuffer
+		virtual void Bind() override;
 	};
 
 }

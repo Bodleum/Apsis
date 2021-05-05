@@ -34,7 +34,6 @@ namespace A {
 
 		glBindVertexArray(m_VertexArrayID);
 		m_VertexBuffer = VertexBuffer::Create(vertex_buffer);
-		m_VertexBuffer->Bind();
 
 		// Set layout
 		auto& elements = m_VertexBuffer->GetLayout()->GetElements();
@@ -46,21 +45,18 @@ namespace A {
 		}
 	}
 
-	void OpenGLVertexArray::AddIndexBuffer(unsigned int* index_buffer, unsigned int size)
+	void OpenGLVertexArray::AddIndexBuffer(const std::vector<unsigned int>& index_buffer)
 	{
 		AP_PROFILE_FN();
 
-		if (m_IndexBufferID != 0)
+		if (m_IndexBuffer)
 		{
 			AP_CRIT_C("An index buffer already exists");
 			return;
 		}
 
 		glBindVertexArray(m_VertexArrayID);
-
-		glCreateBuffers(1, &m_IndexBufferID);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IndexBufferID);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, index_buffer, GL_STATIC_DRAW);
+		m_IndexBuffer = IndexBuffer::Create(index_buffer);
 	}
 
 }

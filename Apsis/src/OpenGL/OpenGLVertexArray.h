@@ -14,12 +14,12 @@ namespace A {
 		void Bind();
 
 		void AddVertexBuffer(const std::vector<float>& vertex_buffer);
-		void AddIndexBuffer(unsigned int* index_buffer, unsigned int size);
+		void AddIndexBuffer(const std::vector<unsigned int>& index_buffer);
 
 	private:
 		unsigned int m_VertexArrayID = 0;
 		Unique<VertexBuffer> m_VertexBuffer = nullptr;
-		unsigned int m_IndexBufferID = 0;
+		Unique<IndexBuffer> m_IndexBuffer = nullptr;
 	};
 
 }

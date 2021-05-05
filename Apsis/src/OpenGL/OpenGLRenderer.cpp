@@ -41,8 +41,7 @@ namespace A {
 
 		{// Create index buffer
 			AP_PROFILE_SCOPE("Create index buffer");
-			unsigned int indices[3] = { 0, 1, 2 };
-			m_TriangleVA->AddIndexBuffer(indices, sizeof(indices));
+			m_TriangleVA->AddIndexBuffer({ 0, 1, 2 });
 		}
 
 

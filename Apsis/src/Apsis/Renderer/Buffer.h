@@ -16,13 +16,20 @@ namespace A {
 
 	protected:
 		unsigned int m_ID = 0;
-		float* m_Buffer = nullptr;
 		Shared<VertexBufferLayout> m_Layout = nullptr;
 	};
 
 	class IndexBuffer
 	{
+	public:
+		static Unique<IndexBuffer> Create(const std::vector<unsigned int>& index_buffer);
+		virtual ~IndexBuffer() = default;
 
+		virtual void Bind() = 0;
+		virtual const unsigned int GetID() const { return m_ID; }
+
+	protected:
+		unsigned int m_ID = 0;
 	};
 
 }
