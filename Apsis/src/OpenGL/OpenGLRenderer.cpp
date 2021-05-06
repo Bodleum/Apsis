@@ -20,6 +20,9 @@ namespace A {
 	{
 		AP_PROFILE_FN();
 
+		// Blending
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		m_WindowHandle = (GLFWwindow*)window->GetHandle();
 		m_RectVA = OpenGLVertexArray::Create();
 		m_RectVA->Bind();
