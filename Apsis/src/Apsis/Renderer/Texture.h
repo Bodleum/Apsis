@@ -7,7 +7,7 @@ namespace A {
 	class Texture
 	{
 	public:
-		Shared<Texture> Create(const std::string& path);
+		static Shared<Texture> Create(const std::string& path);
 		virtual ~Texture() = default;
 
 		virtual void Bind(unsigned int slot = 0) const = 0;
