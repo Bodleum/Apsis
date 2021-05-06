@@ -4,6 +4,9 @@
 #include "OpenGL/OpenGLShader.h"
 #include "OpenGL/OpenGLVertexArray.h"
 
+// Temp
+#include "Apsis/Renderer/Texture.h"
+
 
 struct GLFWwindow;
 
@@ -33,6 +36,9 @@ namespace A {
 		GLFWwindow* m_WindowHandle;
 		Unique<OpenGLVertexArray> m_RectVA = nullptr;
 		std::unordered_map<std::string, int> m_UniformLocations;
+
+		// Temp
+		Shared<Texture> m_Texture;
 	};
 
 }

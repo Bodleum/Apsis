@@ -32,7 +32,8 @@ project "Apsis"
 	{
 		"spdlog",
 		"glad",
-		"GLFW"
+		"GLFW",
+		"stb_image"
 	}
 
 	pchheader "apch.h"

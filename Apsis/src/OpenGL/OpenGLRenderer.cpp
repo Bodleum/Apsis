@@ -33,10 +33,10 @@ namespace A {
 		{// Create vertex buffer
 			AP_PROFILE_SCOPE("Create vertex buffer");
 			m_RectVA->AddVertexBuffer({
-				-0.5f, -0.5f, 0.0f,
-				 0.5f, -0.5f, 0.0f,
-				 0.5f,  0.5f, 0.0f,
-				-0.5f,  0.5f, 0.0f
+				-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+				 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+				 0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
+				-0.5f,  0.5f, 0.0f, 0.0f, 1.0f
 			});
 		}
 
@@ -44,6 +44,12 @@ namespace A {
 			AP_PROFILE_SCOPE("Create index buffer");
 			m_RectVA->AddIndexBuffer({ 0, 1, 2, 0, 2, 3 });
 		}
+
+
+
+		// Texture test
+		m_Texture = Texture::Create("D:/Dev/C++/Apsis/Sandbox/res/camel_picture.png");
+		m_Texture->Bind(0);
 
 
 		return true;
@@ -54,7 +60,8 @@ namespace A {
 		AP_PROFILE_FN();
 		std::vector<std::string> uniformsList = 
 		{
-			"u_Color"
+			"u_Color",
+			"u_Texture"
 		};
 
 		for (auto& uniform : uniformsList)
@@ -102,7 +109,8 @@ namespace A {
 	{
 		AP_PROFILE_FN();
 		glBindVertexArray(m_RectVA->GetID());
-		glUniform4f(m_UniformLocations["u_Color"], col.x(), col.y(), col.z(), col.w());
+		//glUniform4f(m_UniformLocations["u_Color"], col.x(), col.y(), col.z(), col.w());
+		glUniform1i(m_UniformLocations["u_Texture"], 0);
 		glDrawElements(GL_TRIANGLES, m_RectVA->GetIndexCount(), GL_UNSIGNED_INT, nullptr);
 	}
 

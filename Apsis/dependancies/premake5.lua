@@ -144,3 +144,35 @@ project "GLFW"
 	filter "configurations:Release"
 		runtime "Release"
 		optimize "on"
+
+
+project "stb_image"
+	location "stb_image"
+	kind "StaticLib"
+	language "C++"
+	cppdialect "C++17"
+
+	targetdir ("%{wks.location}/bin/%{cfg.system}_%{cfg.buildcfg}/%{prj.name}")
+	objdir ("%{wks.location}/int/%{cfg.system}_%{cfg.buildcfg}/%{prj.name}")
+
+	files
+	{
+		"stb_image/**.h",
+		"stb_image/**.cpp"
+	}
+
+	includedirs
+	{
+		"stb_image"
+	}
+
+	filter { "configurations:Debug" }
+		runtime "Debug"
+		symbols "On"
+
+	filter { "configurations:Release" }
+		runtime "Release"
+		optimize "Full"
+
+	filter { "system:Windows" }
+		systemversion "latest"
