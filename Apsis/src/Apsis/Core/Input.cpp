@@ -6,9 +6,9 @@
 namespace A {
 
 	RendererAPI Input::s_RendererAPI = SystemInfo::GetRendererAPI();
-	Unique<Input> Input::s_Instance = nullptr;
+	Shared<Input> Input::s_Instance = nullptr;
 
-	const Unique<Input>& Input::Create()
+	const Shared<Input> Input::Create()
 	{
 		AP_PROFILE_FN();
 

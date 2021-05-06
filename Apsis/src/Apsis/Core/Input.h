@@ -7,7 +7,7 @@ namespace A {
 	class Input
 	{
 	public:
-		static const Unique<Input>& Create();
+		static const Shared<Input> Create();
 
 		static inline void Init() { s_Instance->InitImpl(); }
 		static inline bool IsKeyDown(KeyCode key_code) { return s_Instance->IsKeyDownImpl(key_code); }
@@ -35,7 +35,7 @@ namespace A {
 
 	private:
 		static RendererAPI s_RendererAPI;
-		static Unique<Input> s_Instance;
+		static Shared<Input> s_Instance;
 	};
 
 }
