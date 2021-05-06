@@ -34,7 +34,7 @@ namespace A {
 		virtual int GetMouseYImpl() = 0;
 
 	private:
-		static RendererAPI s_RendererAPI;
+		static PlatformType s_Platform;
 		static Shared<Input> s_Instance;
 	};
 

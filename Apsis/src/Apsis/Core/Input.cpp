@@ -5,19 +5,18 @@
 
 namespace A {
 
-	RendererAPI Input::s_RendererAPI = SystemInfo::GetRendererAPI();
+	PlatformType Input::s_Platform;
 	Shared<Input> Input::s_Instance = nullptr;
 
 	const Shared<Input> Input::Create()
 	{
 		AP_PROFILE_FN();
 
-		s_RendererAPI = SystemInfo::GetRendererAPI();	// Update
-		switch (s_RendererAPI)
+		s_Platform = SystemInfo::GetPlatform();
+		switch (s_Platform)
 		{
-			case A::RendererAPI::Direct2D:	s_Instance = MakeUnique<WindowsInput>();	break;
-			case A::RendererAPI::OpenGL:	s_Instance = MakeUnique<WindowsInput>();	break;
-			default:						AP_CRIT_C("Unknown renderer API");			return nullptr;
+			case Platform::Windows:	s_Instance = MakeUnique<WindowsInput>();	break;
+			default:						AP_CRIT_C("Unknown platform");			return nullptr;
 		}
 		Input::Init();
 		return s_Instance;
