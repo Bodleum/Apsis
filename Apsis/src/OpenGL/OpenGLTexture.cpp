@@ -35,11 +35,13 @@ namespace A {
 
 	OpenGLTexture::~OpenGLTexture()
 	{
+		AP_PROFILE_FN();
 		glDeleteTextures(1, &m_TextureID);
 	}
 
 	void OpenGLTexture::Bind(unsigned int slot/*= 0*/) const
 	{
+		AP_PROFILE_FN();
 		glActiveTexture(GL_TEXTURE0 + slot);
 		glBindTexture(GL_TEXTURE_2D, m_TextureID);
 	}

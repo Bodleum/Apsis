@@ -17,11 +17,13 @@ namespace A {
 
 	OpenGLShader::~OpenGLShader()
 	{
+		AP_PROFILE_FN();
 		glDeleteProgram(m_ShaderProgramID);
 	}
 
 	void OpenGLShader::Bind()
 	{
+		AP_PROFILE_FN();
 		glUseProgram(m_ShaderProgramID);
 	}
 
@@ -197,6 +199,7 @@ namespace A {
 
 	Shared<VertexBufferLayout> OpenGLShader::DetectVertexBufferLayout(const std::string& vertex_shader_source)
 	{
+		AP_PROFILE_FN();
 		size_t pos, eol;
 		pos = vertex_shader_source.find(" in ");
 		std::string line;
@@ -236,6 +239,7 @@ namespace A {
 
 	const ShaderDataType OpenGLShader::GLSLTypeToShaderDataType(const std::string& type) const
 	{
+		AP_PROFILE_FN();
 		// Clip off numbers
 		size_t typeStringEnd = type.find_last_not_of("1234567890");
 		std::string newType = type.substr(0, typeStringEnd + 1);
@@ -265,6 +269,7 @@ namespace A {
 
 	const unsigned int ShaderDataTypeToOpenGLType(ShaderDataType type)
 	{
+		AP_PROFILE_FN();
 		static std::unordered_map<ShaderDataType, GLenum> typeMap =
 		{
 			{ShaderDataType::Bool, GL_BOOL},

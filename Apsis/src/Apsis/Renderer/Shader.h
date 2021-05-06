@@ -58,6 +58,7 @@ namespace A {
 
 	inline const unsigned int ShaderDataTypeSize(ShaderDataType type)
 	{
+		AP_PROFILE_FN();
 		static std::unordered_map<ShaderDataType, unsigned int> sizeMap =
 		{
 			{ShaderDataType::None, 0},
@@ -95,6 +96,7 @@ namespace A {
 		VertexBufferLayout(const std::vector<BufferElement>& elements)
 			: m_Elements(elements), m_Stride(0)
 		{
+			AP_PROFILE_FN();
 			unsigned int offset = 0;
 			for (auto& element : m_Elements)
 			{

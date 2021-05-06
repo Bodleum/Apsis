@@ -195,6 +195,8 @@ namespace A {
 		const GLchar* message,
 		const void* userParam)
 	{
+		AP_PROFILE_FN();
+
 		std::stringstream ss;
 		ss << "OpenGL Error: " << id << '\n';
 		ss << "Type: ";

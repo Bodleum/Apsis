@@ -56,6 +56,7 @@ namespace A {
 
 	bool EventDispatcher::PollWindowEvents(Unique<Window>& window)
 	{
+		AP_PROFILE_FN();
 		return window->PollEvents();
 	}
 

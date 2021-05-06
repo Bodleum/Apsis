@@ -15,6 +15,8 @@ namespace A {
 
 	void A::Logger::Init()
 	{
+		AP_PROFILE_FN();
+
 		std::vector<spdlog::sink_ptr> logSinks;
 		logSinks.emplace_back(std::make_shared<spdlog::sinks::stdout_color_sink_mt>());
 		logSinks.emplace_back(std::make_shared<spdlog::sinks::basic_file_sink_mt>("Apsis.log", true));

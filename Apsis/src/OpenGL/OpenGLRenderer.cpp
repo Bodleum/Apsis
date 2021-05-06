@@ -7,8 +7,8 @@ namespace A {
 	OpenGLRenderer::OpenGLRenderer()
 		: m_WindowHandle(nullptr)
 	{
-		s_Shader = nullptr;
 		AP_PROFILE_FN();
+		s_Shader = nullptr;
 	}
 
 	OpenGLRenderer::~OpenGLRenderer()

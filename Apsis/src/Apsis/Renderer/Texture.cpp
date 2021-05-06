@@ -7,6 +7,7 @@ namespace A {
 
 	Shared<Texture> Texture::Create(const std::string& path)
 	{
+		AP_PROFILE_FN();
 		switch (SystemInfo::GetRendererAPI())
 		{
 			case RendererAPI::OpenGL: return MakeUnique<OpenGLTexture>(path);

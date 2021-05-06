@@ -14,6 +14,8 @@ namespace A {
 
 	inline std::string MouseCodeToString(MouseCode mouse_code)
 	{
+		AP_PROFILE_FN();
+
 		switch (mouse_code)
 		{
 			case MouseCode::Unknown:	return "Unknown";
@@ -29,6 +31,7 @@ namespace A {
 	// Printing
 	inline std::ostream& operator<<(std::ostream& os, const MouseCode& mouse_code)
 	{
+		AP_PROFILE_FN();
 		return os << (unsigned short)mouse_code;
 	}
 
@@ -206,6 +209,8 @@ namespace A {
 
 	inline std::string KeyCodeToString(KeyCode key_code)
 	{
+		AP_PROFILE_FN();
+
 		switch (key_code)
 		{
 			case KeyCode::Null:					return "Null";
@@ -380,6 +385,7 @@ namespace A {
 	// Printing
 	inline std::ostream& operator<<(std::ostream& os, const KeyCode& key_code)
 	{
+		AP_PROFILE_FN();
 		return os << (unsigned short)key_code;
 	}
 	

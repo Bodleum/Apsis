@@ -49,6 +49,7 @@ namespace A {
 		template<typename T, typename F>
 		bool Dispatch(const F& fn)
 		{
+			AP_PROFILE_FN();
 			if (m_Event->GetType() == T::GetTypeS())
 			{
 				m_Event->m_Complete = fn((T&)(*m_Event));
