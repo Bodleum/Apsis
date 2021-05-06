@@ -24,7 +24,8 @@ project "Apsis"
 		"%{wks.location}/Apsis/dependancies/spdlog/include",
 		"%{wks.location}/Apsis/dependancies/eigen-3.3.9",
 		"%{wks.location}/Apsis/dependancies/glad/include",
-		"%{wks.location}/Apsis/dependancies/GLFW/include"
+		"%{wks.location}/Apsis/dependancies/GLFW/include",
+		"%{wks.location}/Apsis/dependancies/stb_image"
 	}
 
 	links
