@@ -13,8 +13,8 @@ namespace A {
 
 		// Inherited via Renderer
 		virtual bool InitImpl(Unique<Window>& window) override;
-		virtual inline void ClearImpl() override { m_RenderTarget->Clear(D2D1::ColorF(m_ClearColor.x(), m_ClearColor.y(), m_ClearColor.z())); }
-		virtual inline void SetClearColorImpl(const Eigen::Vector4f& col) override { m_ClearColor = col; }
+		virtual inline void ClearImpl() override { m_RenderTarget->Clear(D2D1::ColorF(s_GraphicsResources->ClearColor.x(), s_GraphicsResources->ClearColor.y(), s_GraphicsResources->ClearColor.z())); }
+		virtual inline void SetClearColorImpl(const Eigen::Vector4f& col) override { s_GraphicsResources->ClearColor = col; }
 		virtual void OnResizeImpl() override;
 
 		virtual void DrawCircleImpl(const Eigen::Vector2i& position, float radius, const Eigen::Vector4f& col) override;

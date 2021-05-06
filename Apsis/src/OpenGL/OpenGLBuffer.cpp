@@ -13,7 +13,7 @@ namespace A {
 		glBindBuffer(GL_ARRAY_BUFFER, m_ID);
 		glBufferData(GL_ARRAY_BUFFER, vertex_buffer.size() * sizeof(float), &vertex_buffer[0], GL_STATIC_DRAW);
 
-		m_Layout = Renderer::GetShader()->GetVertexBufferLayout();
+		m_Layout = Renderer::GetGraphicsResources()->DefaultShader->GetVertexBufferLayout();
 		if (!ValidateLayout(vertex_buffer))
 		{
 			AP_CRIT_C("Invalid vertex buffer layout");

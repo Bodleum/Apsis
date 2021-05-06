@@ -6,16 +6,15 @@
 
 namespace A {
 
-	RendererAPI Renderer::s_RendererAPI = SystemInfo::GetRendererAPI();
-	Shared<Shader> Renderer::s_Shader = nullptr;
+	Shared<GraphicsResources> Renderer::s_GraphicsResources = MakeShared<GraphicsResources>(SystemInfo::GetRendererAPI(), Eigen::Vector4f{ 0.8f, 0.2f, 0.8f, 1.0f }, nullptr, Eigen::Vector4f{ 1.0f, 1.0f, 1.0f, 1.0f }, nullptr);
 	Shared<Renderer> Renderer::s_Instance = nullptr;
 
 	Shared<Renderer> Renderer::Create(Unique<Window>& window)
 	{
 		AP_PROFILE_FN();
 
-		s_RendererAPI = SystemInfo::GetRendererAPI();	// Update
-		switch (s_RendererAPI)
+		s_GraphicsResources->RendererAPI = SystemInfo::GetRendererAPI();	// Update
+		switch (s_GraphicsResources->RendererAPI)
 		{
 		case A::RendererAPI::Direct2D:
 			s_Instance = MakeShared<Direct2DRenderer>();

@@ -8,7 +8,6 @@ namespace A {
 		: m_WindowHandle(nullptr)
 	{
 		AP_PROFILE_FN();
-		s_Shader = nullptr;
 	}
 
 	OpenGLRenderer::~OpenGLRenderer()
@@ -29,8 +28,8 @@ namespace A {
 
 		{// Create shader
 			AP_PROFILE_SCOPE("Create shader");
-			s_Shader = Shader::Create("D:/Dev/C++/Apsis/Apsis/src/Assets/OpenGL/DefaultShader.glsl");
-			s_Shader->Bind();
+			s_GraphicsResources->DefaultShader = Shader::Create("D:/Dev/C++/Apsis/Apsis/src/Assets/OpenGL/DefaultShader.glsl");
+			s_GraphicsResources->DefaultShader->Bind();
 		}
 
 		{// Create vertex buffer
@@ -69,7 +68,7 @@ namespace A {
 
 		for (auto& uniform : uniformsList)
 		{
-			int location = glGetUniformLocation(s_Shader->GetID(), uniform.c_str());
+			int location = glGetUniformLocation(s_GraphicsResources->DefaultShader->GetID(), uniform.c_str());
 			if (location == -1)
 			{
 				AP_WARN_C("Uniform {0} not found", uniform);
@@ -88,14 +87,14 @@ namespace A {
 	void OpenGLRenderer::ClearImpl()
 	{
 		AP_PROFILE_FN();
-		glClearColor(m_ClearColor.x(), m_ClearColor.y(), m_ClearColor.z(), m_ClearColor.w());
+		glClearColor(s_GraphicsResources->ClearColor.x(), s_GraphicsResources->ClearColor.y(), s_GraphicsResources->ClearColor.z(), s_GraphicsResources->ClearColor.w());
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 
 	void OpenGLRenderer::SetClearColorImpl(const Eigen::Vector4f& col)
 	{
 		AP_PROFILE_FN();
-		m_ClearColor = col;
+		s_GraphicsResources->ClearColor = col;
 	}
 
 	void OpenGLRenderer::OnResizeImpl()
