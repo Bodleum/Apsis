@@ -38,7 +38,7 @@ namespace A {
 		static inline void OnResize() { s_Instance->OnResizeImpl(); }
 
 		static inline void DrawCircle(const Eigen::Vector2i& position, float radius, const Eigen::Vector4f& col) { s_Instance->DrawCircleImpl(position, radius, col); }
-		static inline void DrawRect(const Eigen::Vector2i& position, float width, float height, const Eigen::Vector4f& col) { s_Instance->DrawRectImpl(position, width, height, col); }
+		static inline void DrawRect(const Eigen::Vector2i& position, float width, float height, Shared<Texture> texture, const Eigen::Vector4f& col = Eigen::Vector4f{1.0f, 1.0f, 1.0f, 1.0f}) { s_Instance->DrawRectImpl(position, width, height, texture,col); }
 
 		static inline RendererAPI GetAPI() { return SystemInfo::GetRendererAPI(); }
 		static inline void SetAPI(RendererAPI api) { s_GraphicsResources->RendererAPI = api; }
@@ -54,10 +54,9 @@ namespace A {
 		virtual void OnResizeImpl() = 0;
 
 		virtual void DrawCircleImpl(const Eigen::Vector2i& position, float radius, const Eigen::Vector4f& col) = 0;
-		virtual void DrawRectImpl(const Eigen::Vector2i& position, float width, float height, const Eigen::Vector4f& col) = 0;
+		virtual void DrawRectImpl(const Eigen::Vector2i& position, float width, float height, Shared<Texture> texture, const Eigen::Vector4f& col/*= {1.0f, 1.0f, 1.0f, 1.0f}*/) = 0;
 
 		static Shared<GraphicsResources> s_GraphicsResources;
-		//Eigen::Vector4f m_ClearColor = { 0.8f, 0.2f, 0.8f, 1.0f };
 
 	private:
 		static Shared<Renderer> s_Instance;

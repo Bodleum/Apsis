@@ -69,7 +69,7 @@ namespace A {
 		m_RenderTarget->DrawEllipse(D2D1::Ellipse(D2D1::Point2F(position.x(), position.y()), radius, radius), m_SolidColorBrush, 2.0f);
 	}
 
-	void Direct2DRenderer::DrawRectImpl(const Eigen::Vector2i& position, float width, float height, const Eigen::Vector4f& col)
+	void Direct2DRenderer::DrawRectImpl(const Eigen::Vector2i& position, float width, float height, Shared<Texture> texture, const Eigen::Vector4f& col/*= {1.0f, 1.0f, 1.0f, 1.0f}*/)
 	{
 		AP_PROFILE_FN();
 		m_SolidColorBrush->SetColor(D2D1::ColorF(col.x(), col.y(), col.z()));

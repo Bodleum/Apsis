@@ -3,7 +3,7 @@
 MainLayer::MainLayer()
 	: Layer()
 {
-
+	m_CamelTexture = A::Texture::Create("res/camel_picture.png");
 }
 
 void MainLayer::OnAdd()
@@ -52,5 +52,5 @@ bool MainLayer::testfn(A::MouseButtonDownEvent& evt)
 void MainLayer::OnRender()
 {
 	//A::Renderer::DrawCircle(Eigen::Vector2i(100, 100), 100, Eigen::Vector4f(1.0f, 1.0f, 0.5f, 1.0f));
-	A::Renderer::DrawRect(Eigen::Vector2i(250, 250), 100, 150, m_ColorRGB);
+	A::Renderer::DrawRect(Eigen::Vector2i(250, 250), 100, 150, m_CamelTexture, m_ColorRGB);
 }

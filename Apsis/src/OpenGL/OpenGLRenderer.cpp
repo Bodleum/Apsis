@@ -104,11 +104,16 @@ namespace A {
 		AP_PROFILE_FN();
 	}
 
-	void OpenGLRenderer::DrawRectImpl(const Eigen::Vector2i& position, float width, float height, const Eigen::Vector4f& col)
+	void OpenGLRenderer::DrawRectImpl(const Eigen::Vector2i& position, float width, float height, Shared<Texture> texture, const Eigen::Vector4f& col/*= {1.0f, 1.0f, 1.0f, 1.0f}*/)
 	{
 		AP_PROFILE_FN();
 		glBindVertexArray(m_RectVA->GetID());
-		s_GraphicsResources->DefaultTexture->Bind();
+
+		if (texture)
+			texture->Bind();
+		else
+			s_GraphicsResources->DefaultTexture->Bind();
+
 		glUniform4f(m_UniformLocations["u_Color"], col.x(), col.y(), col.z(), col.w());
 		glUniform1i(m_UniformLocations["u_Texture"], 0);
 		glDrawElements(GL_TRIANGLES, m_RectVA->GetIndexCount(), GL_UNSIGNED_INT, nullptr);

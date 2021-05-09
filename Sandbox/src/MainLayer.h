@@ -19,4 +19,5 @@ public:
 private:
 	Eigen::Vector4f m_ColorHSV = { 0.0f, 1.0f, 1.0f, 1.0f };
 	Eigen::Vector4f m_ColorRGB = { 1.0f, 0.0f, 0.0f, 1.0f };
+	A::Shared<A::Texture> m_CamelTexture = nullptr;
 };
