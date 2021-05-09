@@ -22,37 +22,34 @@ namespace A {
 		// Blending
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 		m_WindowHandle = (GLFWwindow*)window->GetHandle();
 		m_RectVA = OpenGLVertexArray::Create();
 		m_RectVA->Bind();
 
-		{// Create shader
-			AP_PROFILE_SCOPE("Create shader");
+		{// Create default shader
+			AP_PROFILE_SCOPE("Create default shader");
 			s_GraphicsResources->DefaultShader = Shader::Create("D:/Dev/C++/Apsis/Apsis/src/Assets/OpenGL/DefaultShader.glsl");
 			s_GraphicsResources->DefaultShader->Bind();
 		}
 
-		{// Create vertex buffer
-			AP_PROFILE_SCOPE("Create vertex buffer");
+		{// Create rect vertex array
+			AP_PROFILE_SCOPE("Create rect vertex array");
 			m_RectVA->AddVertexBuffer({
 				-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
 				 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
 				 0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
 				-0.5f,  0.5f, 0.0f, 0.0f, 1.0f
 			});
-		}
-
-		{// Create index buffer
-			AP_PROFILE_SCOPE("Create index buffer");
 			m_RectVA->AddIndexBuffer({ 0, 1, 2, 0, 2, 3 });
 		}
 
-
-
-		// Texture test
-		m_Texture = Texture::Create("D:/Dev/C++/Apsis/Sandbox/res/camel_picture.png");
-		m_Texture->Bind(0);
-
+		{// Create default texture
+			AP_PROFILE_SCOPE("Create default texture");
+			s_GraphicsResources->DefaultTexture = Texture::Create(1, 1);
+			unsigned int whiteTextureData = 0xffffffff;
+			s_GraphicsResources->DefaultTexture->SetData((void*)(&whiteTextureData), sizeof(whiteTextureData));
+		}
 
 		return true;
 	}
@@ -111,7 +108,8 @@ namespace A {
 	{
 		AP_PROFILE_FN();
 		glBindVertexArray(m_RectVA->GetID());
-		//glUniform4f(m_UniformLocations["u_Color"], col.x(), col.y(), col.z(), col.w());
+		s_GraphicsResources->DefaultTexture->Bind();
+		glUniform4f(m_UniformLocations["u_Color"], col.x(), col.y(), col.z(), col.w());
 		glUniform1i(m_UniformLocations["u_Texture"], 0);
 		glDrawElements(GL_TRIANGLES, m_RectVA->GetIndexCount(), GL_UNSIGNED_INT, nullptr);
 	}

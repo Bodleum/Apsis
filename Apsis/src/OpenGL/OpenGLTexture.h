@@ -6,10 +6,12 @@ namespace A {
 	class OpenGLTexture : public Texture
 	{
 	public:
+		OpenGLTexture(unsigned int width, unsigned int height);
 		OpenGLTexture(const std::string& path);
 		virtual ~OpenGLTexture();
 
 		// Inherited via Texture
+		virtual void SetData(void* data, unsigned int size);
 		virtual void Bind(unsigned int slot = 0) const override;
 		virtual inline const int GetWidth() const override { return m_Width; }
 		virtual inline const int GetHeight() const override { return m_Height; }

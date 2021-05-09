@@ -12,13 +12,12 @@ void main()
 
 ShaderType::Pixel
 #version 450 core
-layout(location = 0) out vec4 a_Color;
+layout(location = 0) out vec4 o_Color;
 in vec2 v_TexCoord;
 uniform vec4 u_Color;
 uniform sampler2D u_Texture;
 void main()
 {
 	vec4 texColor = texture(u_Texture, v_TexCoord);
-	a_Color = u_Color;
-	a_Color = texColor;
+	o_Color = texColor * u_Color;
 }

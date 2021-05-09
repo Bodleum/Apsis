@@ -6,6 +6,23 @@
 
 namespace A {
 
+	OpenGLTexture::OpenGLTexture(unsigned int width, unsigned int height)
+		: m_TextureID(0), m_FilePath(""), m_LocalBuffer(nullptr), m_Width(width), m_Height(height), m_BBP(0)
+	{
+		AP_PROFILE_FN();
+
+		glGenTextures(1, &m_TextureID);
+		glBindTexture(GL_TEXTURE_2D, m_TextureID);
+
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, m_Width, m_Height, 0, GL_RGBA, GL_UNSIGNED_BYTE, (const void*)m_LocalBuffer);
+		glBindTexture(GL_TEXTURE_2D, 0);
+	}
+
 	OpenGLTexture::OpenGLTexture(const std::string& path)
 		: m_TextureID(0), m_FilePath(path), m_LocalBuffer(nullptr), m_Width(0), m_Height(0), m_BBP(0)
 	{
@@ -37,6 +54,12 @@ namespace A {
 	{
 		AP_PROFILE_FN();
 		glDeleteTextures(1, &m_TextureID);
+	}
+
+	void OpenGLTexture::SetData(void* data, unsigned int size)
+	{
+		AP_PROFILE_FN();
+		glTextureSubImage2D(m_TextureID, 0, 0, 0, m_Width, m_Height, GL_RGBA, GL_UNSIGNED_BYTE, data);
 	}
 
 	void OpenGLTexture::Bind(unsigned int slot/*= 0*/) const
