@@ -16,13 +16,16 @@
 //#include "Apsis/Event/EventDispatcher.h"	Included in Layer.h
 
 // ---   Renderer   ---
+#include "Apsis/Renderer/Buffer.h"
 #include "Apsis/Renderer/Renderer.h"
 //#include "Apsis/Renderer/RendererAPI.h"	Included in SystemInfo.h
-#include "Apsis/Renderer/Shader.h"
+//#include "Apsis/Renderer/Shader.h"		Included in Renderer.h
+//#include "Apsis/Renderer/Texture.h"		Included in Renderer.h
 
 
 // ---   Utility   ---
 #include "Apsis/Utility/Color.h"
+#include "Apsis/Utility/Instrumentor.h"
 
 
 // ---   Entry Point   ---
