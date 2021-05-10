@@ -58,6 +58,7 @@ namespace A {
 		virtual void DrawRectImpl(const Eigen::Vector2i& position, float width, float height, Shared<Texture> texture, const Eigen::Vector4f& col/*= {1.0f, 1.0f, 1.0f, 1.0f}*/) = 0;
 
 		static Shared<GraphicsResources> s_GraphicsResources;
+		static Shared<Cam> s_Cam;
 
 	private:
 		static Shared<Renderer> s_Instance;

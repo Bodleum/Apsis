@@ -7,6 +7,7 @@
 namespace A {
 
 	Shared<GraphicsResources> Renderer::s_GraphicsResources = MakeShared<GraphicsResources>(SystemInfo::GetRendererAPI(), Eigen::Vector4f{ 0.8f, 0.2f, 0.8f, 1.0f }, nullptr, Eigen::Vector4f{ 1.0f, 1.0f, 1.0f, 1.0f }, nullptr);
+	Shared<Cam> Renderer::s_Cam = nullptr;
 	Shared<Renderer> Renderer::s_Instance = nullptr;
 
 	Shared<Renderer> Renderer::Create(Unique<Window>& window)

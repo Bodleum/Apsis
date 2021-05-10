@@ -64,7 +64,7 @@ namespace A {
 		AP_PROFILE_FN();
 		std::vector<std::string> uniformsList = 
 		{
-			"u_Proj",
+			"u_MVP",
 			"u_Color",
 			"u_Texture"
 		};
@@ -80,7 +80,8 @@ namespace A {
 			m_UniformLocations[uniform] = location;
 		}
 
-		glUniformMatrix4fv(m_UniformLocations["u_Proj"], 1, GL_FALSE, cam->GetProj().data());
+		s_Cam = cam;
+		glUniformMatrix4fv(m_UniformLocations["u_MVP"], 1, GL_FALSE, s_Cam->GetProj().data());
 	}
 
 	void OpenGLRenderer::EndDrawImpl()
