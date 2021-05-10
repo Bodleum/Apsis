@@ -4,6 +4,7 @@
 #include "Apsis/Core/Window.h"
 //#include "Apsis/Event/Event.h"			Included in EventDispatcher.h
 //#include "Apsis/Event/EventDispatcher.h"	Included in Layer.h
+#include "Apsis/Renderer/Cam.h"
 
 //#include <chrono>							Included in EventDispacher.h
 
@@ -27,6 +28,7 @@ namespace A {
 		// Inherited via EventListener
 		virtual bool OnEvent(Shared<Event> evt) override;
 
+		void CreateCam(CamType cam_type);
 		void PushLayer(Layer* layer);
 		void EmlpaceLayer(Layer* layer);
 		void PopLayer();
@@ -51,6 +53,7 @@ namespace A {
 		LayerStack m_LayerStack;
 		Unique<Window> m_Window;
 		Shared<Renderer> m_Renderer;
+		Shared<Cam> m_Cam = nullptr;
 		// Timing
 		MicroSeconds m_TimeStep{ 16667 };	// 60ups by default
 		MicroSeconds m_TimeAccumulator{ 0 };

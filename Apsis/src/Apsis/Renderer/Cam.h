@@ -23,4 +23,9 @@ namespace A {
 		OrthoCam(float left, float right, float top, float bottom, float z_near, float z_far);
 		virtual ~OrthoCam() = default;
 	};
+
+	typedef enum class CamType : unsigned short
+	{
+		Ortho
+	};
 }

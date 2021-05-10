@@ -25,7 +25,7 @@ namespace A {
 		virtual void DrawCircleImpl(const Eigen::Vector2i& position, float radius, const Eigen::Vector4f& col) override;
 		virtual void DrawRectImpl(const Eigen::Vector2i& position, float width, float height, Shared<Texture> texture, const Eigen::Vector4f& col/*= {1.0f, 1.0f, 1.0f, 1.0f}*/) override;
 
-		virtual void BeginDrawImpl() override;
+		virtual void BeginDrawImpl(Shared<Cam> cam) override;
 		virtual void EndDrawImpl() override;
 
 	private:

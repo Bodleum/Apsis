@@ -20,7 +20,6 @@ namespace A {
 
 	private:
 		GLFWwindow* m_WindowHandle;
-		unsigned int m_Width, m_Height;
 		std::string m_Name;
 	};
 

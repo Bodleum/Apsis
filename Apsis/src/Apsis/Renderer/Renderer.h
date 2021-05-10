@@ -32,7 +32,7 @@ namespace A {
 
 		static inline bool Init(Unique<Window>& window) { return s_Instance->InitImpl(window); }
 		
-		static inline void BeginDraw() { s_Instance->BeginDrawImpl(); }
+		static inline void BeginDraw(Shared<Cam> cam) { s_Instance->BeginDrawImpl(cam); }
 		static inline void EndDraw() { s_Instance->EndDrawImpl(); }
 		static inline void Clear() { s_Instance->ClearImpl(); }
 		static inline void SetClearColor(const Eigen::Vector4f& col) { s_Instance->SetClearColorImpl(col); }
@@ -48,7 +48,7 @@ namespace A {
 	protected:
 		virtual bool InitImpl(Unique<Window>& window) = 0;
 
-		virtual void BeginDrawImpl() = 0;
+		virtual void BeginDrawImpl(Shared<Cam> cam) = 0;
 		virtual void EndDrawImpl() = 0;
 		virtual void ClearImpl() = 0;
 		virtual void SetClearColorImpl(const Eigen::Vector4f& col) = 0;

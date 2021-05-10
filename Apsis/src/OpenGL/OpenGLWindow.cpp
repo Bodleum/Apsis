@@ -12,9 +12,12 @@ namespace A {
 	void APIENTRY OpenGLErrorCallbackFunction(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam);
 
 	OpenGLWindow::OpenGLWindow(unsigned int width, unsigned int height, std::string name)
-		: m_WindowHandle(nullptr), m_Width(width), m_Height(height), m_Name(name)
+		: m_WindowHandle(nullptr), m_Name(name)
 	{
 		AP_PROFILE_FN();
+
+		m_Width = width;
+		m_Height = height;
 
 		{// Initialise GLFW
 			AP_PROFILE_SCOPE("Initialise GLFW");

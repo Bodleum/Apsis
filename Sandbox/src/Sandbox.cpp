@@ -6,5 +6,6 @@
 
 Sandbox::Sandbox()
 {
+	CreateCam(A::CamType::Ortho);
 	EmlpaceLayer(new MainLayer());
 }

@@ -24,6 +24,9 @@ namespace A {
 	{
 		AP_PROFILE_FN();
 
+		if (!m_Cam)
+			AP_CRIT_C("No camera set up, use A::App::CreateCam(A::CamType cam_type)");
+
 		while (m_Running)
 		{
 			m_NewTime = std::chrono::time_point_cast<MicroSeconds>(std::chrono::steady_clock::now());	// Get new time
@@ -72,13 +75,30 @@ namespace A {
 	void App::OnRender()
 	{
 		AP_PROFILE_FN();
-		Renderer::BeginDraw();
+		Renderer::BeginDraw(m_Cam);
 		Renderer::Clear();
 		// Render each layer from the bottom up
 		for (auto it = m_LayerStack.rbegin(); it != m_LayerStack.rend(); ++it)
 			if ((*it)->IsEnabled())
 				(*it)->OnRender();
 		Renderer::EndDraw();
+	}
+
+	void App::CreateCam(CamType cam_type)
+	{
+		AP_PROFILE_FN();
+
+		float width = m_Window->GetWidth();
+		float aspectRatio = (float)m_Window->GetWidth() / (float)m_Window->GetHeight();
+
+		switch (cam_type)
+		{
+		case A::CamType::Ortho:
+			m_Cam = MakeShared<OrthoCam>(-aspectRatio, aspectRatio, 1.0f, -1.0f, -1.0f, 1.0f);
+			break;
+		default:
+			break;
+		}
 	}
 
 	void App::PushLayer(Layer* layer)
