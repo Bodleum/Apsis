@@ -94,7 +94,7 @@ namespace A {
 		switch (cam_type)
 		{
 		case A::CamType::Ortho:
-			m_Cam = MakeShared<OrthoCam>(-aspectRatio, aspectRatio, 1.0f, -1.0f, -1.0f, 1.0f);
+			m_Cam = MakeShared<OrthoCam>(-aspectRatio, aspectRatio, -1.0f, 1.0f, -1.0f, 1.0f);
 			break;
 		default:
 			break;

@@ -2,6 +2,8 @@
 #include "OpenGLRenderer.h"
 #include "OpenGLHeaders.h"
 
+#include <Eigen/Geometry>
+
 namespace A {
 
 	OpenGLRenderer::OpenGLRenderer()
@@ -81,7 +83,6 @@ namespace A {
 		}
 
 		s_Cam = cam;
-		glUniformMatrix4fv(m_UniformLocations["u_MVP"], 1, GL_FALSE, s_Cam->GetProj().data());
 	}
 
 	void OpenGLRenderer::EndDrawImpl()
@@ -117,12 +118,20 @@ namespace A {
 	{
 		AP_PROFILE_FN();
 		glBindVertexArray(m_RectVA->GetID());
+		
+		Eigen::Affine3f modelTransform = Eigen::Affine3f::Identity();
+		modelTransform.scale(Eigen::Vector3f(width, height, 1.0f));
+		// Rotate
+		modelTransform.translate(Eigen::Vector3f((float)position.x(), (float)position.y(), 1.0f));
+		Eigen::Matrix4f mvp = modelTransform * s_Cam->GetVP();
+		//mvp = s_Cam->GetVP();
 
 		if (texture)
 			texture->Bind();
 		else
 			s_GraphicsResources->DefaultTexture->Bind();
 
+		glUniformMatrix4fv(m_UniformLocations["u_MVP"], 1, GL_FALSE, mvp.data());
 		glUniform4f(m_UniformLocations["u_Color"], col.x(), col.y(), col.z(), col.w());
 		glUniform1i(m_UniformLocations["u_Texture"], 0);
 		glDrawElements(GL_TRIANGLES, m_RectVA->GetIndexCount(), GL_UNSIGNED_INT, nullptr);
