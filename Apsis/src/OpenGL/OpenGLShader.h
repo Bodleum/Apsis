@@ -6,16 +6,16 @@ namespace A {
 	class OpenGLShader : public Shader
 	{
 	public:
-		OpenGLShader(const std::string& path);
+		OpenGLShader(const char* shader_source);
 		virtual ~OpenGLShader();
 
 		// Inherited via Shader
 		virtual void Bind() override;
 
 	private:
+		const std::unordered_map<ShaderType, std::string> Process(const char* shader_source);
+		void CompileAndLink(std::unordered_map<ShaderType, std::string> shader_sources);
 		// Inheruted via Shader
-		virtual const std::unordered_map<ShaderType, std::string> Read(const std::string& path) override;
-		virtual void CompileAndLink(std::unordered_map<ShaderType, std::string> shader_sources) override;
 		virtual Shared<VertexBufferLayout> DetectVertexBufferLayout(const std::string& vertex_shader_source) override;
 
 

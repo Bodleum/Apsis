@@ -1,4 +1,4 @@
-ShaderType::Vertex
+R"(ShaderType::Vertex
 #version 330 core
 layout(location = 0) in vec3 a_Position;
 layout(location = 1) in vec2 a_TexCoord;
@@ -22,3 +22,4 @@ void main()
 	vec4 texColor = texture(u_Texture, v_TexCoord);
 	o_Color = texColor * u_Color;
 }
+)"

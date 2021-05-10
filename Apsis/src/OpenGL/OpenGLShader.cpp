@@ -6,11 +6,11 @@
 
 namespace A {
 
-	OpenGLShader::OpenGLShader(const std::string& path)
+	OpenGLShader::OpenGLShader(const char* shader_source)
 	{
 		AP_PROFILE_FN();
 
-		auto shaderSources = Read(path);
+		auto shaderSources = Process(shader_source);
 		CompileAndLink(shaderSources);
 		m_VertexBufferLayout = DetectVertexBufferLayout(shaderSources[ShaderType::Vertex]);
 	}
@@ -26,35 +26,14 @@ namespace A {
 		AP_PROFILE_FN();
 		glUseProgram(m_ShaderProgramID);
 	}
-
-	const std::unordered_map<ShaderType, std::string> OpenGLShader::Read(const std::string& path)
+	
+	const std::unordered_map<ShaderType, std::string> OpenGLShader::Process(const char* shader_source)
 	{
 		AP_PROFILE_FN();
 
 		std::unordered_map<ShaderType, std::string> mapOfShaderSources{};
-
-
-		std::ifstream ifs(path, std::ios::in);
-		if (!ifs)
-		{
-			AP_CRIT_C("Could not open shader file {0}", path);
-			return {};
-		}
-
-		// Read file
-		ifs.seekg(0, ifs.end);
-		int length = ifs.tellg();	// Get size of file
-		ifs.seekg(0, ifs.beg);
-		if (length == -1)
-		{
-			AP_ERROR_C("Could not read shader file {0}", path);
-			return {};
-		}
-		std::string fileData;
-		fileData.resize(length);
-		ifs.read(&fileData[0], length);	// Read into fileData
-		ifs.close();
-
+		std::string fileData = shader_source;
+		
 		// Find shader type
 		size_t shaderTypePos = fileData.find("ShaderType::", 0);
 		if (shaderTypePos == std::string::npos)

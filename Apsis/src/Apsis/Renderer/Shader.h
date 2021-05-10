@@ -31,19 +31,21 @@ namespace A {
 	{
 	public:
 		virtual ~Shader() = default;
-		static Shared<Shader> Create(const std::string& path);
+		static Shared<Shader> Create(const char* path);
+		static Shared<Shader> CreateFromString(const char* shader_source);
 
 		virtual void Bind() = 0;
 		virtual inline const unsigned int GetID() const { return m_ShaderProgramID; }
 		virtual inline const Shared<VertexBufferLayout> GetVertexBufferLayout() const { return m_VertexBufferLayout; }
 
 	protected:
-		virtual const std::unordered_map<ShaderType, std::string> Read(const std::string& path) = 0;
-		virtual void CompileAndLink(std::unordered_map<ShaderType, std::string> shader_sources) = 0;
 		virtual Shared<VertexBufferLayout> DetectVertexBufferLayout(const std::string& vertex_shader_source) = 0;
 
 		unsigned int m_ShaderProgramID;
 		Shared<VertexBufferLayout> m_VertexBufferLayout;
+
+	private:
+		static char* Read(const char* path);
 	};
 
 	typedef enum class ShaderDataType : unsigned short

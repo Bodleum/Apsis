@@ -29,7 +29,12 @@ namespace A {
 
 		{// Create default shader
 			AP_PROFILE_SCOPE("Create default shader");
-			s_GraphicsResources->DefaultShader = Shader::Create("D:/Dev/C++/Apsis/Apsis/src/Assets/OpenGL/DefaultShader.glsl");
+
+			const char* shaderSource =
+#include "Assets/OpenGL/DefaultShader.shader"
+				;
+			 
+			s_GraphicsResources->DefaultShader = Shader::CreateFromString(shaderSource);
 			s_GraphicsResources->DefaultShader->Bind();
 		}
 
