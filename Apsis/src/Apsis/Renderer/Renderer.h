@@ -2,7 +2,8 @@
 #include "Apsis/Core/Core.h"	// Shared
 #include "Apsis/Renderer/Shader.h"
 #include "Apsis/Renderer/Texture.h"
-#include <Eigen/Core>
+#include "Apsis/Renderer/Cam.h"
+//#include <Eigen/Core>		Included in Cam.h
 
 namespace A {
 
