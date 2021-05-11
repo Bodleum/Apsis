@@ -1,6 +1,6 @@
 #pragma once
 #include "Apsis/Core/Window.h"
-#include "Apsis/Core/InputCodes.h"
+#include "Apsis/Core/Input/InputCodes.h"
 
 struct GLFWwindow;
 

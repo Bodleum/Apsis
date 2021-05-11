@@ -1,6 +1,6 @@
 #pragma once
 #include <unordered_map>
-#include "Apsis/Core/InputCodes.h"
+#include "Apsis/Core/Input/InputCodes.h"
 
 namespace A {
 

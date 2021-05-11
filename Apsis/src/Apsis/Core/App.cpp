@@ -1,7 +1,7 @@
 #include "apch.h"
 #include "App.h"
 
-#include "Apsis/Core/Input.h"
+#include "Apsis/Core/Input/Input.h"
 #include "Apsis/Renderer/Renderer.h"
 
 namespace A {

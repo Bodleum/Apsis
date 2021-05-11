@@ -1,6 +1,6 @@
 #pragma once
 #include "apch.h"		// sstream
-#include "Apsis/Core/InputCodes.h"
+#include "Apsis/Core/Input/InputCodes.h"
 
 namespace A {
 

@@ -3,7 +3,7 @@
 
 #include "Apsis/Core/App.h"
 //#include "Apsis/Core/Logger.h"	Included in pch
-#include "Apsis/Core/Input.h"
+#include "Apsis/Core/Input/Input.h"
 
 extern A::App* A::CreateApp();
 

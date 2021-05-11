@@ -1,6 +1,6 @@
 #pragma once
 #include "Apsis/Core/Core.h"	// Unique
-#include "Apsis/Core/InputCodes.h"
+#include "Apsis/Core/Input/InputCodes.h"
 
 namespace A {
 

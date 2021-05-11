@@ -1,5 +1,5 @@
 #pragma once
-#include "Apsis/Core/Input.h"
+#include "Apsis/Core/Input/Input.h"
 
 namespace A {
 
