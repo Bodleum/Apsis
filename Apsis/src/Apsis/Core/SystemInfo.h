@@ -8,7 +8,7 @@ namespace A {
 
 	struct SystemInfo
 	{
-		static PlatformType Platform;
+		const static PlatformType Platform;
 		static RendererAPI RendererAPI;
 	};
 

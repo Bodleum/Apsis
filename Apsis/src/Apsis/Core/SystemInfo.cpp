@@ -4,19 +4,19 @@
 namespace A {
 
 	#if defined(AP_PLATFORM_WIN)
-		PlatformType SystemInfo::Platform = PlatformType::Windows;
+		const PlatformType SystemInfo::Platform = PlatformType::Windows;
 	#elif defined(AP_PLATFORM_SIMULATOR)
-		PlatformType SystemInfo::Platform = PlatformType::Simulator;
+		const PlatformType SystemInfo::Platform = PlatformType::Simulator;
 	#elif defined(AP_PLATFORM_IPHONE)
-		PlatformType SystemInfo::Platform = PlatformType::iPhone;
+		const PlatformType SystemInfo::Platform = PlatformType::iPhone;
 	#elif defined(AP_PLATFORM_OSX)
-		PlatformType SystemInfo::Platform = PlatformType::OSX;
+		const PlatformType SystemInfo::Platform = PlatformType::OSX;
 	#elif defined(AP_PLATFORM_LINUX)
-		PlatformType SystemInfo::Platform = PlatformType::Linux;
+		const PlatformType SystemInfo::Platform = PlatformType::Linux;
 	#elif defined(P_PLATFORM_UNIX)
-		PlatformType SystemInfo::Platform = PlatformType::Unix;
+		const PlatformType SystemInfo::Platform = PlatformType::Unix;
 	#elif defined(AP_PLATFORM_POSIX)
-		PlatformType SystemInfo::Platform = PlatformType::POSIX;
+		const PlatformType SystemInfo::Platform = PlatformType::POSIX;
 	#endif
 
 	
