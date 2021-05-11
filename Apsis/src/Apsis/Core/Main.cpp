@@ -44,7 +44,6 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 	AP_PROFILE_BEGIN_SESSION("Startup", "Apsis - Startup.json");
 		A::Logger::Init();
 		A::SystemInfo::Create();
-		A::Input::Create();
 		{
 			A::AppArgs args;
 			args.MainFnArgs.hInstance = hInstance;

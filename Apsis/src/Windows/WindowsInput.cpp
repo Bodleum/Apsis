@@ -1,33 +1,36 @@
 #include "apch.h"
-#include "WindowsInput.h"
+#include "Apsis/Core/Input/Input.h"
 
 namespace A {
 
-	bool WindowsInput::IsKeyDownImpl(KeyCode key_code)
+	int KeyCodeToVirtualKeyCode(KeyCode key_code);
+	int MouseCodeToVirtualKeyCode(MouseCode mouse_code);
+
+	bool Input::IsKeyDown(KeyCode key_code)
 	{
 		AP_PROFILE_FN();
 		return 0x80000000 & GetAsyncKeyState(KeyCodeToVirtualKeyCode(key_code));
 	}
 
-	bool WindowsInput::WasKeyDownImpl(KeyCode key_code)
+	bool Input::WasKeyDown(KeyCode key_code)
 	{
 		AP_PROFILE_FN();
 		return 0x00000001 & GetAsyncKeyState(KeyCodeToVirtualKeyCode(key_code));
 	}
 
-	bool WindowsInput::IsMouseButtonDownImpl(MouseCode mouse_code)
+	bool Input::IsMouseButtonDown(MouseCode mouse_code)
 	{
 		AP_PROFILE_FN();
 		return 0x80000000 & GetAsyncKeyState(MouseCodeToVirtualKeyCode(mouse_code));
 	}
 
-	bool WindowsInput::WasMouseButtonDownImpl(MouseCode mouse_code)
+	bool Input::WasMouseButtonDown(MouseCode mouse_code)
 	{
 		AP_PROFILE_FN();
 		return 0x00000001 & GetAsyncKeyState(MouseCodeToVirtualKeyCode(mouse_code));
 	}
 
-	std::array<int, 2> WindowsInput::GetMousePosImpl()
+	std::array<int, 2> Input::GetMousePos()
 	{
 		AP_PROFILE_FN();
 		POINT point;
@@ -35,21 +38,20 @@ namespace A {
 		return std::array<int, 2>({ (int)point.x, (int)point.y });
 	}
 
-	int WindowsInput::GetMouseXImpl()
+	int Input::GetMouseX()
 	{
 		AP_PROFILE_FN();
 		return GetMousePos()[0];
 	}
 
-	int WindowsInput::GetMouseYImpl()
+	int Input::GetMouseY()
 	{
 		AP_PROFILE_FN();
 		return GetMousePos()[1];
 	}
 
 
-	// ---   Private   ---
-	int WindowsInput::KeyCodeToVirtualKeyCode(KeyCode key_code)
+	int KeyCodeToVirtualKeyCode(KeyCode key_code)
 	{
 		AP_PROFILE_FN();
 		switch (key_code)
@@ -307,7 +309,7 @@ namespace A {
 		return 0;
 	}
 
-	int WindowsInput::MouseCodeToVirtualKeyCode(MouseCode mouse_code)
+	int MouseCodeToVirtualKeyCode(MouseCode mouse_code)
 	{
 		AP_PROFILE_FN();
 		switch (mouse_code)
