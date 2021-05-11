@@ -9,7 +9,7 @@ namespace A {
 	{
 		AP_PROFILE_FN();
 
-		switch (SystemInfo::GetRendererAPI())
+		switch (SystemInfo::RendererAPI)
 		{
 		case RendererAPI::OpenGL:	return MakeShared<OpenGLShader>(Read(path));
 		default:		break;
@@ -22,7 +22,7 @@ namespace A {
 	{
 		AP_PROFILE_FN();
 
-		switch (SystemInfo::GetRendererAPI())
+		switch (SystemInfo::RendererAPI)
 		{
 		case RendererAPI::OpenGL:	return MakeShared<OpenGLShader>(shader_source);
 		default:		break;

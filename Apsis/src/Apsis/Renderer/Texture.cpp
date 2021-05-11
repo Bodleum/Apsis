@@ -8,7 +8,7 @@ namespace A {
 	Shared<Texture> Texture::Create(unsigned int width, unsigned int height)
 	{
 		AP_PROFILE_FN();
-		switch (SystemInfo::GetRendererAPI())
+		switch (SystemInfo::RendererAPI)
 		{
 			case RendererAPI::OpenGL: return MakeUnique<OpenGLTexture>(width, height);
 		}
@@ -19,7 +19,7 @@ namespace A {
 	Shared<Texture> Texture::Create(const std::string& path)
 	{
 		AP_PROFILE_FN();
-		switch (SystemInfo::GetRendererAPI())
+		switch (SystemInfo::RendererAPI)
 		{
 			case RendererAPI::OpenGL: return MakeUnique<OpenGLTexture>(path);
 		}

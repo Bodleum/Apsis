@@ -41,7 +41,7 @@ namespace A {
 		static inline void DrawCircle(const Eigen::Vector2i& position, float radius, const Eigen::Vector4f& col) { s_Instance->DrawCircleImpl(position, radius, col); }
 		static inline void DrawRect(const Eigen::Vector2i& position, float width, float height, Shared<Texture> texture, const Eigen::Vector4f& col = Eigen::Vector4f{1.0f, 1.0f, 1.0f, 1.0f}) { s_Instance->DrawRectImpl(position, width, height, texture,col); }
 
-		static inline RendererAPI GetAPI() { return SystemInfo::GetRendererAPI(); }
+		static inline RendererAPI GetAPI() { return SystemInfo::RendererAPI; }
 		static inline void SetAPI(RendererAPI api) { s_GraphicsResources->RendererAPI = api; }
 		static inline const Shared<GraphicsResources> GetGraphicsResources() { return s_GraphicsResources; }
 

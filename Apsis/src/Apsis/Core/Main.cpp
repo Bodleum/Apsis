@@ -9,8 +9,10 @@ extern A::App* A::CreateApp();
 
 #ifdef AP_PLATFORM_WIN
 
+
 int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPWSTR pCmdLine, _In_ int nShowCmd)
 {
+
 	// Fix io to console
 	if (A::CreateNewConsole(1024))
 	{
@@ -43,7 +45,6 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 
 	AP_PROFILE_BEGIN_SESSION("Startup", "Apsis - Startup.json");
 		A::Logger::Init();
-		A::SystemInfo::Create();
 		{
 			A::AppArgs args;
 			args.MainFnArgs.hInstance = hInstance;

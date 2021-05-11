@@ -8,7 +8,7 @@ namespace A {
 	Unique<VertexBuffer> VertexBuffer::Create(const std::vector<float>& vertex_buffer)
 	{
 		AP_PROFILE_FN();
-		switch (SystemInfo::GetRendererAPI())
+		switch (SystemInfo::RendererAPI)
 		{
 			case RendererAPI::OpenGL: return MakeUnique<OpenGLVertexBuffer>(vertex_buffer);
 		}
@@ -19,7 +19,7 @@ namespace A {
 	Unique<IndexBuffer> IndexBuffer::Create(const std::vector<unsigned int>& index_buffer)
 	{
 		AP_PROFILE_FN();
-		switch (SystemInfo::GetRendererAPI())
+		switch (SystemInfo::RendererAPI)
 		{
 			case RendererAPI::OpenGL: return MakeUnique<OpenGLIndexBuffer>(index_buffer);
 		}
