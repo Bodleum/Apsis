@@ -7,17 +7,15 @@
 namespace A {
 
 	App* App::s_Instance = nullptr;
-	AppArgs App::m_Args = AppArgs();
+	AppArgs App::s_Args = AppArgs();
 
 	App::App()
-		: m_LayerStack(), m_CurrentTime(std::chrono::time_point_cast<MicroSeconds>(std::chrono::steady_clock::now()))
+		: m_Window(Window::Create(s_Args.MainFnArgs)), m_Renderer(Renderer::Create(m_Window)), m_CurrentTime(std::chrono::time_point_cast<MicroSeconds>(std::chrono::steady_clock::now()))
 	{
 		AP_PROFILE_FN();
 
 		s_Instance = this,
 		AP_INFO_C("Created App");
-		m_Window = Window::Create(m_Args.MainFnArgs);
-		m_Renderer = Renderer::Create(m_Window);
 	}
 
 	void App::Run()
@@ -29,7 +27,7 @@ namespace A {
 
 		while (m_Running)
 		{
-			m_NewTime = std::chrono::time_point_cast<MicroSeconds>(std::chrono::steady_clock::now());	// Get new time
+			m_NewTime = std::chrono::time_point_cast<std::chrono::microseconds>(std::chrono::steady_clock::now());	// Get new time
 			m_FrameTime = (m_NewTime - m_CurrentTime);	// Calcultate frame time
 			if (m_FrameTime > 25 * m_TimeStep)	// Clipping
 				m_FrameTime = 25 * m_TimeStep;
@@ -39,10 +37,10 @@ namespace A {
 			// Do updates
 			while (m_TimeAccumulator >= m_TimeStep)
 			{
-				PollEvents();
 				OnUpdate(m_TimeStep);
 				m_TimeAccumulator -= m_TimeStep;
 			}
+
 
 			/* Interpolate rendering
 			const auto alpha = m_TimeAccumulator / m_TimeStep;
@@ -51,15 +49,16 @@ namespace A {
 			* See: https://gafferongames.com/post/fix_your_timestep/
 			*/
 
-			 OnRender();
+			OnRender();
+			PollEvents();
 		}
 	}
 
 	bool App::PollEvents()
 	{
 		AP_PROFILE_FN();
-		bool queueRes = EventDispatcher::PollQueuedEvents();
 		bool windowRes = EventDispatcher::PollWindowEvents(m_Window);
+		bool queueRes = EventDispatcher::PollQueuedEvents();
 		return queueRes || windowRes;
 	}
 
@@ -93,11 +92,11 @@ namespace A {
 
 		switch (cam_type)
 		{
-		case A::CamType::Ortho:
-			m_Cam = MakeShared<OrthoCam>(-aspectRatio, aspectRatio, -1.0f, 1.0f, -1.0f, 1.0f);
-			break;
-		default:
-			break;
+			case A::CamType::Ortho:
+				m_Cam = MakeShared<OrthoCam>(-aspectRatio, aspectRatio, -1.0f, 1.0f, -1.0f, 1.0f);
+				break;
+			default:
+				break;
 		}
 	}
 
@@ -128,10 +127,11 @@ namespace A {
 
 		switch (evt->GetType())
 		{
-		case EventType::WindowResize:	Renderer::OnResize();	break;
-		case EventType::WindowPaint:	OnRender();				break;
-		case EventType::WindowDestroy:	m_Running = false;		break;
-		default:												break;
+			case EventType::WindowResize:	Renderer::OnResize();		break;
+			case EventType::WindowPaint:	OnRender();					break;
+			case EventType::WindowDestroy:	m_Window.reset(nullptr);	break;
+			case EventType::AppQuit:		m_Running = false;			return true;
+			default:													break;
 		}
 
 		for (Layer* layer : m_LayerStack)

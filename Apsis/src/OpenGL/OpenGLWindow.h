@@ -14,6 +14,7 @@ namespace A {
 		virtual ~OpenGLWindow();
 
 		// Inherited via Window
+		virtual void Destroy() override;
 		virtual bool PollEvents() const override;
 		virtual void* GetHandle() const override;
 		virtual const HDC GetDeviceContextHandle() const override;

@@ -10,8 +10,6 @@
 
 namespace A {
 
-	using MicroSeconds = std::chrono::microseconds;
-
 	class Renderer;
 
 	class App : public EventListener
@@ -38,7 +36,7 @@ namespace A {
 	private:
 		void Run();
 
-		static inline void SetAppArgs(AppArgs args) { m_Args = args; }
+		static inline void SetAppArgs(AppArgs args) { s_Args = args; }
 
 		#ifdef AP_PLATFORM_WIN
 			friend int WINAPI ::wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPWSTR pCmdLine, _In_ int nShowCmd);
@@ -47,19 +45,19 @@ namespace A {
 		#endif // AP_PLATFORM_WIN
 
 		bool m_Running = true;
-		static AppArgs m_Args;
+		static AppArgs s_Args;
 		static App* s_Instance;
 		// Assets
-		LayerStack m_LayerStack;
-		Unique<Window> m_Window;
-		Shared<Renderer> m_Renderer;
+		LayerStack m_LayerStack = LayerStack();
+		Unique<Window> m_Window = nullptr;
+		Shared<Renderer> m_Renderer = nullptr;
 		Shared<Cam> m_Cam = nullptr;
 		// Timing
-		MicroSeconds m_TimeStep{ 16667 };	// 60ups by default
-		MicroSeconds m_TimeAccumulator{ 0 };
-		MicroSeconds m_FrameTime{ 0 };
-		std::chrono::time_point<std::chrono::steady_clock, MicroSeconds> m_CurrentTime;
-		std::chrono::time_point<std::chrono::steady_clock, MicroSeconds> m_NewTime;
+		std::chrono::microseconds m_TimeStep{ 16667 };	// 60ups by default
+		std::chrono::microseconds m_TimeAccumulator{ 0 };
+		std::chrono::microseconds m_FrameTime{ 0 };
+		std::chrono::time_point<std::chrono::steady_clock, std::chrono::microseconds> m_CurrentTime;
+		std::chrono::time_point<std::chrono::steady_clock, std::chrono::microseconds> m_NewTime;
 	};
 
 	// Defined in client code

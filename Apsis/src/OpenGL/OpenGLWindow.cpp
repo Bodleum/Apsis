@@ -165,8 +165,7 @@ namespace A {
 	OpenGLWindow::~OpenGLWindow()
 	{
 		AP_PROFILE_FN();
-		glfwDestroyWindow(m_WindowHandle);
-		glfwTerminate();
+		Destroy();
 	}
 
 	bool OpenGLWindow::PollEvents() const
@@ -186,6 +185,14 @@ namespace A {
 	{
 		AP_PROFILE_FN();
 		return HDC();
+	}
+
+	void OpenGLWindow::Destroy()
+	{
+		AP_PROFILE_FN();
+		glfwDestroyWindow(m_WindowHandle);
+		glfwTerminate();
+		EventDispatcher::DispatchEvent(MakeShared<AppQuitEvent>());
 	}
 
 

@@ -7,6 +7,7 @@ namespace A {
 	{
 	public:
 		virtual ~Window() = default;
+		virtual void Destroy() = 0;
 
 		virtual bool PollEvents() const = 0;
 
