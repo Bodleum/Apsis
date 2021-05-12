@@ -10,7 +10,7 @@ namespace A {
 	AppArgs App::s_Args = AppArgs();
 
 	App::App()
-		: m_Window(Window::Create(s_Args.MainFnArgs)), m_Renderer(Renderer::Create(m_Window)), m_CurrentTime(std::chrono::time_point_cast<MicroSeconds>(std::chrono::steady_clock::now()))
+		: m_Window(Window::Create(s_Args.MainFnArgs)), m_Renderer(Renderer::Create(m_Window)), m_CurrentTime(std::chrono::time_point_cast<std::chrono::microseconds>(std::chrono::steady_clock::now()))
 	{
 		AP_PROFILE_FN();
 
@@ -62,7 +62,7 @@ namespace A {
 		return queueRes || windowRes;
 	}
 
-	void App::OnUpdate(MicroSeconds time_step)
+	void App::OnUpdate(std::chrono::microseconds time_step)
 	{
 		AP_PROFILE_FN();
 		// Update each layer if enabled

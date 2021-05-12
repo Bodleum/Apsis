@@ -21,7 +21,7 @@ namespace A {
 		inline const Unique<Window>& GetWindow() { return m_Window; }
 
 		bool PollEvents();
-		void OnUpdate(MicroSeconds time_step);
+		void OnUpdate(std::chrono::microseconds time_step);
 		void OnRender();
 		// Inherited via EventListener
 		virtual bool OnEvent(Shared<Event> evt) override;

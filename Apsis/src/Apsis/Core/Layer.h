@@ -5,8 +5,6 @@
 
 namespace A {
 
-	using MicroSeconds = std::chrono::microseconds;
-
 	class App;
 
 	class Layer
@@ -18,7 +16,7 @@ namespace A {
 		virtual void OnAdd() = 0;
 		virtual void OnRemove() = 0;
 
-		virtual void OnUpdate(MicroSeconds time_step) = 0;
+		virtual void OnUpdate(std::chrono::microseconds time_step) = 0;
 		virtual void OnRender() = 0;
 		virtual bool OnEvent(Shared<Event> evt) = 0;
 

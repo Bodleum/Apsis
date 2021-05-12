@@ -30,7 +30,7 @@ void MainLayer::OnRemove()
 {
 }
 
-void MainLayer::OnUpdate(A::MicroSeconds time_step)
+void MainLayer::OnUpdate(std::chrono::microseconds time_step)
 {
 	m_ColorHSV.x() += time_step.count() * 0.000000005;
 	if (m_ColorHSV.x() > 1.0f)
