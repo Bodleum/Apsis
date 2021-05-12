@@ -1,11 +1,12 @@
 #pragma once
+#include <iostream>
 
 namespace A {
 
 	typedef enum class MouseCode : unsigned short
 	{
-		Unknown = -1,
-		Left = 0,
+		Unknown = 0,
+		Left,
 		Right,
 		Middle,
 		X1,
@@ -13,13 +14,12 @@ namespace A {
 	} Mouse;
 
 	const char* MouseCodeToString(MouseCode mouse_code);
+	std::ostream& operator<<(std::ostream& os, const MouseCode& mouse_code);
 
 	// ASCII
 	typedef enum class KeyCode : unsigned short
 	{
-		Unknown				= -1,
-		Null				= 0,
-
+		Unknown				= 0,
 		
 		Space				= 32,
 		ExclamationMark		= 33,
@@ -187,5 +187,6 @@ namespace A {
 	} Key;
 
 	const char* KeyCodeToString(KeyCode key_code);
+	std::ostream& operator<<(std::ostream& os, const KeyCode& key_code);
 
 }
