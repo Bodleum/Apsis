@@ -9,25 +9,25 @@ namespace A {
 	bool Input::IsKeyDown(KeyCode key_code)
 	{
 		AP_PROFILE_FN();
-		return 0x80000000 & GetAsyncKeyState(KeyCodeToVirtualKeyCode(key_code));
+		return BIT_AT(32) & GetAsyncKeyState(KeyCodeToVirtualKeyCode(key_code));
 	}
 
 	bool Input::WasKeyDown(KeyCode key_code)
 	{
 		AP_PROFILE_FN();
-		return 0x00000001 & GetAsyncKeyState(KeyCodeToVirtualKeyCode(key_code));
+		return BIT_AT(0) & GetAsyncKeyState(KeyCodeToVirtualKeyCode(key_code));
 	}
 
 	bool Input::IsMouseButtonDown(MouseCode mouse_code)
 	{
 		AP_PROFILE_FN();
-		return 0x80000000 & GetAsyncKeyState(MouseCodeToVirtualKeyCode(mouse_code));
+		return BIT_AT(32) & GetAsyncKeyState(MouseCodeToVirtualKeyCode(mouse_code));
 	}
 
 	bool Input::WasMouseButtonDown(MouseCode mouse_code)
 	{
 		AP_PROFILE_FN();
-		return 0x00000001 & GetAsyncKeyState(MouseCodeToVirtualKeyCode(mouse_code));
+		return BIT_AT(0) & GetAsyncKeyState(MouseCodeToVirtualKeyCode(mouse_code));
 	}
 
 	std::array<int, 2> Input::GetMousePos()
