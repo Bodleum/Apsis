@@ -8,20 +8,28 @@ namespace A {
 		AP_PROFILE_FN();
 		static std::unordered_map<MouseCode, const char*> stringMap =
 		{
-			{ MouseCode::Unknown, "Unknown" },
 			{ MouseCode::Left, "Left" },
 			{ MouseCode::Right,  "Right" },
 			{ MouseCode::Middle,  "Middle" },
 			{ MouseCode::X1,  "X1" },
 			{ MouseCode::X2,  "X2" }
 		};
-		return stringMap[mouse_code];
+
+		try
+		{
+			return stringMap.at(mouse_code);
+		}
+		catch (const std::out_of_range& e)
+		{
+			AP_WARN_C("MouseCode {0} not supported", (unsigned short)mouse_code);
+			return "Unknown";
+		}
 	}
 
 	// Printing
-	inline std::ostream& operator<<(std::ostream& os, const MouseCode& mouse_code)
+	std::ostream& operator<<(std::ostream& os, const MouseCode& mouse_code)
 	{
-		return os << (short)mouse_code;
+		return os << MouseCodeToString(mouse_code);
 	}
 
 
@@ -29,8 +37,6 @@ namespace A {
 	{
 		static std::unordered_map<KeyCode, const char*> stringMap =
 		{
-			{ KeyCode::Null,				"Null" },
-
 			{ KeyCode::Space,				"Space" },
 			{ KeyCode::ExclamationMark,		"ExclamationMark" },
 			{ KeyCode::DoubleQuotes,		"DoubleQuotes" },
@@ -196,12 +202,20 @@ namespace A {
 			{ KeyCode::Menu,				"Menu" }
 		};
 		
-		return stringMap[key_code];
+		try
+		{
+			return stringMap.at(key_code);
+		}
+		catch (const std::out_of_range& e)
+		{
+			AP_WARN_C("KeyCode {0} not supported", (unsigned short)key_code);
+			return "Unknown";
+		}
 	}
 
 	// Printing
-	inline std::ostream& operator<<(std::ostream& os, const KeyCode& key_code)
+	std::ostream& operator<<(std::ostream& os, const KeyCode& key_code)
 	{
-		return os << (short)key_code;
+		return os << KeyCodeToString(key_code);
 	}
 }

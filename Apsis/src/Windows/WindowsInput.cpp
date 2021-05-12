@@ -58,8 +58,6 @@ namespace A {
 		{
 		case A::KeyCode::Unknown:
 			break;
-		case A::KeyCode::Null:
-			break;
 		case A::KeyCode::Space:
 			return VK_SPACE;
 		case A::KeyCode::DoubleQuotes:
