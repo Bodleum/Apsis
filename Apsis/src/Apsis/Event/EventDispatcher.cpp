@@ -23,7 +23,7 @@ namespace A {
 		return eventComleted;
 	}
 
-	void EventDispatcher::SendEvent(Shared<Event> evt, std::chrono::nanoseconds delay)
+	void EventDispatcher::SendEvent(Shared<Event> evt, std::chrono::milliseconds delay)
 	{
 		AP_PROFILE_FN();
 		std::chrono::time_point<std::chrono::system_clock, std::chrono::nanoseconds> now = std::chrono::system_clock::now();

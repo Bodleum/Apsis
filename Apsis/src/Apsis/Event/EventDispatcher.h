@@ -16,7 +16,7 @@ namespace A {
 	public:
 		static inline void AddListener(EventListener* inst) { s_ListenerList.push_back(inst); }
 		static bool SendBlockingEvent(Shared<Event> evt);
-		static void SendEvent(Shared<Event> evt, std::chrono::nanoseconds delay = std::chrono::nanoseconds{ 0 });
+		static void SendEvent(Shared<Event> evt, std::chrono::milliseconds delay = std::chrono::milliseconds{ 0 });
 
 		static bool PollQueuedEvents();
 		static bool PollWindowEvents(Unique<Window>& window);
