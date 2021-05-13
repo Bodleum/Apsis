@@ -1,5 +1,5 @@
 #pragma once
-#include "apch.h"
+#include "Apsis/Core/Core.h"
 
 namespace A {
 
@@ -7,25 +7,14 @@ namespace A {
 
 	typedef enum class ShaderType : unsigned short
 	{
-		None		= 0,
+		Unknown		= 0,
 		Vertex		= 1,
 		Pixel		= 2,
 		Fragment	= 2
 	};
 
-	inline std::unordered_map<std::string, ShaderType> StringToShaderType =
-	{
-		{"ShaderType::Vertex",		ShaderType::Vertex},
-		{"ShaderType::Pixel",		ShaderType::Pixel},
-		{"ShaderType::Fragment",	ShaderType::Fragment}
-	};
-
-	inline std::unordered_map<ShaderType, std::string> ShaderTypeToString =
-	{
-		{ShaderType::Vertex,	"Vertex"},
-		{ShaderType::Pixel,		"Pixel"},
-		{ShaderType::Fragment,	"Fragment"}
-	};
+	ShaderType StringToShaderType(const std::string& string);
+	std::string ShaderTypeToString(ShaderType shader_type);
 
 	class Shader
 	{
@@ -58,24 +47,7 @@ namespace A {
 		Double
 	};
 
-	inline const unsigned int ShaderDataTypeSize(ShaderDataType type)
-	{
-		AP_PROFILE_FN();
-		static std::unordered_map<ShaderDataType, unsigned int> sizeMap =
-		{
-			{ShaderDataType::None, 0},
-			{ShaderDataType::Bool, 1},
-			{ShaderDataType::Int, 4},
-			{ShaderDataType::UnsignedInt, 4},
-			{ShaderDataType::Float, 4},
-			{ShaderDataType::Double, 8}
-		};
-
-		if (type == ShaderDataType::None)
-			AP_CRIT_C("Unknown shader data type");
-
-		return sizeMap[type];
-	}
+	unsigned int ShaderDataTypeSize(ShaderDataType type);
 	
 	struct BufferElement
 	{

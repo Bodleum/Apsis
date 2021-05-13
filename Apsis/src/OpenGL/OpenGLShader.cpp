@@ -46,7 +46,7 @@ namespace A {
 		{
 			size_t lineEnd = fileData.find_first_of("\n\r", shaderTypePos);
 			std::string shaderTypeString = fileData.substr(shaderTypePos, lineEnd - shaderTypePos);
-			ShaderType shaderType = StringToShaderType[shaderTypeString];
+			ShaderType shaderType = StringToShaderType(shaderTypeString);
 			size_t shaderTypeLength = strlen(shaderTypeString.c_str());
 			size_t shaderBeginPos = lineEnd + 1;
 
@@ -128,7 +128,7 @@ namespace A {
 				// We don't need the shader anymore.
 				glDeleteShader(shader);
 
-				AP_ERROR_C("{0} shader failed to compile:\n{1}", ShaderTypeToString[type], infoLog.data());
+				AP_ERROR_C("{0} shader failed to compile:\n{1}", ShaderTypeToString(type), infoLog.data());
 
 				return;
 			}
