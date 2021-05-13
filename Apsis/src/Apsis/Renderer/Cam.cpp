@@ -20,7 +20,7 @@ namespace A {
 	{
 		m_Transform = Eigen::Affine3f::Identity();
 		m_Transform.scale(m_Scale);
-		m_Transform.rotate(m_Rotation);
+		m_Transform.rotate(m_Orientation);
 		m_Transform.translate(m_Position);
 
 		m_View = m_Transform.inverse();

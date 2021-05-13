@@ -137,7 +137,7 @@ namespace A {
 			default:													break;
 
 
-			case EventType::MouseButtonDown: m_Cam->SetRotation(0.0f);	break;
+			case EventType::MouseButtonDown: m_Cam->SetOrientation(0.0f);	break;
 		}
 
 		for (Layer* layer : m_LayerStack)
