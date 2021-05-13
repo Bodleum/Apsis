@@ -10,6 +10,7 @@ namespace A {
 	{
 		Unknown = 0,
 		Test,
+		Message,
 
 		// Mouse
 		MouseButtonDown,
@@ -63,6 +64,20 @@ namespace A {
 
 	private:
 		std::string m_Message;
+	};
+
+	class Message : public Event
+	{
+	public:
+		Message(const std::string& msg)
+			: Msg(msg)
+		{
+		}
+
+		virtual std::string GetString() const override { return Msg; }
+		AP_SET_EVENT_TYPE(Message)
+
+		std::string Msg;
 	};
 
 	//  --- Mouse   ---

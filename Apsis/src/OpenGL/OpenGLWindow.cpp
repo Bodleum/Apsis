@@ -192,7 +192,7 @@ namespace A {
 		AP_PROFILE_FN();
 		glfwDestroyWindow(m_WindowHandle);
 		glfwTerminate();
-		EventDispatcher::DispatchEvent(MakeShared<AppQuitEvent>());
+		EventDispatcher::SendBlockingEvent(MakeShared<AppQuitEvent>());
 	}
 
 

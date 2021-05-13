@@ -41,11 +41,19 @@ void MainLayer::OnUpdate(std::chrono::microseconds time_step)
 
 bool MainLayer::OnEvent(A::Shared<A::Event> evt)
 {
+	A::LocalDispatcher ld(evt);
+
+	ld.Dispatch<A::MouseButtonDownEvent>(BIND_EVT_FN(MainLayer::testfn));
+
+	if (evt->GetType() == A::EventType::Message)
+		AP_TRACE(*evt);
+
 	return false;
 }
 
 bool MainLayer::testfn(A::MouseButtonDownEvent& evt)
 {
+	A::EventDispatcher::SendEvent(A::MakeShared<A::Message>("Hello"), 1s);
 	return false;
 }
 

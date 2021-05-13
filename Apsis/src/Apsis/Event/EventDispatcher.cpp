@@ -8,14 +8,7 @@ namespace A {
 	std::vector<EventListener*> EventDispatcher::s_ListenerList = {};
 	std::map<std::chrono::time_point<std::chrono::system_clock, std::chrono::nanoseconds>, Shared<Event>> EventDispatcher::s_QueuedEvents = {};
 
-	Shared<EventDispatcher> EventDispatcher::Get()
-	{
-		AP_PROFILE_FN();
-		static Shared<EventDispatcher> instance{};
-		return instance;
-	}
-
-	bool EventDispatcher::DispatchEvent(Shared<Event> evt)
+	bool EventDispatcher::SendBlockingEvent(Shared<Event> evt)
 	{
 		AP_PROFILE_FN();
 
@@ -47,7 +40,7 @@ namespace A {
 		auto it = s_QueuedEvents.begin();
 		while (it != s_QueuedEvents.end() && it->first <= now)
 		{
-			eventRes = EventDispatcher::DispatchEvent(it->second);
+			eventRes = EventDispatcher::SendBlockingEvent(it->second);
 			it = s_QueuedEvents.erase(it);
 		}
 

@@ -14,21 +14,14 @@ namespace A {
 	class EventDispatcher
 	{
 	public:
-		static Shared<EventDispatcher> Get();
-
 		static inline void AddListener(EventListener* inst) { s_ListenerList.push_back(inst); }
-		static bool DispatchEvent(Shared<Event> evt);
+		static bool SendBlockingEvent(Shared<Event> evt);
 		static void SendEvent(Shared<Event> evt, std::chrono::nanoseconds delay = std::chrono::nanoseconds{ 0 });
 
 		static bool PollQueuedEvents();
 		static bool PollWindowEvents(Unique<Window>& window);
 
-		EventDispatcher(EventDispatcher const&) = delete;
-		EventDispatcher& operator=(EventDispatcher const&) = delete;
-
 	private:
-		EventDispatcher() {}
-
 		static std::vector<EventListener*> s_ListenerList;
 		static std::map<std::chrono::time_point<std::chrono::system_clock, std::chrono::nanoseconds>, Shared<Event>> s_QueuedEvents;
 	};
