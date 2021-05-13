@@ -1,7 +1,7 @@
 #include "apch.h"
 #include "Instrumentor.h"
 
-#include <algorithm>
+//#include <algorithm>	In pch
 //#include <chrono>		In header
 //#include <fstream>	In header
 #include <iomanip>

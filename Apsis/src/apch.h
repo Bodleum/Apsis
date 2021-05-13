@@ -14,9 +14,11 @@
 	#include <vector>
 	#include <map>
 	#include <unordered_map>
+	#include <algorithm>
 
 
 	#ifdef AP_PLATFORM_WIN
+		#define NOMINMAX
 		#include <Windows.h>
 	#endif
 #pragma warning(pop)

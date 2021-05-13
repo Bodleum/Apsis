@@ -7,7 +7,7 @@ namespace A {
 	{
 		AP_PROFILE_FN();
 		float k = fmod(n + (hsva.x() * 360.0f), 6);
-		return hsva.z() - hsva.z() * hsva.y() * max(min(min(k, 4 - k), 1.0f), 0.0f);
+		return hsva.z() - hsva.z() * hsva.y() * std::max(std::min(std::min(k, 4 - k), 1.0f), 0.0f);
 	}
 
 	const Eigen::Vector4f HSVToRGB(const Eigen::Vector4f& hsva) noexcept
@@ -18,8 +18,8 @@ namespace A {
 
 	const Eigen::Vector4f RGBToHSV(const Eigen::Vector4f& rgba) noexcept
 	{
-		float V = max(max(rgba.x(), rgba.y()), rgba.z());
-		float C = V - min(min(rgba.x(), rgba.y()), rgba.z());
+		float V = std::max(std::max(rgba.x(), rgba.y()), rgba.z());
+		float C = V - std::min(std::min(rgba.x(), rgba.y()), rgba.z());
 
 		float h = 0;
 		if (V == rgba.x())
