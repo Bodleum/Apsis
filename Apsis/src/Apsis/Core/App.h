@@ -58,6 +58,10 @@ namespace A {
 		std::chrono::microseconds m_FrameTime{ 0 };
 		std::chrono::time_point<std::chrono::steady_clock, std::chrono::microseconds> m_CurrentTime;
 		std::chrono::time_point<std::chrono::steady_clock, std::chrono::microseconds> m_NewTime;
+
+
+
+		float m_Angle = 0.0f;
 	};
 
 	// Defined in client code

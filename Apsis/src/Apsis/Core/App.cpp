@@ -69,6 +69,9 @@ namespace A {
 		for (Layer* layer : m_LayerStack)
 			if (layer->IsEnabled())
 				layer->OnUpdate(time_step);
+
+
+		m_Cam->Rotate(0.5f);
 	}
 
 	void App::OnRender()
@@ -132,6 +135,9 @@ namespace A {
 			case EventType::WindowDestroy:	m_Window.reset(nullptr);	break;
 			case EventType::AppQuit:		m_Running = false;			return true;
 			default:													break;
+
+
+			case EventType::MouseButtonDown: m_Cam->SetRotation(0.0f);	break;
 		}
 
 		for (Layer* layer : m_LayerStack)

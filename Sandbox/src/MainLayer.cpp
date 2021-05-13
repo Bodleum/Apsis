@@ -60,5 +60,5 @@ bool MainLayer::testfn(A::MouseButtonDownEvent& evt)
 void MainLayer::OnRender()
 {
 	//A::Renderer::DrawCircle(Eigen::Vector2i(100, 100), 100, Eigen::Vector4f(1.0f, 1.0f, 0.5f, 1.0f));
-	A::Renderer::DrawRect(Eigen::Vector2i(0, 0), 1.6f, 0.9f, m_CamelTexture, m_ColorRGB);
+	A::Renderer::DrawRect(Eigen::Vector2i(0, 0), 1.6f, 0.9f, 0.0f, m_CamelTexture, m_ColorRGB);
 }

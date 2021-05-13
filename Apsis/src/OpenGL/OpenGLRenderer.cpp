@@ -33,7 +33,7 @@ namespace A {
 			AP_PROFILE_SCOPE("Create default shader");
 
 			const char* shaderSource =
-#include "Assets/OpenGL/DefaultShader.shader"
+				#include "Assets/OpenGL/DefaultShader.shader"
 				;
 			 
 			s_GraphicsResources->DefaultShader = Shader::CreateFromString(shaderSource);
@@ -114,16 +114,16 @@ namespace A {
 		AP_PROFILE_FN();
 	}
 
-	void OpenGLRenderer::DrawRectImpl(const Eigen::Vector2i& position, float width, float height, Shared<Texture> texture, const Eigen::Vector4f& col/*= {1.0f, 1.0f, 1.0f, 1.0f}*/)
+	void OpenGLRenderer::DrawRectImpl(const Eigen::Vector2i& position, float width, float height, float angle, Shared<Texture> texture, const Eigen::Vector4f& col/*= {1.0f, 1.0f, 1.0f, 1.0f}*/)
 	{
 		AP_PROFILE_FN();
 		glBindVertexArray(m_RectVA->GetID());
 		
 		Eigen::Affine3f modelTransform = Eigen::Affine3f::Identity();
-		modelTransform.scale(Eigen::Vector3f(width, height, 1.0f));
-		// Rotate
-		modelTransform.translate(Eigen::Vector3f((float)position.x(), (float)position.y(), 1.0f));
 		modelTransform = modelTransform * s_Cam->GetVP();
+		modelTransform.translate(Eigen::Vector3f((float)position.x(), (float)position.y(), 1.0f));
+		modelTransform.rotate(Eigen::Quaternionf(Eigen::AngleAxisf(angle * 3.1415f / 180.0f, Eigen::Vector3f::UnitZ())));
+		modelTransform.scale(Eigen::Vector3f(width, height, 1.0f));
 
 		if (texture)
 			texture->Bind();

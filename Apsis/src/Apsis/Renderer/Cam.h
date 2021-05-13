@@ -24,6 +24,8 @@ namespace A {
 		inline const Eigen::Vector3f GetPositionMatrix() const { return m_Position; }
 
 		inline void SetScale(float scale) { m_Scale = scale; Refresh(); }
+		inline void SetRotation(float angle) { m_Rotation = Eigen::AngleAxisf(3.1415f * angle / 180.0f, Eigen::Vector3f::UnitZ()); Refresh(); }
+		inline void Rotate(float angle) { m_Rotation *= Eigen::Quaternionf(Eigen::AngleAxisf(3.1415f * angle / 180.0f, Eigen::Vector3f::UnitZ())); Refresh(); }
 		inline void SetPosition(const Eigen::Vector3f& position) { m_Position = position; Refresh(); }
 
 	protected:
@@ -35,7 +37,7 @@ namespace A {
 		Eigen::Affine3f m_Transform = Eigen::Affine3f::Identity();
 
 		float m_Scale = 1.0f;
-		// TODO: Add rotations -> Quaternions?
+		Eigen::Quaternionf m_Rotation = Eigen::Quaternionf::Identity();
 		Eigen::Vector3f m_Position = Eigen::Vector3f::Zero();
 	};
 
