@@ -30,19 +30,3 @@
 	#define AP_PLATFORM_POSIX
 	#error "Not supported"
 #endif
-
-namespace A {
-
-	typedef enum class PlatformType : unsigned short
-	{
-		Unknown = 0,
-		Windows,
-		Simulator,
-		iPhone,
-		OSX,
-		Linux,
-		Uinx,
-		POSIX
-	} Platform;
-
-}
