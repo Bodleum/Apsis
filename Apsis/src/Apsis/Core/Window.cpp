@@ -1,8 +1,12 @@
 #include "apch.h"
 #include "Window.h"
 #include "Apsis/Core/SystemInfo.h"
-#include "Windows/WindowsWindow.h"
 #include "OpenGL/OpenGLWindow.h"
+
+#if defined(AP_PLATFORM_WIN)
+	#include "Windows/WindowsWindow.h"
+#endif // defined(AP_PLATFORM_WIN)
+
 
 namespace A {
 
@@ -12,6 +16,7 @@ namespace A {
 
 		switch (SystemInfo::RendererAPI)
 		{
+			#if defined(AP_PLATFORM_WIN)
 			case RendererAPI::Direct2D:
 			{
 				HINSTANCE hInstance = args.hInstance;
@@ -20,6 +25,7 @@ namespace A {
 				int nShowCmd = args.nShowCmd;
 				return MakeUnique<WindowsWindow>(hInstance, hPrevInstance, pCmdLine, nShowCmd, name, width, height);
 			}
+			#endif // defined(AP_PLATFORM_WIN)
 			case RendererAPI::OpenGL:	return MakeUnique<OpenGLWindow>(width, height, name);
 			default:					break;
 		}

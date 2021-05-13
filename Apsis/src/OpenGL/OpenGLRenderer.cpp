@@ -123,15 +123,14 @@ namespace A {
 		modelTransform.scale(Eigen::Vector3f(width, height, 1.0f));
 		// Rotate
 		modelTransform.translate(Eigen::Vector3f((float)position.x(), (float)position.y(), 1.0f));
-		Eigen::Matrix4f mvp = modelTransform * s_Cam->GetVP();
-		//mvp = s_Cam->GetVP();
+		modelTransform = modelTransform * s_Cam->GetVP();
 
 		if (texture)
 			texture->Bind();
 		else
 			s_GraphicsResources->DefaultTexture->Bind();
 
-		glUniformMatrix4fv(m_UniformLocations["u_MVP"], 1, GL_FALSE, mvp.data());
+		glUniformMatrix4fv(m_UniformLocations["u_MVP"], 1, GL_FALSE, modelTransform.matrix().data());
 		glUniform4f(m_UniformLocations["u_Color"], col.x(), col.y(), col.z(), col.w());
 		glUniform1i(m_UniformLocations["u_Texture"], 0);
 		glDrawElements(GL_TRIANGLES, m_RectVA->GetIndexCount(), GL_UNSIGNED_INT, nullptr);

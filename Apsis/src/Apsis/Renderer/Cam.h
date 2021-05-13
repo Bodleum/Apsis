@@ -1,5 +1,7 @@
 #pragma once
 #include <Eigen/Core>
+#include <Eigen/Geometry>
+#include <Eigen/Dense>
 
 namespace A {
 
@@ -10,24 +12,31 @@ namespace A {
 		Cam(const Eigen::Matrix4f& proj);
 		virtual ~Cam() = default;
 
-		inline const Eigen::Matrix4f GetProj() const { return m_Proj; }
-		inline const Eigen::Matrix4f GetView() const { return m_View; }
-		inline const Eigen::Matrix4f GetVP() const { return m_VP; }
-		inline const Eigen::Matrix4f GetTransform() const { return m_Transform; }
-		inline const Eigen::Vector3f GetPosition() const { return m_Position; }
+		inline const Eigen::Affine3f GetProj() const { return m_Proj; }
+		inline const Eigen::Affine3f GetView() const { return m_View; }
+		inline const Eigen::Affine3f GetVP() const { return m_VP; }
+		inline const Eigen::Affine3f GetTransform() const { return m_Transform; }
 
+		inline const Eigen::Matrix4f GetProjMatrix() const { return m_Proj.matrix(); }
+		inline const Eigen::Matrix4f GetViewMatrix() const { return m_View.matrix(); }
+		inline const Eigen::Matrix4f GetVPMatrix() const { return m_VP.matrix(); }
+		inline const Eigen::Matrix4f GetTransformMatrix() const { return m_Transform.matrix(); }
+		inline const Eigen::Vector3f GetPositionMatrix() const { return m_Position; }
+
+		inline void SetScale(float scale) { m_Scale = scale; Refresh(); }
 		inline void SetPosition(const Eigen::Vector3f& position) { m_Position = position; Refresh(); }
 
 	protected:
 		void Refresh();
 
-		Eigen::Matrix4f m_Proj;
-		Eigen::Matrix4f m_View;
-		Eigen::Matrix4f m_VP;
-		Eigen::Matrix4f m_Transform;
+		Eigen::Affine3f m_Proj = Eigen::Affine3f::Identity();
+		Eigen::Affine3f m_View = Eigen::Affine3f::Identity();
+		Eigen::Affine3f m_VP = Eigen::Affine3f::Identity();
+		Eigen::Affine3f m_Transform = Eigen::Affine3f::Identity();
 
-		Eigen::Vector3f m_Position;
+		float m_Scale = 1.0f;
 		// TODO: Add rotations -> Quaternions?
+		Eigen::Vector3f m_Position = Eigen::Vector3f::Zero();
 	};
 
 
