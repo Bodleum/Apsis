@@ -59,4 +59,70 @@ namespace A {
 	}
 
 
+	ShaderType StringToShaderType(const std::string& string)
+	{
+		AP_PROFILE_FN();
+
+		static std::unordered_map<std::string, ShaderType> stringMap =
+		{
+			{"ShaderType::Vertex",		ShaderType::Vertex},
+			{"ShaderType::Pixel",		ShaderType::Pixel},
+			{"ShaderType::Fragment",	ShaderType::Fragment}
+		};
+
+		try
+		{
+			return stringMap.at(string);
+		}
+		catch (const std::out_of_range& e)
+		{
+			AP_WARN_C("Unknown shader type {0}", string);
+			return ShaderType::Unknown;
+		}
+	}
+
+	std::string ShaderTypeToString(ShaderType shader_type)
+	{
+		static std::unordered_map<ShaderType, std::string> shaderTypeMap =
+		{
+			{ShaderType::Vertex,	"Vertex"},
+			{ShaderType::Pixel,		"Pixel"},
+			{ShaderType::Fragment,	"Fragment"}
+		};
+
+		try
+		{
+			return shaderTypeMap.at(shader_type);
+		}
+		catch (const std::out_of_range& e)
+		{
+			AP_WARN_C("Unknown shader type {0}", (unsigned short)shader_type);
+			return "Unknown";
+		}
+	}
+
+	unsigned int ShaderDataTypeSize(ShaderDataType type)
+	{
+		AP_PROFILE_FN();
+		static std::unordered_map<ShaderDataType, unsigned int> sizeMap =
+		{
+			{ShaderDataType::Bool, 1},
+			{ShaderDataType::Int, 4},
+			{ShaderDataType::UnsignedInt, 4},
+			{ShaderDataType::Float, 4},
+			{ShaderDataType::Double, 8}
+		};
+
+
+		try
+		{
+			return sizeMap.at(type);
+		}
+		catch (const std::out_of_range& e)
+		{
+			AP_CRIT_C("Unknown shader data type {0}", (unsigned short)type);
+			return 0;
+		}
+	}
+
 }
