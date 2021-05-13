@@ -6,8 +6,9 @@ namespace A {
 	class OpenGLTexture : public Texture
 	{
 	public:
+		OpenGLTexture(unsigned int width, unsigned int height, void* data, unsigned int size);
 		OpenGLTexture(unsigned int width, unsigned int height);
-		OpenGLTexture(const std::string& path);
+		OpenGLTexture(const char* path);
 		virtual ~OpenGLTexture();
 
 		// Inherited via Texture
@@ -18,7 +19,7 @@ namespace A {
 
 	protected:
 		unsigned int m_TextureID;
-		std::string m_FilePath;
+		const char* m_FilePath;
 		unsigned char* m_LocalBuffer;
 		int m_Width, m_Height, m_BBP;
 	};

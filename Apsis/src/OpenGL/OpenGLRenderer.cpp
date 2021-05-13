@@ -53,9 +53,8 @@ namespace A {
 
 		{// Create default texture
 			AP_PROFILE_SCOPE("Create default texture");
-			s_GraphicsResources->DefaultTexture = Texture::Create(1, 1);
 			unsigned int whiteTextureData = 0xffffffff;
-			s_GraphicsResources->DefaultTexture->SetData((void*)(&whiteTextureData), sizeof(whiteTextureData));
+			s_GraphicsResources->DefaultTexture = Texture::Create(1, 1, &whiteTextureData, sizeof(whiteTextureData));
 		}
 
 		return true;
