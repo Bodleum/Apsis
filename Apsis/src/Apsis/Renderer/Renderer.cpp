@@ -1,12 +1,14 @@
 #include "apch.h"
 #include "Renderer.h"
-
-#include "Windows/Direct2D/Direct2DRenderer.h"
 #include "OpenGL/OpenGLRenderer.h"
+
+#if defined(AP_PLATFORM_WIN)
+	#include "Windows/Direct2D/Direct2DRenderer.h"
+#endif // defined(AP_PLATFORM_WIN)
 
 namespace A {
 
-	Shared<GraphicsResources> Renderer::s_GraphicsResources = MakeShared<GraphicsResources>(SystemInfo::RendererAPI, Eigen::Vector4f{ 0.8f, 0.2f, 0.8f, 1.0f }, nullptr, Eigen::Vector4f{ 1.0f, 1.0f, 1.0f, 1.0f }, nullptr);
+	Shared<GraphicsResources> Renderer::s_GraphicsResources = MakeShared<GraphicsResources>();
 	Shared<Cam> Renderer::s_Cam = nullptr;
 	Shared<Renderer> Renderer::s_Instance = nullptr;
 

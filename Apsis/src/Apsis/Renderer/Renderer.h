@@ -10,12 +10,13 @@ namespace A {
 	class Window;
 	struct GraphicsResources
 	{
-		RendererAPI RendererAPI;
-		Eigen::Vector4f ClearColor;
-		Shared<Texture> DefaultTexture;
-		Eigen::Vector4f DefaultColor;
-		Shared<Shader> DefaultShader;
+		RendererAPI RendererAPI = RendererAPI::Unknown;
+		Eigen::Vector4f ClearColor = Eigen::Vector4f(0.8f, 0.2f, 0.8f, 1.0f);
+		Shared<Texture> DefaultTexture = nullptr;
+		Eigen::Vector4f DefaultColor = Eigen::Vector4f(1.0f, 1.0f, 1.0f, 1.0f);
+		Shared<Shader> DefaultShader = nullptr;
 
+		GraphicsResources() = default;
 		GraphicsResources(A::RendererAPI renderer_api, const Eigen::Vector4f& clear_color, Shared<Texture> texture, const Eigen::Vector4f& color, Shared<Shader> shader)
 			: RendererAPI(renderer_api), ClearColor(clear_color), DefaultTexture(texture), DefaultColor(color), DefaultShader(shader)
 		{
