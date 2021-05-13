@@ -110,6 +110,11 @@ namespace A {
 		AP_PROFILE_FN();
 	}
 
+	void WindowsWindow::Destroy()
+	{
+		AP_PROFILE_FN();
+	}
+
 	bool WindowsWindow::PollEvents() const
 	{
 		AP_PROFILE_FN();

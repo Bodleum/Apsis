@@ -13,6 +13,7 @@ namespace A {
 		virtual ~WindowsWindow();
 
 		// Inherited via Window
+		virtual void Destroy() override;
 		virtual bool PollEvents() const override;
 		virtual const HDC GetDeviceContextHandle() const override { return m_DeviceContexHandle; }
 		virtual inline void* GetHandle() const override { return m_WindowHandle; }
