@@ -14,7 +14,8 @@ public:
 	virtual void OnRender() override;
 	virtual bool OnEvent(A::Shared<A::Event> evt) override;
 
-	bool testfn(A::MouseButtonDownEvent& evt);
+	bool OnMessage(const A::Message& msg);
+	bool testfn(const A::MouseButtonDownEvent& evt);
 
 private:
 	Eigen::Vector4f m_ColorHSV = { 0.0f, 1.0f, 1.0f, 1.0f };

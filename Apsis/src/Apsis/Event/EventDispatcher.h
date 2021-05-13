@@ -17,6 +17,8 @@ namespace A {
 		static inline void AddListener(EventListener* inst) { s_ListenerList.push_back(inst); }
 		static bool SendBlockingEvent(Shared<Event> evt);
 		static void SendEvent(Shared<Event> evt, std::chrono::milliseconds delay = std::chrono::milliseconds{ 0 });
+		inline static void (SendMessage)(const char* message, std::chrono::milliseconds delay = std::chrono::milliseconds{ 0 }) { SendEvent(MakeShared<Message>(message), delay); }
+		inline static bool SendBlockingMessage(const char* message) { return SendBlockingEvent(MakeShared<Message>(message)); }
 
 		static bool PollQueuedEvents();
 		static bool PollWindowEvents(Unique<Window>& window);

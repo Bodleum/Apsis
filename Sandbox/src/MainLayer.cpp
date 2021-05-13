@@ -43,17 +43,26 @@ bool MainLayer::OnEvent(A::Shared<A::Event> evt)
 {
 	A::LocalDispatcher ld(evt);
 
+	ld.Dispatch<A::Message>(BIND_EVT_FN(MainLayer::OnMessage));
 	ld.Dispatch<A::MouseButtonDownEvent>(BIND_EVT_FN(MainLayer::testfn));
 
-	if (evt->GetType() == A::EventType::Message)
-		AP_TRACE(*evt);
+	//if (evt->GetType() == A::EventType::Message)
+	//	AP_TRACE(*evt);
 
 	return false;
 }
 
-bool MainLayer::testfn(A::MouseButtonDownEvent& evt)
+bool MainLayer::OnMessage(const A::Message& msg)
 {
-	A::EventDispatcher::SendEvent(A::MakeShared<A::Message>("Hello"), 1s);
+	if (msg.Msg == "Hello")
+		AP_TRACE(msg);
+
+	return true;
+}
+
+bool MainLayer::testfn(const A::MouseButtonDownEvent& evt)
+{
+	A::EventDispatcher::SendMessage("Hello", 1s);
 	return false;
 }
 
