@@ -1,13 +1,25 @@
 #pragma once
 #include "Apsis/Core/Window.h"
 #include "Apsis/Renderer/Renderer.h"
-#include "OpenGL/OpenGLShader.h"
-#include "OpenGL/OpenGLVertexArray.h"
+	//#include "Apsis/Core/SystemInfo.h"
+	//#include "Apsis/Renderer/Cam.h"
+	//	#include <Eigen/Core>
+	//	#include <Eigen/Geometry>
+	//	#include <Eigen/Dense>
+	//#include "Apsis/Renderer/Shader.h"
+	//	#include "Apsis/Core/Core.h"
+	//		#include <memory>
+	//		#include <chrono>
+	//#include "Apsis/Renderer/Texture.h"
+	//	#include "Apsis/Core/Core.h"
+	//		#include <memory>
+	//		#include <chrono>
 
 struct GLFWwindow;
 
 namespace A {
 
+	class OpenGLVertexArray;
 
 	class OpenGLRenderer : public Renderer
 	{
