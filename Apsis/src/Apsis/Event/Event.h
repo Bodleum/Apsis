@@ -80,6 +80,9 @@ namespace A {
 		std::string Msg;
 	};
 
+	// Operator overloading for easy comparison
+	inline bool operator == (const Message& msg, const char* string) { return msg.Msg == string; }
+
 	//  --- Mouse   ---
 	class MouseEvent : public Event
 	{

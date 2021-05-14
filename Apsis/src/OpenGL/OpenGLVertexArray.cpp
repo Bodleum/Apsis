@@ -34,6 +34,7 @@ namespace A {
 
 		glBindVertexArray(m_VertexArrayID);
 		m_VertexBuffer = VertexBuffer::Create(vertex_buffer);
+		m_VertexBuffer->Bind();
 
 		// Set layout
 		auto& elements = m_VertexBuffer->GetLayout()->GetElements();
@@ -57,6 +58,7 @@ namespace A {
 
 		glBindVertexArray(m_VertexArrayID);
 		m_IndexBuffer = IndexBuffer::Create(index_buffer);
+		m_IndexBuffer->Bind();
 	}
 
 }

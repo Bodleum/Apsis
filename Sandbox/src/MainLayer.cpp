@@ -46,15 +46,13 @@ bool MainLayer::OnEvent(A::Shared<A::Event> evt)
 	ld.Dispatch<A::Message>(BIND_EVT_FN(MainLayer::OnMessage));
 	ld.Dispatch<A::MouseButtonDownEvent>(BIND_EVT_FN(MainLayer::testfn));
 
-	//if (evt->GetType() == A::EventType::Message)
-	//	AP_TRACE(*evt);
-
 	return false;
+
 }
 
 bool MainLayer::OnMessage(const A::Message& msg)
 {
-	if (msg.Msg == "Hello")
+	if (msg == "Hello")
 		AP_TRACE(msg);
 
 	return true;

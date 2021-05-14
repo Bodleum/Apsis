@@ -19,6 +19,8 @@ namespace A {
 			AP_CRIT_C("Invalid vertex buffer layout");
 			return;
 		}
+
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
 	}
 
 	OpenGLVertexBuffer::~OpenGLVertexBuffer()
@@ -55,6 +57,7 @@ namespace A {
 		glCreateBuffers(1, &m_ID);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ID);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, index_buffer.size() * sizeof(unsigned int), &index_buffer[0], GL_STATIC_DRAW);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	}
 
 	OpenGLIndexBuffer::~OpenGLIndexBuffer()
