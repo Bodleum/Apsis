@@ -31,7 +31,7 @@ namespace A {
 	private:
 		GLFWwindow* m_WindowHandle;
 		Unique<OpenGLVertexArray> m_RectVA = nullptr;
-		std::unordered_map<std::string, int> m_UniformLocations;
+		std::unordered_map<const char*, int> m_UniformLocations;
 	};
 
 }

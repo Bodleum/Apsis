@@ -57,30 +57,33 @@ namespace A {
 			s_GraphicsResources->DefaultTexture = Texture::Create(1, 1, &whiteTextureData, sizeof(whiteTextureData));
 		}
 
+		{// Get uniform locations
+			AP_PROFILE_SCOPE("Get uniform locations");
+			std::vector<const char*> uniformsList =
+			{
+				"u_MVP",
+				"u_Color",
+				"u_Texture"
+			};
+
+			for (auto& uniform : uniformsList)
+			{
+				int location = glGetUniformLocation(s_GraphicsResources->DefaultShader->GetID(), uniform);
+				if (location == -1)
+				{
+					AP_WARN_C("Uniform {0} not found", uniform);
+					continue;
+				}
+				m_UniformLocations[uniform] = location;
+			}
+		}
+
 		return true;
 	}
 
 	void OpenGLRenderer::BeginDrawImpl(Shared<Cam> cam)
 	{
 		AP_PROFILE_FN();
-		std::vector<std::string> uniformsList = 
-		{
-			"u_MVP",
-			"u_Color",
-			"u_Texture"
-		};
-
-		for (auto& uniform : uniformsList)
-		{
-			int location = glGetUniformLocation(s_GraphicsResources->DefaultShader->GetID(), uniform.c_str());
-			if (location == -1)
-			{
-				AP_WARN_C("Uniform {0} not found", uniform);
-				continue;
-			}
-			m_UniformLocations[uniform] = location;
-		}
-
 		s_Cam = cam;
 	}
 
