@@ -7,7 +7,7 @@
 namespace A {
 
 	OpenGLTexture::OpenGLTexture(unsigned int width, unsigned int height, void* data, unsigned int size)
-		: m_TextureID(0), m_FilePath(nullptr), m_LocalBuffer(data), m_Width(width), m_Height(height), m_BBP(0)
+		: m_LocalBuffer(data), m_Width(width), m_Height(height)
 	{
 		AP_PROFILE_FN();
 
@@ -24,7 +24,7 @@ namespace A {
 	}
 
 	OpenGLTexture::OpenGLTexture(unsigned int width, unsigned int height)
-		: m_TextureID(0), m_FilePath(nullptr), m_LocalBuffer(nullptr), m_Width(width), m_Height(height), m_BBP(0)
+		: m_Width(width), m_Height(height)
 	{
 		AP_PROFILE_FN();
 
@@ -41,7 +41,7 @@ namespace A {
 	}
 
 	OpenGLTexture::OpenGLTexture(const char* path)
-		: m_TextureID(0), m_FilePath(path), m_LocalBuffer(nullptr), m_Width(0), m_Height(0), m_BBP(0)
+		: m_FilePath(path)
 	{
 		AP_PROFILE_FN();
 

@@ -7,7 +7,6 @@
 namespace A {
 
 	OpenGLRenderer::OpenGLRenderer()
-		: m_WindowHandle(nullptr)
 	{
 		AP_PROFILE_FN();
 	}

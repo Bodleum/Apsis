@@ -18,10 +18,10 @@ namespace A {
 		virtual inline const int GetHeight() const override { return m_Height; }
 
 	protected:
-		unsigned int m_TextureID;
-		const char* m_FilePath;
-		void* m_LocalBuffer;
-		int m_Width, m_Height, m_BBP;
+		unsigned int m_TextureID = 0;
+		const char* m_FilePath = nullptr;
+		void* m_LocalBuffer = nullptr;
+		int m_Width, m_Height, m_BBP = 0;
 	};
 
 }

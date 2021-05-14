@@ -10,7 +10,7 @@
 
 namespace A {
 
-	Unique<Window> Window::Create(MainFnArgs args, const std::string& name/* = "Window"*/, unsigned int width/* = 1280*/, unsigned int height/* = 720*/)
+	Unique<Window> Window::Create(MainFnArgs args, const char* name/* = "Window"*/, unsigned int width/* = 1280*/, unsigned int height/* = 720*/)
 	{
 		AP_PROFILE_FN();
 

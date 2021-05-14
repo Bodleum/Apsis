@@ -10,7 +10,7 @@ namespace A {
 	class OpenGLWindow : public Window
 	{
 	public:
-		OpenGLWindow(unsigned int width, unsigned int height, std::string name);
+		OpenGLWindow(unsigned int width, unsigned int height, const char* name);
 		virtual ~OpenGLWindow();
 
 		// Inherited via Window
@@ -20,8 +20,8 @@ namespace A {
 		virtual const HDC GetDeviceContextHandle() const override;
 
 	private:
-		GLFWwindow* m_WindowHandle;
-		std::string m_Name;
+		GLFWwindow* m_WindowHandle = nullptr;
+		const char* m_Name;
 	};
 
 }

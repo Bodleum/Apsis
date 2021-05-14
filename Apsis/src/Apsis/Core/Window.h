@@ -19,7 +19,7 @@ namespace A {
 			virtual const HDC GetDeviceContextHandle() const = 0;
 		#endif // AP_PLATFORM_WIN
 
-		static Unique<Window> Create(MainFnArgs args, const std::string& name = "Window", unsigned int width = 1280, unsigned int height = 720);
+		static Unique<Window> Create(MainFnArgs args, const char* name = nullptr, unsigned int width = 1280, unsigned int height = 720);
 
 	protected:
 		unsigned int m_Width, m_Height;

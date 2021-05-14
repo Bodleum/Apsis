@@ -7,15 +7,16 @@
 #include "OpenGLHeaders.h"
 #include "Translators.h"
 
+
 namespace A {
 
 	void APIENTRY OpenGLErrorCallbackFunction(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam);
 
-	OpenGLWindow::OpenGLWindow(unsigned int width, unsigned int height, std::string name)
-		: m_WindowHandle(nullptr), m_Name(name)
+	OpenGLWindow::OpenGLWindow(unsigned int width, unsigned int height, const char* name)
 	{
 		AP_PROFILE_FN();
 
+		m_Name = name ? name : "Apsis Window";
 		m_Width = width;
 		m_Height = height;
 
@@ -34,16 +35,14 @@ namespace A {
 
 		{// Create GLFW window
 			AP_PROFILE_SCOPE("Create GLFW window");
-			glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-			glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
-			m_WindowHandle = glfwCreateWindow(width, height, name.c_str(), NULL, NULL);
+			m_WindowHandle = glfwCreateWindow(width, height, m_Name, NULL, NULL);
 			if (!m_WindowHandle)
 			{
 				AP_CRIT_C("Failed to create glfwWindow");
 				glfwTerminate();
 				return;
 			}
-			AP_TRACE_C("Created GLFW window: {0}x{1}", width, height);
+			AP_INFO_C("Created GLFW window: {0}x{1}", width, height);
 		}
 
 		{// Load extensions with glad
@@ -59,8 +58,7 @@ namespace A {
 		}
 
 		//Check OpenGL version
-		int maj;
-		int min;
+		int maj, min;
 		glGetIntegerv(GL_MAJOR_VERSION, &maj);
 		glGetIntegerv(GL_MINOR_VERSION, &min);
 		AP_ASSERT_C(maj > 4 || (maj == 4 && min >= 5), "At least OpenGL version 4.5 is required, current version: {0}.{1}", maj, min);
@@ -236,9 +234,9 @@ namespace A {
 
 		switch (severity)
 		{
-			case GL_DEBUG_SEVERITY_LOW:		AP_WARN_C(ss.str());
-			case GL_DEBUG_SEVERITY_MEDIUM:	AP_ERROR_C(ss.str());
-			case GL_DEBUG_SEVERITY_HIGH:	AP_CRIT_C(ss.str());
+			case GL_DEBUG_SEVERITY_LOW:		AP_WARN_C(ss.str());	break;
+			case GL_DEBUG_SEVERITY_MEDIUM:	AP_ERROR_C(ss.str());	break;
+			case GL_DEBUG_SEVERITY_HIGH:	AP_CRIT_C(ss.str());	break;
 		}
 	}
 

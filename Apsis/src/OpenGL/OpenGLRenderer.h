@@ -29,9 +29,9 @@ namespace A {
 		virtual void EndDrawImpl() override;
 
 	private:
-		GLFWwindow* m_WindowHandle;
+		GLFWwindow* m_WindowHandle = nullptr;
 		Unique<OpenGLVertexArray> m_RectVA = nullptr;
-		std::unordered_map<const char*, int> m_UniformLocations;
+		std::unordered_map<const char*, int> m_UniformLocations = {};
 	};
 
 }
