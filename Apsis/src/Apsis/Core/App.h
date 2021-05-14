@@ -1,14 +1,24 @@
 #pragma once
 #include "Apsis/Core/Layer.h"
+	//#include "Apsis/Core/Core.h"
+	//	#include <memory>
+	//	#include <chrono>
+	//#include <deque>
+#include "Apsis/Event/EventDispatcher.h"
+	//#include "Apsis/Core/Core.h"
+	//	#include <memory>
+	//	#include <chrono>
+	//#include "Apsis/Event/Event.h"
+	//	#include "Apsis/Core/Input/InputCodes.h"
+	//		#include <iostream>
+	//#include <map>
+	//#include <vector>
+
+
 //#include "Apsis/Core/Main.h"				Included in Window.h
 #include "Apsis/Core/Window.h"
-//#include "Apsis/Event/Event.h"			Included in EventDispatcher.h
-	//#include "Apsis/Core/Input/InputCodes.h"
-	//	#include <iostream>
-#include "Apsis/Event/EventDispatcher.h"
 #include "Apsis/Renderer/Cam.h"
 
-//#include <chrono>							Included in EventDispacher.h
 
 namespace A {
 
