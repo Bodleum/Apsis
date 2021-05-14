@@ -1,7 +1,8 @@
 #pragma once
-#include "Apsis/Core/Main.h"
 
 namespace A {
+
+	struct MainFnArgs;
 
 	class Window
 	{

@@ -2,6 +2,7 @@
 #include "App.h"
 
 #include "Apsis/Core/Input/Input.h"
+#include "Apsis/Core/Main.h"
 #include "Apsis/Renderer/Renderer.h"
 
 namespace A {
@@ -53,6 +54,8 @@ namespace A {
 			PollEvents();
 		}
 	}
+
+	void App::SetAppArgs(AppArgs args) { s_Args = args; }
 
 	bool App::PollEvents()
 	{

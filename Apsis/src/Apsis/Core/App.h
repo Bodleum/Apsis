@@ -23,6 +23,7 @@
 namespace A {
 
 	class Renderer;
+	struct AppArgs;
 
 	class App : public EventListener
 	{
@@ -44,17 +45,12 @@ namespace A {
 		void PopLayer();
 
 		inline void SetTimeStep(std::chrono::microseconds new_time_step) { m_TimeStep = new_time_step; }
+		static void SetAppArgs(AppArgs args);
 
-	private:
 		void Run();
 
-		static inline void SetAppArgs(AppArgs args) { s_Args = args; }
+	private:
 
-		#ifdef AP_PLATFORM_WIN
-			friend int WINAPI ::wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPWSTR pCmdLine, _In_ int nShowCmd);
-		#else
-			friend int ::main(int argc, char** argv);
-		#endif // AP_PLATFORM_WIN
 
 		bool m_Running = true;
 		static AppArgs s_Args;

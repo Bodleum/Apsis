@@ -1,5 +1,7 @@
 #include "apch.h"
 #include "Window.h"
+
+#include "Apsis/Core/Main.h"
 #include "Apsis/Core/SystemInfo.h"
 #include "OpenGL/OpenGLWindow.h"
 
