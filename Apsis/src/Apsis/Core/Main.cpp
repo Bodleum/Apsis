@@ -10,7 +10,7 @@ extern A::App* A::CreateApp();
 #ifdef AP_PLATFORM_WIN
 
 
-int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPWSTR pCmdLine, _In_ int nShowCmd)
+int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ wchar_t* pCmdLine, _In_ int nShowCmd)
 {
 
 	// Fix io to console
