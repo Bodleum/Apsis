@@ -51,7 +51,7 @@ namespace A {
 		virtual ~OrthoCam() = default;
 	};
 
-	typedef enum class CamType : unsigned short
+	enum class CamType : unsigned short
 	{
 		Ortho
 	};

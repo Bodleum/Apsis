@@ -13,11 +13,12 @@
 	//		#include <iostream>
 	//#include <map>
 	//#include <vector>
-
-
-//#include "Apsis/Core/Main.h"				Included in Window.h
 #include "Apsis/Core/Window.h"
 #include "Apsis/Renderer/Cam.h"
+	//#include <Eigen/Core>
+	//#include <Eigen/Geometry>
+	//#include <Eigen/Dense>
+
 
 
 namespace A {
