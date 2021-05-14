@@ -1,12 +1,24 @@
 #include "apch.h"
-#include "OpenGLWindow.h"
+#include "Window.h"
+	//#include "Apsis/Core/Window.h"
+	//#include "Apsis/Core/Input/InputCodes.h"
+	//	#include <iostream>
 
-//#include "Apsis/Event/Event.h"		Included in EventDispatcher.h
 #include "Apsis/Event/EventDispatcher.h"
-
-#include "OpenGLHeaders.h"
+	//#include "Apsis/Core/Core.h"
+	//	#include <memory>
+	//	#include <chrono>
+	//#include "Apsis/Event/Event.h"
+	//	#include "Apsis/Core/Input/InputCodes.h"
+	//		#include <iostream>
+	//#include <map>
+	//#include <vector>
+#include "Headers.h"
+	//#include <glad/glad.h>
+	//#include <GLFW/glfw3.h>
 #include "Translators.h"
-
+	//#include "Apsis/Core/Input/InputCodes.h"
+	//	#include <iostream>
 
 namespace A {
 
@@ -78,17 +90,17 @@ namespace A {
 					{
 						case GLFW_PRESS:
 						{
-							EventDispatcher::SendEvent(MakeShared<KeyDownEvent>(GLFWKeyCodeTranslator[key], false));
+							EventDispatcher::SendEvent(MakeShared<KeyDownEvent>(GLFWKeyCodeToKeyCode(key), false));
 							break;
 						}
 						case GLFW_REPEAT:
 						{
-							EventDispatcher::SendEvent(MakeShared<KeyDownEvent>(GLFWKeyCodeTranslator[key], true));
+							EventDispatcher::SendEvent(MakeShared<KeyDownEvent>(GLFWKeyCodeToKeyCode(key), true));
 							break;
 						}
 						case GLFW_RELEASE:
 						{
-							EventDispatcher::SendEvent(MakeShared<KeyUpEvent>(GLFWKeyCodeTranslator[key]));
+							EventDispatcher::SendEvent(MakeShared<KeyUpEvent>(GLFWKeyCodeToKeyCode(key)));
 							break;
 						}
 					}
@@ -97,7 +109,7 @@ namespace A {
 
 			glfwSetCharCallback(m_WindowHandle, [](GLFWwindow* window, unsigned int codepoint)
 				{
-					EventDispatcher::SendEvent(MakeShared<KeyCharEvent>(GLFWKeyCodeTranslator[codepoint], (char)codepoint, false));
+					EventDispatcher::SendEvent(MakeShared<KeyCharEvent>(Key::Unknown, (char)codepoint, false));
 				}
 			);
 
@@ -109,14 +121,14 @@ namespace A {
 						{
 							double x, y;
 							glfwGetCursorPos(window, &x, &y);
-							EventDispatcher::SendEvent(MakeShared<MouseButtonDownEvent>((int)x, (int)y, GLFWMouseButtonTranslator[button]));
+							EventDispatcher::SendEvent(MakeShared<MouseButtonDownEvent>((int)x, (int)y, GLFWMouseButtonToMouseCode(button)));
 							break;
 						}
 						case GLFW_RELEASE:
 						{
 							double x, y;
 							glfwGetCursorPos(window, &x, &y);
-							EventDispatcher::SendEvent(MakeShared<MouseButtonUpEvent>((int)x, (int)y, GLFWMouseButtonTranslator[button]));
+							EventDispatcher::SendEvent(MakeShared<MouseButtonUpEvent>((int)x, (int)y, GLFWMouseButtonToMouseCode(button)));
 							break;
 							break;
 						}
@@ -177,12 +189,6 @@ namespace A {
 	{
 		AP_PROFILE_FN();
 		return m_WindowHandle;
-	}
-
-	const HDC OpenGLWindow::GetDeviceContextHandle() const
-	{
-		AP_PROFILE_FN();
-		return HDC();
 	}
 
 	void OpenGLWindow::Destroy()

@@ -1,16 +1,28 @@
 #pragma once
 #include "Apsis/Core/Layer.h"
-//#include "Apsis/Core/Main.h"				Included in Window.h
+	//#include "Apsis/Core/Core.h"
+	//	#include <memory>
+	//	#include <chrono>
+	//#include <deque>
+#include "Apsis/Event/EventDispatcher.h"
+	//#include "Apsis/Core/Core.h"
+	//	#include <memory>
+	//	#include <chrono>
+	//#include "Apsis/Event/Event.h"
+	//	#include "Apsis/Core/Input/InputCodes.h"
+	//		#include <iostream>
+	//#include <map>
+	//#include <vector>
 #include "Apsis/Core/Window.h"
-//#include "Apsis/Event/Event.h"			Included in EventDispatcher.h
-//#include "Apsis/Event/EventDispatcher.h"	Included in Layer.h
 #include "Apsis/Renderer/Cam.h"
-
-//#include <chrono>							Included in EventDispacher.h
+	//#include <Eigen/Core>
+	//#include <Eigen/Geometry>
+	//#include <Eigen/Dense>
 
 namespace A {
 
 	class Renderer;
+	struct AppArgs;
 
 	class App : public EventListener
 	{
@@ -32,17 +44,12 @@ namespace A {
 		void PopLayer();
 
 		inline void SetTimeStep(std::chrono::microseconds new_time_step) { m_TimeStep = new_time_step; }
+		static void SetAppArgs(AppArgs args);
 
-	private:
 		void Run();
 
-		static inline void SetAppArgs(AppArgs args) { s_Args = args; }
+	private:
 
-		#ifdef AP_PLATFORM_WIN
-			friend int WINAPI ::wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPWSTR pCmdLine, _In_ int nShowCmd);
-		#else
-			friend int ::main(int argc, char** argv);
-		#endif // AP_PLATFORM_WIN
 
 		bool m_Running = true;
 		static AppArgs s_Args;

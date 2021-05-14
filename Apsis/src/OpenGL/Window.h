@@ -1,6 +1,7 @@
 #pragma once
 #include "Apsis/Core/Window.h"
 #include "Apsis/Core/Input/InputCodes.h"
+	//#include <iostream>
 
 struct GLFWwindow;
 
@@ -17,7 +18,6 @@ namespace A {
 		virtual void Destroy() override;
 		virtual bool PollEvents() const override;
 		virtual void* GetHandle() const override;
-		virtual const HDC GetDeviceContextHandle() const override;
 
 	private:
 		GLFWwindow* m_WindowHandle = nullptr;

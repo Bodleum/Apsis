@@ -1,7 +1,8 @@
 #include "apch.h"
 #include "Buffer.h"
 #include "Apsis/Core/SystemInfo.h"
-#include "OpenGL/OpenGLBuffer.h"
+#include "OpenGL/Buffer.h"
+	//#include "Apsis/Renderer/Buffer.h"
 
 namespace A {
 

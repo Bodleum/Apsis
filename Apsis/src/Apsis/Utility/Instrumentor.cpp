@@ -1,16 +1,14 @@
 #include "apch.h"
 #include "Instrumentor.h"
+	//#include <fstream>
+	//#include <mutex>
 
-//#include <algorithm>	In pch
-//#include <chrono>		In header
-//#include <fstream>	In header
 #include <iomanip>
-//#include <string>		In header/pch
 #include <thread>
-//#include <mutex>		In header
-//#include <sstream>	In pch
 
 #include "Apsis/Core/Logger.h"
+	//#include <spdlog/spdlog.h>
+	//#include <spdlog/fmt/ostr.h>
 
 namespace A {
 

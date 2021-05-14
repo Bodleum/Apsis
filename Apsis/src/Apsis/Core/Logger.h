@@ -1,6 +1,6 @@
 #pragma once
 #pragma warning(push, 0)
-	#include <memory>
+	//#include <memory>
 
 	#include <spdlog/spdlog.h>
 	#include <spdlog/fmt/ostr.h>

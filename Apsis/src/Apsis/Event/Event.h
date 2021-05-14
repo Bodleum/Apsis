@@ -1,6 +1,6 @@
 #pragma once
-#include "apch.h"		// sstream
 #include "Apsis/Core/Input/InputCodes.h"
+	//#include <iostream>
 
 namespace A {
 
@@ -109,12 +109,7 @@ namespace A {
 		}
 
 		inline MouseCode GetButton() const { return m_Button; }
-		virtual std::string GetString() const override
-		{
-			std::stringstream ss;
-			ss << "MouseButtonDown: " << MouseCodeToString(m_Button) << " at " << m_MouseX << ", " << m_MouseY;
-			return ss.str();
-		}
+		virtual std::string GetString() const override;
 
 		AP_SET_EVENT_TYPE(MouseButtonDown)
 
@@ -131,12 +126,7 @@ namespace A {
 		}
 
 		inline MouseCode GetButton() const { return m_Button; }
-		virtual std::string GetString() const override
-		{
-			std::stringstream ss;
-			ss << "MouseButtonUp: " << MouseCodeToString(m_Button) << " at " << m_MouseX << ", " << m_MouseY;
-			return ss.str();
-		}
+		virtual std::string GetString() const override;
 
 		AP_SET_EVENT_TYPE(MouseButtonUp)
 
@@ -152,12 +142,7 @@ namespace A {
 		{
 		}
 
-		virtual std::string GetString() const override
-		{
-			std::stringstream ss;
-			ss << "MouseMove at " << m_MouseX << ", " << m_MouseY;
-			return ss.str();
-		}
+		virtual std::string GetString() const override;
 
 		AP_SET_EVENT_TYPE(MouseMove)
 	};
@@ -171,12 +156,7 @@ namespace A {
 		}
 
 		inline int GetDelta() const { return m_Delta; }
-		virtual std::string GetString() const override
-		{
-			std::stringstream ss;
-			ss << "MouseWheel, Delta: " << m_Delta << " at " << m_MouseX << ", " << m_MouseY;
-			return ss.str();
-		}
+		virtual std::string GetString() const override;
 
 		AP_SET_EVENT_TYPE(MouseWheel)
 
@@ -206,14 +186,7 @@ namespace A {
 		}
 
 		inline KeyCode GetKeyCode() const { return m_KeyCode; }
-		virtual std::string GetString() const override
-		{
-			std::stringstream ss;
-			ss << KeyCodeToString(m_KeyCode) << " Down";
-			if (m_Repeat)
-				ss << "\tRepeat";
-			return ss.str();
-		}
+		virtual std::string GetString() const override;
 
 		AP_SET_EVENT_TYPE(KeyDown)
 
@@ -230,12 +203,7 @@ namespace A {
 		}
 
 		inline KeyCode GetKeyCode() const { return m_KeyCode; }
-		virtual std::string GetString() const override
-		{
-			std::stringstream ss;
-			ss << KeyCodeToString(m_KeyCode) << " Up";
-			return ss.str();
-		}
+		virtual std::string GetString() const override;
 
 		AP_SET_EVENT_TYPE(KeyUp)
 	};
@@ -249,14 +217,7 @@ namespace A {
 		}
 
 		inline const char GetKeyChar() const { return m_Char; }
-		virtual std::string GetString() const override
-		{
-			std::stringstream ss;
-			ss << m_Char << " Char";
-			if (m_Repeat)
-				ss << "\tRepeat";
-			return ss.str();
-		}
+		virtual std::string GetString() const override;
 
 		AP_SET_EVENT_TYPE(KeyChar)
 
@@ -319,12 +280,7 @@ namespace A {
 		{
 		}
 
-		virtual std::string GetString() const override
-		{
-			std::stringstream ss;
-			ss << "WindowResize: " << m_Width << 'x' << m_Height;
-			return ss.str();
-		}
+		virtual std::string GetString() const override;
 
 		AP_SET_EVENT_TYPE(WindowResize)
 

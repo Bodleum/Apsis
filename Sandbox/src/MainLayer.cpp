@@ -60,7 +60,7 @@ bool MainLayer::OnMessage(const A::Message& msg)
 
 bool MainLayer::testfn(const A::MouseButtonDownEvent& evt)
 {
-	A::EventDispatcher::SendMessage("Hello", 1s);
+	A::EventDispatcher::SendMsg("Hello", 1s);
 	return false;
 }
 

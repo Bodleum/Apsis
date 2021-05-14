@@ -1,8 +1,12 @@
 #pragma once
-#include "apch.h"
 
 #ifdef AP_PLATFORM_WIN
-	int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPWSTR pCmdLine, _In_ int nShowCmd);
+
+	// Forward declare HINSTANCE to avoid including Windows.h
+	struct HINSTANCE__;
+	typedef struct HINSTANCE__* HINSTANCE;
+
+	int wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ wchar_t* pCmdLine, _In_ int nShowCmd);
 
 	namespace A {
 		/*
@@ -24,7 +28,7 @@
 
 			HINSTANCE hInstance;
 			HINSTANCE hPrevInstance;
-			LPWSTR pCmdLine;
+			wchar_t* pCmdLine;
 			int nShowCmd;
 		};
 

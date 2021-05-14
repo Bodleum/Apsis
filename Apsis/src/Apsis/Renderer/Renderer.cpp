@@ -1,6 +1,35 @@
 #include "apch.h"
 #include "Renderer.h"
-#include "OpenGL/OpenGLRenderer.h"
+	//#include "Apsis/Core/SystemInfo.h"
+	//#include "Apsis/Renderer/Cam.h"
+	//	#include <Eigen/Core>
+	//	#include <Eigen/Geometry>
+	//	#include <Eigen/Dense>
+	//#include "Apsis/Renderer/Shader.h"
+	//	#include "Apsis/Core/Core.h"
+	//		#include <memory>
+	//		#include <chrono>
+	//#include "Apsis/Renderer/Texture.h"
+	//	#include "Apsis/Core/Core.h"
+	//		#include <memory>
+	//		#include <chrono>
+
+#include "OpenGL/Renderer.h"
+	//#include "Apsis/Core/Window.h"
+	//#include "Apsis/Renderer/Renderer.h"
+	//	#include "Apsis/Core/SystemInfo.h"
+	//	#include "Apsis/Renderer/Cam.h"
+	//		#include <Eigen/Core>
+	//		#include <Eigen/Geometry>
+	//		#include <Eigen/Dense>
+	//	#include "Apsis/Renderer/Shader.h"
+	//		#include "Apsis/Core/Core.h"
+	//			#include <memory>
+	//			#include <chrono>
+	//	#include "Apsis/Renderer/Texture.h"
+	//		#include "Apsis/Core/Core.h"
+	//			#include <memory>
+	//			#include <chrono>
 
 #if defined(AP_PLATFORM_WIN)
 	#include "Windows/Direct2D/Direct2DRenderer.h"

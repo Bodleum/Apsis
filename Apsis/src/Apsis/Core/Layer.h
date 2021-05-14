@@ -1,11 +1,13 @@
 #pragma once
+#include "Apsis/Core/Core.h"
+	//#include <memory>
+	//#include <chrono>
 #include <deque>
-//#include <chrono>		Included in EventDispatcher.h
-#include "Apsis/Event/EventDispatcher.h"
 
 namespace A {
 
 	class App;
+	struct Event;
 
 	class Layer
 	{

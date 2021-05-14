@@ -1,7 +1,14 @@
 #include "apch.h"
 #include "Shader.h"
+	//#include "Apsis/Core/Core.h"
+	//	#include <memory>
+	//	#include <chrono>
 
-#include "OpenGL/OpenGLShader.h"
+#include "OpenGL/Shader.h"
+	//#include "Apsis/Renderer/Shader.h"
+	//	#include "Apsis/Core/Core.h"
+	//		#include <memory>
+	//		#include <chrono>
 
 namespace A {
 
@@ -122,6 +129,19 @@ namespace A {
 		{
 			AP_CRIT_C("Unknown shader data type {0}", (unsigned short)type);
 			return 0;
+		}
+	}
+
+	VertexBufferLayout::VertexBufferLayout(const std::vector<BufferElement>& elements)
+		: m_Elements(elements), m_Stride(0)
+	{
+		AP_PROFILE_FN();
+		unsigned int offset = 0;
+		for (auto& element : m_Elements)
+		{
+			element.Offset = offset;
+			offset += element.Size;
+			m_Stride += element.Size;
 		}
 	}
 

@@ -1,8 +1,13 @@
 #pragma once
+#include "Apsis/Core/Core.h"
+	//#include <memory>
+	//#include <chrono>
 #include "Apsis/Event/Event.h"
+	//#include "Apsis/Core/Input/InputCodes.h"
+	//	#include <iostream>
 
 #include <map>
-#include <chrono>
+#include <vector>
 
 namespace A {
 
@@ -17,7 +22,7 @@ namespace A {
 		static inline void AddListener(EventListener* inst) { s_ListenerList.push_back(inst); }
 		static bool SendBlockingEvent(Shared<Event> evt);
 		static void SendEvent(Shared<Event> evt, std::chrono::milliseconds delay = std::chrono::milliseconds{ 0 });
-		inline static void (SendMessage)(const char* message, std::chrono::milliseconds delay = std::chrono::milliseconds{ 0 }) { SendEvent(MakeShared<Message>(message), delay); }
+		inline static void SendMsg(const char* message, std::chrono::milliseconds delay = std::chrono::milliseconds{ 0 }) { SendEvent(MakeShared<Message>(message), delay); }
 		inline static bool SendBlockingMessage(const char* message) { return SendBlockingEvent(MakeShared<Message>(message)); }
 
 		static bool PollQueuedEvents();
@@ -44,7 +49,6 @@ namespace A {
 		template<typename T, typename F>
 		bool Dispatch(const F& fn)
 		{
-			AP_PROFILE_FN();
 			if (m_Event->GetType() == T::GetTypeS())
 			{
 				m_Event->m_Complete = fn((T&)(*m_Event));
