@@ -19,8 +19,6 @@
 	//#include <Eigen/Geometry>
 	//#include <Eigen/Dense>
 
-
-
 namespace A {
 
 	class Renderer;

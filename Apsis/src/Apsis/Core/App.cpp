@@ -1,9 +1,43 @@
 #include "apch.h"
 #include "App.h"
+	//#include "Apsis/Core/Layer.h"
+	//	#include "Apsis/Core/Core.h"
+	//		#include <memory>
+	//		#include <chrono>
+	//	#include <deque>
+	//#include "Apsis/Event/EventDispatcher.h"
+	//	#include "Apsis/Core/Core.h"
+	//		#include <memory>
+	//		#include <chrono>
+	//	#include "Apsis/Event/Event.h"
+	//		#include "Apsis/Core/Input/InputCodes.h"
+	//			#include <iostream>
+	//	#include <map>
+	//	#include <vector>
+	//#include "Apsis/Core/Window.h"
+	//#include "Apsis/Renderer/Cam.h"
+	//	#include <Eigen/Core>
+	//	#include <Eigen/Geometry>
+	//	#include <Eigen/Dense>
 
 #include "Apsis/Core/Input/Input.h"
+	//#include "Apsis/Core/Input/InputCodes.h"
+	//	#include <iostream>
 #include "Apsis/Core/Main.h"
 #include "Apsis/Renderer/Renderer.h"
+	//#include "Apsis/Core/SystemInfo.h"
+	//#include "Apsis/Renderer/Cam.h"
+	//	#include <Eigen/Core>
+	//	#include <Eigen/Geometry>
+	//	#include <Eigen/Dense>
+	//#include "Apsis/Renderer/Shader.h"
+	//	#include "Apsis/Core/Core.h"
+	//		#include <memory>
+	//		#include <chrono>
+	//#include "Apsis/Renderer/Texture.h"
+	//	#include "Apsis/Core/Core.h"
+	//		#include <memory>
+	//		#include <chrono>
 
 namespace A {
 
