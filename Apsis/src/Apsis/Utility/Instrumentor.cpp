@@ -1,8 +1,5 @@
 #include "apch.h"
 #include "Instrumentor.h"
-	//#include <chrono>
-	//#include <fstream>
-	//#include <string>
 	//#include <mutex>
 
 #include <iomanip>
