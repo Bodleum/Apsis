@@ -1,7 +1,9 @@
 #pragma once
-#include "Apsis/Renderer/Shader.h"
 
 namespace A {
+
+	class Shader;
+	class VertexBufferLayout;
 
 	class VertexBuffer
 	{
