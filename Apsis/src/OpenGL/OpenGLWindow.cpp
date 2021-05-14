@@ -179,12 +179,6 @@ namespace A {
 		return m_WindowHandle;
 	}
 
-	const HDC OpenGLWindow::GetDeviceContextHandle() const
-	{
-		AP_PROFILE_FN();
-		return HDC();
-	}
-
 	void OpenGLWindow::Destroy()
 	{
 		AP_PROFILE_FN();
