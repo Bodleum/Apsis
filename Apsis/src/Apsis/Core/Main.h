@@ -1,6 +1,5 @@
 #pragma once
 #include "apch.h"
-#include "Apsis/Core/Platform.h"
 
 #ifdef AP_PLATFORM_WIN
 	int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPWSTR pCmdLine, _In_ int nShowCmd);

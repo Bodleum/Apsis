@@ -8,8 +8,13 @@ project "Apsis"
 
 	files
 	{
-		"src/**.h",
-		"src/**.cpp"
+		"src/Apsis.h",
+		"src/apch.h",
+		"src/apch.cpp",
+		"src/Apsis/**.h",
+		"src/Apsis/**.cpp",
+		"src/OpenGL/**.h",
+		"src/OpenGL/**.cpp"
 	}
 
 	removefiles
@@ -43,7 +48,7 @@ project "Apsis"
 		defines "AP_DEBUG"
 		runtime "Debug"
 		symbols "On"
-		ignoredefaultlibraries { "msvcrt", "libcmt", "msvcrtd"}
+		ignoredefaultlibraries { "libcmt", "msvcrt", "msvcrtd"}
 		
 		filter { "configurations:Release" }
 		defines "AP_RELEASE"
@@ -60,3 +65,8 @@ project "Apsis"
 
 	filter { "system:Windows" }
 		systemversion "latest"
+		files
+		{
+			"src/Windows/**.h",
+			"src/Windows/**.cpp"
+		}

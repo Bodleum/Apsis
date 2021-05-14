@@ -14,6 +14,7 @@ workspace "Apsis"
 	}
 
 	filter { "platforms:Win64" }
+		defines "AP_PLATFORM_WIN"
 		system "Windows"
 		architecture "x86_64"
 

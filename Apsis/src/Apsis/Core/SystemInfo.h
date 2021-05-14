@@ -1,5 +1,4 @@
 #pragma once
-#include "Apsis/Core/Platform.h"
 
 namespace A {
 
