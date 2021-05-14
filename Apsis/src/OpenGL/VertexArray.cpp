@@ -1,11 +1,11 @@
 #include "apch.h"
-#include "OpenGLVertexArray.h"
+#include "VertexArray.h"
 	//#include "Apsis/Renderer/Buffer.h"
 
-#include "OpenGLHeaders.h"
+#include "Headers.h"
 	//#include <glad/glad.h>
 	//#include <GLFW/glfw3.h>
-#include "OpenGL/OpenGLShader.h"
+#include "OpenGL/Shader.h"
 	//#include "Apsis/Renderer/Shader.h"
 	//	#include "Apsis/Core/Core.h"
 	//		#include <memory>

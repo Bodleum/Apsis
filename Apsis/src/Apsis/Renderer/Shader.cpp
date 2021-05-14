@@ -4,7 +4,7 @@
 	//	#include <memory>
 	//	#include <chrono>
 
-#include "OpenGL/OpenGLShader.h"
+#include "OpenGL/Shader.h"
 	//#include "Apsis/Renderer/Shader.h"
 	//	#include "Apsis/Core/Core.h"
 	//		#include <memory>

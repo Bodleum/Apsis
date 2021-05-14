@@ -1,5 +1,5 @@
 #include "apch.h"
-#include "OpenGLWindow.h"
+#include "Window.h"
 	//#include "Apsis/Core/Window.h"
 	//#include "Apsis/Core/Input/InputCodes.h"
 	//	#include <iostream>
@@ -13,7 +13,7 @@
 	//		#include <iostream>
 	//#include <map>
 	//#include <vector>
-#include "OpenGLHeaders.h"
+#include "Headers.h"
 	//#include <glad/glad.h>
 	//#include <GLFW/glfw3.h>
 #include "Translators.h"

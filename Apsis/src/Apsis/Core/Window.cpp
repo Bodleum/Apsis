@@ -3,7 +3,7 @@
 
 #include "Apsis/Core/Main.h"
 #include "Apsis/Core/SystemInfo.h"
-#include "OpenGL/OpenGLWindow.h"
+#include "OpenGL/Window.h"
 	//#include "Apsis/Core/Window.h"
 	//#include "Apsis/Core/Input/InputCodes.h"
 	//	#include <iostream>

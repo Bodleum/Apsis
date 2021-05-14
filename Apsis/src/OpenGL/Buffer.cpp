@@ -1,6 +1,6 @@
 #include "apch.h"
-#include "OpenGLBuffer.h"
-#include "OpenGLHeaders.h"
+#include "Buffer.h"
+#include "Headers.h"
 	//#include <glad/glad.h>
 	//#include <GLFW/glfw3.h>
 #include "Apsis/Renderer/Renderer.h"

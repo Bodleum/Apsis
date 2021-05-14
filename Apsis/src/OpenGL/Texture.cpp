@@ -1,11 +1,11 @@
 #include "apch.h"
-#include "OpenGLTexture.h"
+#include "Texture.h"
 	//#include "Apsis/Renderer/Texture.h"
 	//	#include "Apsis/Core/Core.h"
 	//		#include <memory>
 	//		#include <chrono>
 
-#include "OpenGLHeaders.h"
+#include "Headers.h"
 	//#include <glad/glad.h>
 	//#include <GLFW/glfw3.h>
 

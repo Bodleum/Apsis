@@ -5,7 +5,7 @@
 	//	#include <chrono>
 
 #include "Apsis/Core/SystemInfo.h"
-#include "OpenGL/OpenGLTexture.h"
+#include "OpenGL/Texture.h"
 	//#include "Apsis/Renderer/Texture.h"
 	//	#include "Apsis/Core/Core.h"
 	//		#include <memory>

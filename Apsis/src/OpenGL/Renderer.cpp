@@ -1,5 +1,5 @@
 #include "apch.h"
-#include "OpenGLRenderer.h"
+#include "Renderer.h"
 	//#include "Apsis/Core/Window.h"
 	//#include "Apsis/Renderer/Renderer.h"
 	//	#include "Apsis/Core/SystemInfo.h"
@@ -16,11 +16,11 @@
 	//			#include <memory>
 	//			#include <chrono>
 
-#include "OpenGLHeaders.h"
+#include "Headers.h"
 	//#include <glad/glad.h>
 	//#include <GLFW/glfw3.h>
 
-#include "OpenGL/OpenGLVertexArray.h"
+#include "OpenGL/VertexArray.h"
 	//#include "Apsis/Renderer/Buffer.h"
 
 namespace A {

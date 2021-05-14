@@ -14,7 +14,7 @@
 	//		#include <memory>
 	//		#include <chrono>
 
-#include "OpenGL/OpenGLRenderer.h"
+#include "OpenGL/Renderer.h"
 	//#include "Apsis/Core/Window.h"
 	//#include "Apsis/Renderer/Renderer.h"
 	//	#include "Apsis/Core/SystemInfo.h"
