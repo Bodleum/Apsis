@@ -20,13 +20,8 @@
 	//#include <glad/glad.h>
 	//#include <GLFW/glfw3.h>
 
-
-
-
 #include "OpenGL/OpenGLVertexArray.h"
-#pragma message ("TODO")
-
-
+	//#include "Apsis/Renderer/Buffer.h"
 
 namespace A {
 
