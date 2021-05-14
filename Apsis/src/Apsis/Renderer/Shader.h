@@ -39,7 +39,7 @@ namespace A {
 
 	typedef enum class ShaderDataType : unsigned short
 	{
-		None = 0,
+		Unknown = 0,
 		Bool,
 		Int,
 		UnsignedInt,

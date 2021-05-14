@@ -241,7 +241,15 @@ namespace A {
 			{"dmat", ShaderDataType::Double}
 		};
 
-		return typeMap[newType];
+		try
+		{
+			return typeMap.at(newType);
+		}
+		catch (const std::out_of_range& e)
+		{
+			AP_WARN_C("Unknown GLSL type {0}", newType);
+			return ShaderDataType::Unknown;
+		}
 	}
 
 
@@ -258,6 +266,14 @@ namespace A {
 			{ShaderDataType::Double, GL_DOUBLE}
 		};
 
-		return typeMap[type];
+		try
+		{
+			return typeMap.at(type);
+		}
+		catch (const std::out_of_range& e)
+		{
+			AP_WARN_C("Unknown shader data type {0}", (unsigned short)type);
+			return GL_NONE;
+		}
 	}
 }
