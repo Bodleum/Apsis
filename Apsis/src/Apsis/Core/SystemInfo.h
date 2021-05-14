@@ -14,12 +14,12 @@ namespace A {
 		POSIX
 	} Platform;
 
-	typedef enum class RendererAPI : unsigned short
+	enum class RendererAPI : unsigned short
 	{
 		Unknown = 0,
 		Direct2D,
 		OpenGL
-	} RendererAPI;
+	};
 
 	struct SystemInfo
 	{
