@@ -67,18 +67,7 @@ namespace A {
 	class VertexBufferLayout
 	{
 	public:
-		VertexBufferLayout(const std::vector<BufferElement>& elements)
-			: m_Elements(elements), m_Stride(0)
-		{
-			AP_PROFILE_FN();
-			unsigned int offset = 0;
-			for (auto& element : m_Elements)
-			{
-				element.Offset = offset;
-				offset += element.Size;
-				m_Stride += element.Size;
-			}
-		}
+		VertexBufferLayout(const std::vector<BufferElement>& elements);
 
 		inline const std::vector<BufferElement>& GetElements() const { return m_Elements; }
 		inline const unsigned int GetStride() const { return m_Stride; }

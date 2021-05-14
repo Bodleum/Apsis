@@ -125,4 +125,17 @@ namespace A {
 		}
 	}
 
+	VertexBufferLayout::VertexBufferLayout(const std::vector<BufferElement>& elements)
+		: m_Elements(elements), m_Stride(0)
+	{
+		AP_PROFILE_FN();
+		unsigned int offset = 0;
+		for (auto& element : m_Elements)
+		{
+			element.Offset = offset;
+			offset += element.Size;
+			m_Stride += element.Size;
+		}
+	}
+
 }

@@ -1,7 +1,8 @@
 #pragma once
 
 #ifdef AP_PLATFORM_WIN
-	struct HINSTASCE;
+	//struct HINSTANCE;
+	#include "Windows.h"
 	int wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, wchar_t* pCmdLine, int nShowCmd);
 
 	namespace A {

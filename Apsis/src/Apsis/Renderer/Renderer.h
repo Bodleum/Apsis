@@ -4,6 +4,7 @@
 #include "Apsis/Renderer/Texture.h"
 #include "Apsis/Renderer/Cam.h"
 //#include <Eigen/Core>		Included in Cam.h
+#include "Apsis/Core/SystemInfo.h"
 
 namespace A {
 
