@@ -20,7 +20,7 @@ namespace A {
 	protected:
 		unsigned int m_TextureID;
 		const char* m_FilePath;
-		unsigned char* m_LocalBuffer;
+		void* m_LocalBuffer;
 		int m_Width, m_Height, m_BBP;
 	};
 

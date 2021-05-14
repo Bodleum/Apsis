@@ -7,7 +7,7 @@
 namespace A {
 
 	OpenGLTexture::OpenGLTexture(unsigned int width, unsigned int height, void* data, unsigned int size)
-		: m_TextureID(0), m_FilePath(nullptr), m_LocalBuffer((unsigned char*)data), m_Width(width), m_Height(height), m_BBP(0)
+		: m_TextureID(0), m_FilePath(nullptr), m_LocalBuffer(data), m_Width(width), m_Height(height), m_BBP(0)
 	{
 		AP_PROFILE_FN();
 
@@ -19,7 +19,7 @@ namespace A {
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, m_Width, m_Height, 0, GL_RGBA, GL_UNSIGNED_BYTE, (const void*)m_LocalBuffer);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, m_Width, m_Height, 0, GL_RGBA, GL_UNSIGNED_BYTE, m_LocalBuffer);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
@@ -36,7 +36,7 @@ namespace A {
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, m_Width, m_Height, 0, GL_RGBA, GL_UNSIGNED_BYTE, (const void*)m_LocalBuffer);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, m_Width, m_Height, 0, GL_RGBA, GL_UNSIGNED_BYTE, m_LocalBuffer);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
@@ -50,7 +50,7 @@ namespace A {
 
 		{// Load image
 			stbi_set_flip_vertically_on_load(1);
-			m_LocalBuffer = stbi_load(path, &m_Width, &m_Height, &m_BBP, 4);
+			m_LocalBuffer = (void*)stbi_load(path, &m_Width, &m_Height, &m_BBP, 4);
 		}
 
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
