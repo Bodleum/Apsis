@@ -1,8 +1,13 @@
 #include "apch.h"
 #include "OpenGLShader.h"
-#include "OpenGLHeaders.h"
+	//#include "Apsis/Renderer/Shader.h"
+	//	#include "Apsis/Core/Core.h"
+	//		#include <memory>
+	//		#include <chrono>
 
-#include <fstream>
+#include "OpenGLHeaders.h"
+	//#include <glad/glad.h>
+	//#include <GLFW/glfw3.h>
 
 namespace A {
 
