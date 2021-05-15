@@ -53,19 +53,19 @@ namespace A {
 	{
 		AP_PROFILE_FN();
 
-		if (Input::IsKeyDown(Key::H))
+		if (Input::IsKeyDown(Key::J))
 			s_Cam->Move(Eigen::Vector3f(-s_CamMoveSpeed * std::chrono::duration_cast<std::chrono::milliseconds>(time_step).count() * 0.001f, 0.0f, 0.0f));
-		if (Input::IsKeyDown(Key::N))
+		if (Input::IsKeyDown(Key::L))
 			s_Cam->Move(Eigen::Vector3f(s_CamMoveSpeed * std::chrono::duration_cast<std::chrono::milliseconds>(time_step).count() * 0.001f, 0.0f, 0.0f));
 
-		if (Input::IsKeyDown(Key::C))
+		if (Input::IsKeyDown(Key::I))
 			s_Cam->Move(Eigen::Vector3f(0.0f, s_CamMoveSpeed * std::chrono::duration_cast<std::chrono::milliseconds>(time_step).count() * 0.001f, 0.0f));
-		if (Input::IsKeyDown(Key::T))
+		if (Input::IsKeyDown(Key::K))
 			s_Cam->Move(Eigen::Vector3f(0.0f, -s_CamMoveSpeed * std::chrono::duration_cast<std::chrono::milliseconds>(time_step).count() * 0.001f, 0.0f));
 
-		if (Input::IsKeyDown(Key::G))
+		if (Input::IsKeyDown(Key::U))
 			s_Cam->Rotate(5.0f);
-		if (Input::IsKeyDown(Key::R))
+		if (Input::IsKeyDown(Key::O))
 			s_Cam->Rotate(-5.0f);
 	}
 

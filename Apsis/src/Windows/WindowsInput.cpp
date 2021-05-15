@@ -6,6 +6,7 @@ namespace A {
 	int KeyCodeToVirtualKeyCode(KeyCode key_code);
 	int MouseCodeToVirtualKeyCode(MouseCode mouse_code);
 
+#if 0
 	bool Input::IsKeyDown(KeyCode key_code)
 	{
 		AP_PROFILE_FN();
@@ -49,7 +50,7 @@ namespace A {
 		AP_PROFILE_FN();
 		return GetMousePos()[1];
 	}
-
+#endif
 
 	int KeyCodeToVirtualKeyCode(KeyCode key_code)
 	{
