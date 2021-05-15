@@ -9,7 +9,7 @@ namespace A {
 	bool Input::IsKeyDown(KeyCode key_code)
 	{
 		AP_PROFILE_FN();
-		return BIT_AT(32) & GetAsyncKeyState(KeyCodeToVirtualKeyCode(key_code));
+		return BIT_AT(31) & GetAsyncKeyState(KeyCodeToVirtualKeyCode(key_code));
 	}
 
 	bool Input::WasKeyDown(KeyCode key_code)
@@ -21,7 +21,7 @@ namespace A {
 	bool Input::IsMouseButtonDown(MouseCode mouse_code)
 	{
 		AP_PROFILE_FN();
-		return BIT_AT(32) & GetAsyncKeyState(MouseCodeToVirtualKeyCode(mouse_code));
+		return BIT_AT(31) & GetAsyncKeyState(MouseCodeToVirtualKeyCode(mouse_code));
 	}
 
 	bool Input::WasMouseButtonDown(MouseCode mouse_code)
