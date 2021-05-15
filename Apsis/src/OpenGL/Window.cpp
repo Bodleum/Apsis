@@ -153,7 +153,7 @@ namespace A {
 				{
 					double x, y;
 					glfwGetCursorPos(window, &x, &y);
-					EventDispatcher::SendEvent(MakeShared<MouseWheelEvent>((int)x, (int)y, (int)x_off));
+					EventDispatcher::SendEvent(MakeShared<MouseWheelEvent>((int)x, (int)y, (int)y_off));
 				}
 			);
 
