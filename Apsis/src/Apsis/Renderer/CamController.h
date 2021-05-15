@@ -22,11 +22,14 @@ namespace A {
 		// Inherited via EventListener
 		virtual bool OnEvent(Shared<Event> evt) override;
 
+		static void OnUpdate(std::chrono::microseconds time_step);
+
 	private:
 		bool OnMouseScrolled(const MouseWheelEvent& evt);
 		bool OnWindowResize(const WindowResizeEvent& evt);
 
-		Shared<Cam> m_Cam = nullptr;
+		static Shared<Cam> s_Cam;
+		static float s_CamMoveSpeed;
 
 		static Unique<CamController> s_Instance;
 	};

@@ -14,14 +14,19 @@
 	//#include <Eigen/Core>
 	//#include <Eigen/Geometry>
 	//#include <Eigen/Dense>
+#include "Apsis/Core/Input/Input.h"
+	//#include "Apsis/Core/Input/InputCodes.h"
+	//	#include <iostream>
 
 namespace A {
 
+	Shared<Cam> CamController::s_Cam = nullptr;
+	float CamController::s_CamMoveSpeed = 1.0f;
 	Unique<CamController> CamController::s_Instance = nullptr;
 
 	CamController::CamController(Shared<Cam> cam)
-		: m_Cam(cam)
 	{
+		s_Cam = cam;
 	}
 
 	void CamController::Init(Shared<Cam> cam)
@@ -44,19 +49,37 @@ namespace A {
 		return false;
 	}
 
+	void CamController::OnUpdate(std::chrono::microseconds time_step)
+	{
+		AP_PROFILE_FN();
+
+		if (Input::IsKeyDown(Key::H))
+			s_Cam->Move(Eigen::Vector3f(-s_CamMoveSpeed * std::chrono::duration_cast<std::chrono::milliseconds>(time_step).count() * 0.001f, 0.0f, 0.0f));
+		if (Input::IsKeyDown(Key::N))
+			s_Cam->Move(Eigen::Vector3f(s_CamMoveSpeed * std::chrono::duration_cast<std::chrono::milliseconds>(time_step).count() * 0.001f, 0.0f, 0.0f));
+
+		if (Input::IsKeyDown(Key::C))
+			s_Cam->Move(Eigen::Vector3f(0.0f, s_CamMoveSpeed * std::chrono::duration_cast<std::chrono::milliseconds>(time_step).count() * 0.001f, 0.0f));
+		if (Input::IsKeyDown(Key::T))
+			s_Cam->Move(Eigen::Vector3f(0.0f, -s_CamMoveSpeed * std::chrono::duration_cast<std::chrono::milliseconds>(time_step).count() * 0.001f, 0.0f));
+
+		if (Input::IsKeyDown(Key::G))
+			s_Cam->Rotate(5.0f);
+		if (Input::IsKeyDown(Key::R))
+			s_Cam->Rotate(-5.0f);
+	}
+
 	bool CamController::OnMouseScrolled(const MouseWheelEvent& evt)
 	{
 		float zoom = evt.GetDelta() * 0.1f;
-		m_Cam->Zoom(zoom);
-
-		std::cout << m_Cam->GetVP().matrix() << std::endl << std::endl;
+		s_Cam->Zoom(zoom);
 		return false;
 	}
 
 	bool CamController::OnWindowResize(const WindowResizeEvent& evt)
 	{
 		float aspectRatio = (float)evt.GetWidth() / (float)evt.GetHeight();
-		m_Cam->SetProj(-aspectRatio * m_Cam->GetZoom(), aspectRatio * m_Cam->GetZoom(), -1.0f * m_Cam->GetZoom(), m_Cam->GetZoom(), -1.0f, 1.0f);
+		s_Cam->SetProj(-aspectRatio * s_Cam->GetZoom(), aspectRatio * s_Cam->GetZoom(), -1.0f * s_Cam->GetZoom(), s_Cam->GetZoom(), -1.0f, 1.0f);
 		return false;
 	}
 

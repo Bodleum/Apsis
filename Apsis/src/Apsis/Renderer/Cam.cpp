@@ -41,7 +41,6 @@ namespace A {
 		AP_PROFILE_FN();
 		m_Zoom = std::max(m_Zoom, m_MinZoom);	// Clamp zoom
 		m_Zoom = std::min(m_Zoom, m_MaxZoom);
-		std::cout << m_Zoom << std::endl;
 		m_Proj = CreateOrthographicProjection(m_Left * 1.0f / m_Zoom, m_Right * 1.0f / m_Zoom, m_Bottom * 1.0f / m_Zoom, m_Top * 1.0f / m_Zoom, m_Near, m_Far);
 		RefreshVP();
 	}

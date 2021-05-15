@@ -112,6 +112,8 @@ namespace A {
 	void App::OnUpdate(std::chrono::microseconds time_step)
 	{
 		AP_PROFILE_FN();
+		// Update CamController
+		CamController::OnUpdate(time_step);
 		// Update each layer if enabled
 		for (Layer* layer : m_LayerStack)
 			if (layer->IsEnabled())
