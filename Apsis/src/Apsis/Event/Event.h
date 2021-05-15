@@ -281,6 +281,8 @@ namespace A {
 		}
 
 		virtual std::string GetString() const override;
+		unsigned int GetWidth() const { return m_Width; }
+		unsigned int GetHeight() const { return m_Height; }
 
 		AP_SET_EVENT_TYPE(WindowResize)
 

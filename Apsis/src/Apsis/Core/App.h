@@ -49,7 +49,7 @@ namespace A {
 		void Run();
 
 	private:
-
+		bool OnWindowResize(const WindowResizeEvent& evt);
 
 		bool m_Running = true;
 		static AppArgs s_Args;

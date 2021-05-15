@@ -48,7 +48,7 @@ namespace A {
 		return true;
 	}
 
-	void Direct2DRenderer::OnResizeImpl()
+	void Direct2DRenderer::OnResizeImpl(const WindowResizeEvent& evt)
 	{
 		AP_PROFILE_FN();
 

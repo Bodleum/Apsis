@@ -19,9 +19,10 @@
 #include "Headers.h"
 	//#include <glad/glad.h>
 	//#include <GLFW/glfw3.h>
-
 #include "OpenGL/VertexArray.h"
 	//#include "Apsis/Renderer/Buffer.h"
+#include "Apsis/Event/Event.h"
+	//#include "Apsis/Core/Input/InputCodes.h"
 
 namespace A {
 
@@ -124,9 +125,10 @@ namespace A {
 		s_GraphicsResources->ClearColor = col;
 	}
 
-	void OpenGLRenderer::OnResizeImpl()
+	void OpenGLRenderer::OnResizeImpl(const WindowResizeEvent& evt)
 	{
 		AP_PROFILE_FN();
+		glViewport(0, 0, evt.GetWidth(), evt.GetHeight());
 	}
 
 	void OpenGLRenderer::DrawCircleImpl(const Eigen::Vector2i& position, float radius, const Eigen::Vector4f& col)

@@ -32,7 +32,7 @@ namespace A {
 		virtual bool InitImpl(Unique<Window>& window) override;
 		virtual void ClearImpl() override;
 		virtual void SetClearColorImpl(const Eigen::Vector4f& col) override;
-		virtual void OnResizeImpl() override;
+		virtual void OnResizeImpl(const WindowResizeEvent& evt) override;
 
 		virtual void DrawCircleImpl(const Eigen::Vector2i& position, float radius, const Eigen::Vector4f& col) override;
 		virtual void DrawRectImpl(const Eigen::Vector2i& position, float width, float height, float angle, Shared<Texture> texture, const Eigen::Vector4f& col/*= {1.0f, 1.0f, 1.0f, 1.0f}*/) override;

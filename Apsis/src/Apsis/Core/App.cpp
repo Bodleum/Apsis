@@ -24,6 +24,16 @@
 	//#include "Apsis/Core/Input/InputCodes.h"
 	//	#include <iostream>
 #include "Apsis/Core/Main.h"
+#include "Apsis/Renderer/CamController.h"
+	//#include "Apsis/Event/EventDispatcher.h"
+	//	#include "Apsis/Core/Core.h"
+	//		#include <memory>
+	//		#include <chrono>
+	//	#include "Apsis/Event/Event.h"
+	//		#include "Apsis/Core/Input/InputCodes.h"
+	//			#include <iostream>
+	//	#include <map>
+	//	#include <vector>
 #include "Apsis/Renderer/Renderer.h"
 	//#include "Apsis/Core/SystemInfo.h"
 	//#include "Apsis/Renderer/Cam.h"
@@ -108,7 +118,7 @@ namespace A {
 				layer->OnUpdate(time_step);
 
 
-		m_Cam->Rotate(0.5f);
+		//m_Cam->Rotate(0.5f);
 	}
 
 	void App::OnRender()
@@ -138,6 +148,8 @@ namespace A {
 			default:
 				break;
 		}
+
+		CamController::Init(m_Cam);
 	}
 
 	void App::PushLayer(Layer* layer)
@@ -165,9 +177,11 @@ namespace A {
 	{
 		AP_PROFILE_FN();
 
+		LocalDispatcher ld(evt);
+		ld.Dispatch<WindowResizeEvent>(BIND_EVT_FN(App::OnWindowResize));
+
 		switch (evt->GetType())
 		{
-			case EventType::WindowResize:	Renderer::OnResize();		break;
 			case EventType::WindowPaint:	OnRender();					break;
 			case EventType::WindowDestroy:	m_Window.reset(nullptr);	break;
 			case EventType::AppQuit:		m_Running = false;			return true;
@@ -181,6 +195,13 @@ namespace A {
 			if (layer->OnEvent(evt))
 				return true;
 
+		return false;
+	}
+
+	bool App::OnWindowResize(const WindowResizeEvent& evt)
+	{
+		AP_PROFILE_FN();
+		Renderer::OnResize(evt);
 		return false;
 	}
 
